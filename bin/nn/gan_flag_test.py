@@ -1,3 +1,8 @@
+"""
+Colab with GPU:
+https://colab.research.google.com/drive/1F9JiSKNhISC2u4psqLCdxYOEmxSrA2vd?usp=sharing
+"""
+
 import tensorflow as tf
 from tensorflow.keras.layers import Input, Reshape, Dropout, Dense
 from tensorflow.keras.layers import Flatten, BatchNormalization
