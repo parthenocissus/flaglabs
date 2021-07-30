@@ -1,0 +1,13 @@
+Weekly To Do List: 
+- August 6th - August 13th
+
+
+Jacques Laroche:
+----------------
+1. Look up how to train Keras networks on arrays of different sizes
+2. Grow the Anthems Dataset
+   Look up getting Midi files from MuseScore (reference: https://www.tech-gate.org/usa/2021/07/21/audacitys-new-owner-is-in-another-fight-with-the-open-source-community/)
+3. Look up other ML projects related to the Anthems project and take
+   note of their approach
+4. Go through code and add comments
+5. Add a weekly tasks document and add to Github --> inform team
