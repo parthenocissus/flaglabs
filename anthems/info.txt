@@ -13,3 +13,12 @@ A few notes:
 > The files will download in the same directory you run the script in.
 > I've attempted to write the script to be cross-platform, but have only tested it in a Windows environment. It may, or may not work in Linux/OSX.
 > The last few National Anthem MIDI files on the www.midiworld.com site are not needed. These seem like extra uploads (page 5 of "National Anthems" on site)
+
+
+HOW TO USE REQUIREMENTS.TXT:
+----------------------------
+1) Saving all packages in a requirements.txt file:
+pip freeze > requirements.txt
+
+2) Loading packages from a requirements.txt file:
+pip install -r requirements.txt
