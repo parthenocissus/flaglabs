@@ -9,6 +9,7 @@ from tqdm import tqdm #for progress bars
 import time #for Pause functionality
 import urllib3 #needed to disable warnings if the site being scraped has an SSL certificate error
 import string #for function to fix filenames with illegal characters
+import random #needed to randomize our User Header
 
 # Defining Constants, Arrays, etc.
 # --------------------------------
@@ -23,6 +24,16 @@ urllib3.disable_warnings()
 subdir = "downloads"
 # Get current directory
 here = os.path.dirname(os.path.realpath(__file__))
+# Define User Agent -- This will allow our request to seem like it is coming from a "legitimate" source, rather than from a web scraper. Doing this will lower the probablity that we will get our IP address banned while scraping.
+user_agents = [
+	'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36',
+	'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/92.0.4515.107 Safari/537.36',
+	'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/90.0.4430.212 Safari/537.36',
+	'Mozilla/5.0 (iPhone; CPU iPhone OS 12_2 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/15E148',
+	'Mozilla/5.0 (Linux; Android 11; SM-G960U) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/89.0.4389.72 Mobile Safari/537.36'
+]
+user_agent = random.choice(user_agents)
+headers = {'User-Agent': user_agent}
 
 # Defining Functions
 # ------------------
@@ -92,6 +103,12 @@ print("      by Jacques Laroche")
 print("-------------------------------")
 print("")
 time.sleep(2)
+
+# For Header Testing Purposes
+print("User Agent Header we will divulge while scraping:")
+response = requests.get('https://httpbin.org/headers', headers=headers)
+print(response.json()['headers']['User-Agent'])
+input("\nPress [Enter] to continue... \n")
 
 # Code to iterate through all pages
 # ---------------------------------
