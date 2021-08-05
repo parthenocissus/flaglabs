@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Generator: Adobe Illustrator 21.0.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+<svg version="1.1" id="main" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 viewBox="0 0 17 35" style="enable-background:new 0 0 17 35;" xml:space="preserve">
+<style type="text/css">
+	.st0{fill:none;}
+	.st1{fill:none;stroke:#000000;stroke-width:1.75;stroke-miterlimit:10;}
+</style>
+<rect id="hover-rect" x="0.5" y="2.4" pointer-events="all" class="st0" width="16.2" height="30.6"/>
+<ellipse id="idle-pictome-head" pointer-events="none" class="st1" cx="12.6" cy="6.6" rx="3.4" ry="3.1"/>
+<path id="idle-pictome-leg2" pointer-events="none" class="st1" d="M9.2,32c-0.4-0.3-7.7-9.7-7.7-9.7s7.3-9,7.7-9.5"/>
+<path id="idle-pictome-leg2_1_" pointer-events="none" class="st1" d="M15.5,32c-0.3-0.3-7.7-9.7-7.7-9.7s7.3-9,7.7-9.4"/>
+</svg>
