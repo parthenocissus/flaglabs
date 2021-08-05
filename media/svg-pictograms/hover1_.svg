@@ -1,17 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- Generator: Adobe Illustrator 21.0.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
-<svg version="1.1" id="main" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
-	 viewBox="0 0 17 35" style="enable-background:new 0 0 17 35;" xml:space="preserve">
-<style type="text/css">
-	.st0{fill:none;}
-	.st1{fill:none;stroke:#000000;stroke-width:1.75;stroke-miterlimit:10;}
-</style>
-<g>
-	<rect id="hover-rect" x="0.6" y="1.5" pointer-events="all" class="st0" width="16" height="32.3"/>
-	<ellipse id="idle-pictome-head" pointer-events="none" class="st1" cx="12.6" cy="20.6" rx="3.4" ry="3.3"/>
-	<path id="idle-pictome-arm2" pointer-events="none" class="st1" d="M0.5,12c0.5,0,7.1,0,8.2,0s7.5,0,8,0"/>
-	<path id="idle-pictome-arm2_1_" pointer-events="none" class="st1" d="M0.5,29.2c0.5,0,7,0,8.4,0s7.2,0,7.9,0"/>
-	<path id="idle-pictome-arm2_2_" pointer-events="none" class="st1" d="M0.5,20.6c0.2,0,3.9,0,4.5,0s4,0,4.2,0"/>
-	<path id="idle-pictome-arm2_3_" pointer-events="none" class="st1" d="M0.5,3.5c0.5,0,7.1,0,8.2,0s7.4,0,8,0"/>
-</g>
+<svg version="1.2" baseProfile="tiny" id="main" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+	 x="0px" y="0px" viewBox="0 0 17 35" xml:space="preserve">
+<path fill="none" stroke="#000000" stroke-width="1.75" stroke-miterlimit="10" d="M12.6,17.3c1.9,0,3.4,1.5,3.4,3.3
+	s-1.5,3.3-3.4,3.3s-3.4-1.5-3.4-3.3S10.7,17.3,12.6,17.3z"/>
+<path fill="none" stroke="#1D1D1B" stroke-width="1.75" stroke-miterlimit="10" d="M0.5,12c0.5,0,7.1,0,8.2,0s7.5,0,8,0"/>
+<path fill="none" stroke="#1D1D1B" stroke-width="1.75" stroke-miterlimit="10" d="M0.5,29.2c0.5,0,7,0,8.4,0s7.2,0,7.9,0"/>
+<path fill="none" stroke="#1D1D1B" stroke-width="1.75" stroke-miterlimit="10" d="M0.5,20.6c0.2,0,3.9,0,4.5,0s4,0,4.2,0"/>
+<path fill="none" stroke="#1D1D1B" stroke-width="1.75" stroke-miterlimit="10" d="M0.5,3.5c0.5,0,7.1,0,8.2,0s7.4,0,8,0"/>
 </svg>

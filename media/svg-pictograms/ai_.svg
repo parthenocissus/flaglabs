@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- Generator: Adobe Illustrator 16.0.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
-<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
-<svg version="1.1" id="main" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
-	 width="17px" height="35px" viewBox="0 0 17 35" enable-background="new 0 0 17 35" xml:space="preserve">
-<path id="leg" fill="none" stroke="#1D1D1B" stroke-width="1.75" stroke-miterlimit="10" d="M15.887,20.221
-	c0,8.559-3.612,12.885-7.264,12.979c-3.733,0.097-7.508-4.229-7.508-12.979"/>
-<path id="arm" fill="none" stroke="#1D1D1B" stroke-width="1.75" stroke-miterlimit="10" d="M1.115,14.78
-	c0-8.654,3.693-12.981,7.386-12.981s7.386,4.327,7.386,12.981"/>
-<circle id="head" fill="none" stroke="#1D1D1B" stroke-width="1.75" stroke-miterlimit="10" cx="8.5" cy="17.5" r="3.614"/>
+<!-- Generator: Adobe Illustrator 21.0.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+<svg version="1.2" baseProfile="tiny" id="main" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+	 x="0px" y="0px" viewBox="0 0 17 35" xml:space="preserve">
+<path id="leg" fill="none" stroke="#1D1D1B" stroke-width="1.75" stroke-miterlimit="10" d="M15.9,20.2c0,8.6-3.6,12.9-7.3,13
+	c-3.7,0.1-7.5-4.2-7.5-13"/>
+<path id="arm" fill="none" stroke="#1D1D1B" stroke-width="1.75" stroke-miterlimit="10" d="M1.1,14.8c0-8.7,3.7-13,7.4-13
+	s7.4,4.3,7.4,13"/>
+<path fill="none" stroke="#1D1D1B" stroke-width="1.75" stroke-miterlimit="10" d="M8.5,13.9c2,0,3.6,1.6,3.6,3.6s-1.6,3.6-3.6,3.6
+	s-3.6-1.6-3.6-3.6S6.5,13.9,8.5,13.9z"/>
 </svg>
