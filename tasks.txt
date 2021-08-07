@@ -10,4 +10,4 @@ Jacques Laroche:
 3. Look up other ML projects related to the Anthems project and take
    note of their approach
 4. Go through code and add comments
-5. Add a weekly tasks document and add to Github --> inform team
+5. [DONE] Add a weekly tasks document and add to Github --> inform team
