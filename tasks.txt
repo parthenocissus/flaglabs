@@ -5,8 +5,10 @@ Weekly To Do List:
 Jacques Laroche:
 ----------------
 1. Look up how to train Keras networks on arrays of different sizes
-2. Grow the Anthems Dataset
+2. [Worked On] Grow the Anthems Dataset
    Look up getting Midi files from MuseScore (reference: https://www.tech-gate.org/usa/2021/07/21/audacitys-new-owner-is-in-another-fight-with-the-open-source-community/)
+   Status 
+    --> I've identified what Genre and files we could use for training. I then tried to use the Github tools to bulk download Midi files from the MuseScore site that we could use for training. Unfortunately, the tools seem to be a bit lacking and I'm talking to the developer (Xmader) on the project's Discord schannel to see what possible ways forward there are for us.
 3. Look up other ML projects related to the Anthems project and take
    note of their approach
 4. Go through code and add comments
