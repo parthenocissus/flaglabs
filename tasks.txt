@@ -5,11 +5,18 @@ Weekly To Do List:
 Jacques Laroche:
 ----------------
 1. Look up how to train Keras networks on arrays of different sizes
-2. [Worked On] Grow the Anthems Dataset
+
+2. [WORKED ON] Grow the Anthems Dataset
    Look up getting Midi files from MuseScore (reference: https://www.tech-gate.org/usa/2021/07/21/audacitys-new-owner-is-in-another-fight-with-the-open-source-community/)
-   Status 
-    --> I've identified what Genre and files we could use for training. I then tried to use the Github tools to bulk download Midi files from the MuseScore site that we could use for training. Unfortunately, the tools seem to be a bit lacking and I'm talking to the developer (Xmader) on the project's Discord schannel to see what possible ways forward there are for us.
-3. Look up other ML projects related to the Anthems project and take
-   note of their approach
+   Status: 
+    I've identified what Genre and files we could use for training. I then tried to use the Github tools to bulk download Midi files from the MuseScore site that we could use for training. Unfortunately, the tools seem to be a bit lacking and I'm talking to the developer (Xmader) on the project's Discord schannel to see what possible ways forward there are for us.
+
+3. [WORKED ON] Look up other ML projects related to the Anthems project and take note of their approach
+   Status:
+    Found an article about using audio instead of images as the dataset for a GAN. Link to the piece is below. 
+    https://towardsdatascience.com/synthesizing-audio-with-generative-adversarial-networks-8e0308184edd
+	NOTE: This article got me thinking that maybe we are thinking about things wrong when it comes to using SVGs instead of raster images. SPecifically, perhaps we should be analyzing the SVGs with an NLP algorithm since we are actually dealing with text rather than an image (in the traditional sense).
+   
 4. Go through code and add comments
-5. [DONE] Add a weekly tasks document and add to Github --> inform team
+
+5. [DONE!] Add a weekly tasks document and add to Github --> inform team
