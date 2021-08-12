@@ -4,53 +4,64 @@ from svgpathtools import svg2paths, svg2paths2, wsvg
 import numpy as np
 import glob
 
-svg_ext = '.svg'
-# media_path = 'media/svg-pictograms/'
+# media_path = 'media/svg-pictograms-stroke3-tst/'
 media_path = 'media/svg-pictograms-stroke3/'
 
-# paths, attributes = svg2paths(file_name)
+# Compute the size of all points within all paths within a single SVG file
+# So it can be used for defining the shape of an empty numpy array
+def get_shape_size(ps):
+    size = 0
+    for path in ps:
+        size += len(path) + 1
+    return size
 
-svg_data = []
 
-# Going trough all SVG files in the "media/svg-pictograms" directory
-for f in glob.iglob(media_path + "/*"):
-    print(f"\n_______\n{f}")
-    paths, attributes, svg_attributes = svg2paths2(f)
-    single_file_svg_data = []
+# Parsing SVGs into a numpy array for training
+def parse_svg_pictograms(media_path=media_path):
 
-    # Now going through all path within a single file
-    for i, p in enumerate(paths):
-        print(f"\npath{i}")
-        print(p)
-        path_segments = []
+    svg_data = []
 
-        # Now through all path segmets, that is all cubic bezier objects
-        for item in p:
-            # print(item)
-            points = []
+    float_formatter = "{:.2f}".format
+    np.set_printoptions(formatter={'float_kind': float_formatter})
 
-            # Now through all points (x, y) in a within a signle cubic bezier path segment,
-            # points that consist of a real part and an imaginary part,
-            # since they are defined as complex numbers with 2 pars
-            for part in item:
-                points.append(part.real)
-                points.append(part.imag)
-                # print(f"[{part.real}, {part.imag}]")
+    # Going trough all SVG files in the media_path directory
+    for f in glob.iglob(media_path + "/*"):
+        print(f"\n_______\n{f}")
+        paths, attributes, svg_attributes = svg2paths2(f)
+        shape_size = get_shape_size(paths)
+        points = np.zeros(shape=(shape_size, 3), dtype=float)
 
-            # Appending all arrays in a nested fashion
-            path_segments.append(points)
-        single_file_svg_data.append(path_segments)
-    svg_data.append(single_file_svg_data)
+        itr = 0
+        current = {"x": 0, "y": 0}
 
-# Printing number data, as a basic Python nested array
-print("\n\nraw svg data:")
-print(svg_data)
+        # Now going through all path within a single file
+        for i1, p in enumerate(paths):
 
-# Now to covert it into a numpy array
-# (This np array will need to be reshaped!)
-print("\n\nsvg data as a basic numpy array:")
-data = np.array(svg_data, dtype=object)
+            # Now through all path segmets, that is all cubic bezier objects
+            for i2, item in enumerate(p):
+                x = item.start.real
+                y = item.start.imag
+                dx = x - current["x"]
+                dy = y - current["y"]
+                pen_state = 0.0
+                points[itr] = [dx, dy, pen_state]
+                itr += 1
+                current = {"x": x, "y": y}
+
+                if i2 == len(p) - 1:
+                    x = item.end.real
+                    y = item.end.imag
+                    dx = x - current["x"]
+                    dy = y - current["y"]
+                    pen_state = 2.0 if i1 == len(paths) - 1 else 1.0
+                    points[itr] = [dx, dy, pen_state]
+                    itr += 1
+                    current = {"x": x, "y": y}
+
+        svg_data.append(points)
+
+    return np.array(svg_data, dtype=object)
+
+
+data = parse_svg_pictograms()
 print(data)
-
-# Saving to a new file...
-# wsvg(paths, attributes=attributes, svg_attributes=svg_attributes, filename=output_file)
