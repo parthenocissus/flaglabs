@@ -63,5 +63,78 @@ def parse_svg_pictograms(media_path=media_path):
     return np.array(svg_data, dtype=object)
 
 
+# Parsing SVGs into a numpy array for training, x4
+def parse_svg_pictograms_x4(media_path=media_path):
+
+    svg_data = []
+
+    float_formatter = "{:.2f}".format
+    np.set_printoptions(formatter={'float_kind': float_formatter})
+
+    # Going trough all SVG files in the media_path directory
+    for f in glob.iglob(media_path + "/*"):
+        print(f"\n_______\n{f}")
+        paths, attributes, svg_attributes = svg2paths2(f)
+        shape_size = get_shape_size(paths) * 4
+        points = np.zeros(shape=(shape_size, 3), dtype=float)
+
+        itr = 0
+        current = {"x": 0, "y": 0}
+        current_flip = {"x": 0, "y": 0}
+
+        # Now going through all path within a single file
+        for i1, p in enumerate(paths):
+
+            # Now through all path segmets, that is all cubic bezier objects
+            for i2, item in enumerate(p):
+                x = item.start.real
+                y = item.start.imag
+                dx = x - current["x"]
+                dy = y - current["y"]
+                pen_state = 0.0
+                points[itr] = [dx, dy, pen_state]
+                itr += 1
+                current = {"x": x, "y": y}
+
+                x_flip = 17 - x
+                y_flip = 35 - y
+                dx_flip = x_flip - current_flip["x"]
+                dy_flip = y_flip - current_flip["y"]
+                points[itr] = [dx_flip, dy, pen_state]
+                itr += 1
+                points[itr] = [dx, dy_flip, pen_state]
+                itr += 1
+                points[itr] = [dx_flip, dy_flip, pen_state]
+                itr += 1
+                current_flip = {"x": x_flip, "y": y_flip}
+
+                if i2 == len(p) - 1:
+                    x = item.end.real
+                    y = item.end.imag
+                    dx = x - current["x"]
+                    dy = y - current["y"]
+                    pen_state = 2.0 if i1 == len(paths) - 1 else 1.0
+                    points[itr] = [dx, dy, pen_state]
+                    itr += 1
+                    current = {"x": x, "y": y}
+
+                    x_flip = 17 - x
+                    y_flip = 35 - y
+                    dx_flip = x_flip - current_flip["x"]
+                    dy_flip = y_flip - current_flip["y"]
+                    points[itr] = [dx_flip, dy, pen_state]
+                    itr += 1
+                    points[itr] = [dx, dy_flip, pen_state]
+                    itr += 1
+                    points[itr] = [dx_flip, dy_flip, pen_state]
+                    itr += 1
+                    current_flip = {"x": x_flip, "y": y_flip}
+
+        svg_data.append(points)
+
+    return np.array(svg_data, dtype=object)
+
+
+
 data = parse_svg_pictograms()
 print(data)
