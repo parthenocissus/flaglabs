@@ -26,7 +26,7 @@ NOTE: Save all these URLs in a TXT or CSV file
 
 - [ ] Go through code and add comments
 
-- [ ] Add an "Open Questions" Markdown document to our Github repo and inform the team
+- [x] Add an "Open Questions" Markdown document to our Github repo and inform the team
 
 - [ ] Lookup how to use Adobe Illustrator programatically / via command line
 
