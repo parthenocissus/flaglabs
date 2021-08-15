@@ -30,6 +30,7 @@ Antonije Petrovic:
 - [ ] Research about RNNs.
 - [ ] [WORKED ON] Consider more ways of SVG feature representation.
     Status: Found yet another way for svg2vector representation. Added a link to the article to our Google Doc. Will research more about this. Maybe we will end up trying out different approaches and in the end we'll see what works best.
+    Uroš's comment: Stroke-3 and Stroke-5 models work fine, at least so far. What we actually need is to find what is the right amount of points density.
     
 Uroš Krčadinac:
 
