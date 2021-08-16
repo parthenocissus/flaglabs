@@ -29,7 +29,8 @@ NOTE: Save all these URLs in a TXT or CSV file
 - [x] Add an "Open Questions" Markdown document to our Github repo and inform the team
 
 - [x] Lookup how to use Adobe Illustrator programatically / via command line
-Status: Illustrator has no CLI interface, but it does accept scripts! I found a script that can batch-convert any file readable by Adobe Illustrator to an SVG. I'm imagining we could batch-convert files from SVG to Raster (either jpg or png) then convert all these Raster files back to SVG with the Adobe Illustrator script mentioned above. The link to the conversion script: https://gist.github.com/seltzered/4405256#file-illustratorsaveassvgs-jsx
+
+    *NOTE*: Illustrator has no CLI interface, but it does accept scripts! I found a script that can batch-convert any file readable by Adobe Illustrator to an SVG. I'm imagining we could batch-convert files from SVG to Raster (either jpg or png) then convert all these Raster files back to SVG with the Adobe Illustrator script mentioned above. The link to the conversion script: https://gist.github.com/seltzered/4405256#file-illustratorsaveassvgs-jsx
 
 - [ ] Build / Find a dataset of pictograms / icons
 
