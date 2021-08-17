@@ -6,21 +6,21 @@
 
 **Jacques Laroche**:
 
-- [ ] Finish Growing the Anthems Dataset
+- [ ] Finish Growing the Anthems Dataset <br><br>
 A way forward has been determined for this task. Below is an outline of the pipeline:
-1. Scrape the following pages:
+	1. Scrape the following pages:
 https://musescore.com/sheetmusic/soundtrack?page=1 thru /soundtrack?page=100
 
-1. From the Pages in Step 1 save all URLs with the following construction:
+	1. From the Pages in Step 1 save all URLs with the following construction:
 https://musescore.com/user/XXXXXX
 Example: https://musescore.com/user/16006641/scores/4197961
 NOTE: Save all these URLs in a TXT or CSV file
 
-1. Write a Python script to go through the file created in Step 3 and extract all the ID numbers (which are the last set of numbers in each URL). Save all these ID numbers to a TXT or CSV file.
+	1. Write a Python script to go through the file created in Step 3 and extract all the ID numbers (which are the last set of numbers in each URL). Save all these ID numbers to a TXT or CSV file.
 
-1. Write a Python script to go through the file created in Step 4. The script should iterate through each ID number, find the corresponding MSCZ file within the subdirectories of the Bulk MSCZ download, and finally, copy each of these found files placing them in one spot -- preferably a Directory called "Soundtrack".
+	1. Write a Python script to go through the file created in Step 4. The script should iterate through each ID number, find the corresponding MSCZ file within the subdirectories of the Bulk MSCZ download, and finally, copy each of these found files placing them in one spot -- preferably a Directory called "Soundtrack".
 
-1. Convert all MSCZ files from the "Soundtrack" directory created in Step 5 into MIDI files. NOTE: Please see https://musescore.org/en/project/batch-convert for details
+	1. Convert all MSCZ files from the "Soundtrack" directory created in Step 5 into MIDI files. NOTE: Please see https://musescore.org/en/project/batch-convert for details
 
 - [ ] Continue looking up other ML projects related to the Anthems project and take note of their approach   
 
