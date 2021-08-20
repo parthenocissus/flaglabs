@@ -4,7 +4,7 @@ import time
 import math
 import random
 from random import choices
-
+from colour import Color
 
 # _________________________
 # Flag Generating Engine
@@ -456,3 +456,10 @@ if __name__ == '__main__':
         gf = GenFlag()
         # print("\n" + str(i+1) + ". " + gf.svg_string())
         gf.save()
+
+    rules_path = 'conf/flag-rules.json'
+    rules = json.load(open(rules_path))
+    for primary_group in rules['colors']:
+        for c in primary_group['variations']:
+            clr = Color(c['value'])
+            print(f"{clr.get_web()}, {clr.get_rgb()}")
