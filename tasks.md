@@ -2,6 +2,19 @@
 
 *please add each week's tasks to the top of this document*
 
+## August 20th - August 27th
+
+**Miloš Rančić**
+
+- [ ] Find a way to map the text from the Design section of a flag-related Wiki page onto a particular flag variant layout that we can use for generating (https://www.reddit.com/r/vexillology/comments/agbwrb/flag_variants/)
+
+**Uroš Krčadinac**
+
+- [ ] Create a Web app for generating flags with the rule-based system gen-flag.py.
+- [ ] Create more SVG vector stick-figure pictograms.
+- [ ] Create a complete color vocabulary for flags
+- [ ] Be involved with text generation of mottos
+
 ## August 14th - August 20th
 
 **Jacques Laroche**:
