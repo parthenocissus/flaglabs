@@ -47,7 +47,7 @@ NOTE: Save all these URLs in a TXT or CSV file
 **Uroš Krčadinac**:
 
 - [ ] Create more SVG vector stick-figure pictograms.
-- [ ] Research: generative grammars, expert systems, rule-based systems, procedural generation, etc.
+- [x] Research: generative grammars, expert systems, rule-based systems, procedural generation, etc.
 
 ___
 

@@ -1,0 +1,46 @@
+{
+  "layout": [
+    { "weight": 3, "fn": "unicolor", "layer2": ["chevron", "canton", "border", "hoist_stripe"] },
+    { "weight": 5, "fn": "tricolor_vertical" },
+    { "weight": 5, "fn": "tricolor_horizontal", "layer2": ["chevron", "canton", "border", "hoist_stripe"] },
+    { "weight": 3, "fn": "bicolor_vertical" },
+    { "weight": 5, "fn": "bicolor_horizontal", "layer2": ["chevron", "canton", "border", "hoist_stripe", "cross", "nordic_cross"] },
+    { "weight": 4, "fn": "bicolor_diagonal_left" },
+    { "weight": 1, "fn": "bicolor_diagonal_right" },
+    { "weight": 3, "fn": "bend_left" },
+    { "weight": 2, "fn": "bend_right" },
+    { "weight": 3, "fn": "pale" },
+    { "weight": 2, "fn": "diamond", "layer2": ["border","offset_stripes_vertical", "offset_stripes_horizontal"] },
+    { "weight": 5, "fn": "chevron", "layer2": ["pall", "fly_stripe"] },
+    { "weight": 3, "fn": "canton" },
+    { "weight": 3, "fn": "hoist_stripe" },
+    { "weight": 1, "fn": "fly_stripe" },
+    { "weight": 2, "fn": "bottom_stripe" },
+    { "weight": 1, "fn": "top_stripe" },
+    { "weight": 1, "fn": "offset_stripes_vertical" },
+    { "weight": 1, "fn": "offset_stripes_horizontal" },
+    { "weight": 1, "fn": "top_stripe" },
+    { "weight": 2, "fn": "border" },
+    { "weight": 3, "fn": "cross" },
+    { "weight": 3, "fn": "saltire" },
+    { "weight": 3, "fn": "cross_saltire" },
+    { "weight": 5, "fn": "pall" },
+    { "weight": 3, "fn": "nordic_cross" },
+    { "weight": 3, "fn": "canton_cross" }
+  ],
+
+  "layout-todo": [
+    { "weight": 3, "fn": "" },
+    { "weight": 3, "fn": "", "layer2": ["chevron", "canton", "border"] }
+  ],
+
+  "color": {
+    "dark": ["red", "green", "blue", "purple", "orange", "black"],
+    "light": ["white", "yellow"]
+  },
+
+  "color_combination": [
+    ["red", "white", "purple"],
+    ["green", "yellow", "black"]
+  ]
+}
