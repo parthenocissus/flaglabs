@@ -2,18 +2,53 @@
 
 *please add each week's tasks to the top of this document*
 
-## August 20th - August 27th
+## August 21st - August 27th
 
-**Miloš Rančić**
+**Miloš Rančić**:
 
 - [ ] Find a way to map the text from the Design section of a flag-related Wiki page onto a particular flag variant layout that we can use for generating (https://www.reddit.com/r/vexillology/comments/agbwrb/flag_variants/)
+- [ ] Create Coat of Arms dataset
+- [ ] Assist team with text generation of "National Mottos"
 
-**Uroš Krčadinac**
+**Antonije Petrovic**:
+
+- [ ] items...
+
+**Uroš Krčadinac**:
 
 - [ ] Create a Web app for generating flags with the rule-based system gen-flag.py.
 - [ ] Create more SVG vector stick-figure pictograms.
 - [ ] Create a complete color vocabulary for flags
 - [ ] Be involved with text generation of mottos
+
+**Jacques Laroche**:
+
+- [ ] Finish Growing the Anthems Dataset <br><br>
+A way forward has been determined for this task. Below is an outline of the pipeline:
+	1. Scrape the following pages:
+https://musescore.com/sheetmusic/soundtrack?page=1 thru /soundtrack?page=100
+
+	1. From the Pages in Step 1 save all URLs with the following construction:
+https://musescore.com/user/XXXXXX
+Example: https://musescore.com/user/16006641/scores/4197961
+NOTE: Save all these URLs in a TXT or CSV file
+
+	1. Write a Python script to go through the file created in Step 3 and extract all the ID numbers (which are the last set of numbers in each URL). Save all these ID numbers to a TXT or CSV file.
+
+	1. Write a Python script to go through the file created in Step 4. The script should iterate through each ID number, find the corresponding MSCZ file within the subdirectories of the Bulk MSCZ download, and finally, copy each of these found files placing them in one spot -- preferably a Directory called "Soundtrack".
+
+	1. Convert all MSCZ files from the "Soundtrack" directory created in Step 5 into MIDI files. NOTE: Please see https://musescore.org/en/project/batch-convert for details
+
+- [ ] Continue looking up other ML projects related to the Anthems project and take note of their approach   
+
+- [x] Change our meetings to use Zoom instead of Google Meet
+	Status: Completed. The Zoom link is https://us02web.zoom.us/j/85446992747 and I added it to the calendar invitation.
+
+- [ ] Build / Find a dataset of pictograms / icons
+
+- [ ] Assist team with "National Mottos" task (growing dataset, etc.) 	
+	NOTE: https://en.wikipedia.org/wiki/List_of_national_mottos
+
 
 ## August 14th - August 20th
 
