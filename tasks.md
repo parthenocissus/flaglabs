@@ -41,7 +41,8 @@ NOTE: Save all these URLs in a TXT or CSV file
 
 - [ ] Continue looking up other ML projects related to the Anthems project and take note of their approach   
 
-- [ ] Change our meetings to use Zoom instead of Google Meet
+- [x] Change our meetings to use Zoom instead of Google Meet
+	Status: Completed. The Zoom link is https://us02web.zoom.us/j/85446992747 and I added it to the calendar invitation.
 
 - [ ] Build / Find a dataset of pictograms / icons
 
