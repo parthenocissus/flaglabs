@@ -290,6 +290,22 @@ class Flag:
                 t = f"translate({-2*self.w} {-2*self.h}) skewX({skew_x}) skewY({skew_y})"
                 self.fc.add(self.fc.rect((x1, x2), (r_w, r_h), stroke='none', fill=c, transform=t))
 
+    # Sunburst (eg. Macedonian flag)
+    def sunburst(self):
+        n = randrange(6, 20, 2)
+        theta = (2 * math.pi) / n
+        offset = 0 if random() < 0.75 else uniform(0, theta)
+        r = math.sqrt(self.w*self.w + self.h*self.h)
+        r = self.w
+        x1, y1 = r * math.sin(offset), r * math.cos(offset)
+        for i in range(1, n+1):
+            c = self.choose_different_color()
+            x2, y2 = r * math.sin(i * theta + offset), r * math.cos(i * theta + offset)
+            d = f"M0,0 L{x1},{y1} L{x2},{y2} z"
+            t = f"translate({self.w/2}, {self.h/2})"
+            self.fc.add(self.fc.path(d=d, stroke='none', fill=c, transform=t))
+            x1, y1 = x2, y2
+
     # Diamond (eg. Brazilian flag)
     def diamond(self):
         self.unicolor()

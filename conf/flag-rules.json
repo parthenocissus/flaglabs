@@ -39,9 +39,11 @@
     { "weight": 3, "fn": "checkered",
       "layer2": ["chevron", "canton", "diamond", "pall", "saltire"],
       "rules": ["alternating_colors"] },
-    { "weight": 2000, "fn": "lozenges",
+    { "weight": 2, "fn": "lozenges",
       "layer2": ["chevron", "canton", "diamond", "pall", "saltire"],
-      "rules": ["alternating_colors"] }
+      "rules": ["alternating_colors"] },
+    { "weight": 2, "fn": "sunburst",
+      "layer2": ["canton"], "rules": ["alternating_colors"] }
   ],
 
   "special_rules": [
