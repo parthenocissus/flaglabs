@@ -1,22 +1,25 @@
 {
   "layout": [
-    { "weight": 3, "fn": "unicolor", "layer2": ["chevron", "canton", "border", "hoist_stripe"] },
+    { "weight": 3, "fn": "unicolor", "layer2": ["chevron", "canton", "border", "hoist_stripe",
+        "offset_stripes_vertical", "offset_stripes_horizontal", "diamond", "hoist_stripe",
+        "fly_stripe", "bottom_stripe", "top_stripe", "border", "cross_saltire", "pall",
+        "nordic_cross", "canton_cross", "saltire"] },
     { "weight": 5, "fn": "tricolor_vertical" },
     { "weight": 5, "fn": "tricolor_horizontal", "layer2": ["chevron", "canton", "border", "hoist_stripe"] },
     { "weight": 3, "fn": "bicolor_vertical" },
-    { "weight": 5, "fn": "bicolor_horizontal", "layer2": ["chevron", "canton", "border", "hoist_stripe", "cross", "nordic_cross"] },
+    { "weight": 5, "fn": "bicolor_horizontal", "layer2": ["chevron", "canton", "border", "hoist_stripe",
+        "cross", "nordic_cross"] },
     { "weight": 4, "fn": "bicolor_diagonal_left" },
     { "weight": 1, "fn": "bicolor_diagonal_right" },
     { "weight": 3, "fn": "bend_left" },
     { "weight": 2, "fn": "bend_right" },
     { "weight": 3, "fn": "pale" },
-    { "weight": 2, "fn": "diamond", "layer2": ["border","offset_stripes_vertical", "offset_stripes_horizontal"] },
+    { "weight": 2, "fn": "diamond", "layer2": ["border", "offset_stripes_vertical", "offset_stripes_horizontal"] },
     { "weight": 5, "fn": "chevron", "layer2": ["pall", "fly_stripe"] },
     { "weight": 3, "fn": "canton" },
     { "weight": 3, "fn": "hoist_stripe" },
     { "weight": 1, "fn": "fly_stripe" },
     { "weight": 2, "fn": "bottom_stripe" },
-    { "weight": 1, "fn": "top_stripe" },
     { "weight": 1, "fn": "offset_stripes_vertical" },
     { "weight": 1, "fn": "offset_stripes_horizontal" },
     { "weight": 1, "fn": "top_stripe" },
@@ -26,25 +29,33 @@
     { "weight": 3, "fn": "cross_saltire" },
     { "weight": 5, "fn": "pall" },
     { "weight": 3, "fn": "nordic_cross" },
-    { "weight": 3, "fn": "canton_cross" }
+    { "weight": 3, "fn": "canton_cross" },
+    { "weight": 4, "fn": "stripes_horizontal",
+      "layer2": ["chevron", "canton", "diamond", "pall", "saltire"],
+      "rules": ["alternating_colors"] },
+    { "weight": 2, "fn": "stripes_vertical",
+      "layer2": ["chevron", "canton", "diamond", "pall", "saltire"],
+      "rules": ["alternating_colors"] },
+    { "weight": 3, "fn": "checkered",
+      "layer2": ["chevron", "canton", "diamond", "pall", "saltire"],
+      "rules": ["alternating_colors"] },
+    { "weight": 2000, "fn": "lozenges",
+      "layer2": ["chevron", "canton", "diamond", "pall", "saltire"],
+      "rules": ["alternating_colors"] }
   ],
 
-  "layout-todo": [
-    { "weight": 3, "fn": "" },
-    { "weight": 3, "fn": "", "layer2": ["chevron", "canton", "border"] }
+  "special_rules": [
+      { "name": "none", "weight": 10 },
+      { "name": "alternating_colors", "weight": 2 }
   ],
-
-  "color": {
-    "dark": ["red", "green", "blue", "orange", "black", "#FF99FF"],
-    "light": ["white", "yellow"]
-  },
 
   "colors": [
     {
       "primary": "red",
       "weight": 10,
       "variations": [
-        { "name": "vivid_crimson", "value": "#cc0033", "weight": 10 },
+        { "name": "blood_orange", "value": "#CB001E", "weight": 10 },
+        { "name": "vivid_crimson", "value": "#cc0033", "weight": 6 },
         { "name": "persian_red", "value": "#cc3333", "weight": 6 },
         { "name": "university_red", "value": "#cc0000", "weight": 6 },
         { "name": "mahogany", "value": "#cc3200", "weight": 6 },
@@ -52,9 +63,9 @@
         { "name": "deep_carmine_pink", "value": "#ff3333", "weight": 5 },
         { "name": "carmine_red", "value": "#ff0032", "weight": 4 },
         { "name": "japanese_carmine", "value": "#993332", "weight": 3 },
-        { "name": "pink_raspberry", "value": "#990033", "weight": 2 },
         { "name": "vivid_auburn", "value": "#971e1d", "weight": 1 },
-        { "name": "puce_red", "value": "#663233", "weight": 1 }
+        { "name": "puce_red", "value": "#663233", "weight": 1 },
+        { "name": "crimson_red", "value": "#990000", "weight": 1}
       ]
     },
     {
@@ -83,24 +94,95 @@
       ]
     },
     {
+      "primary": "green",
+      "weight": 7,
+      "variations": [
+        { "name": "sea_green", "value": "#229e45", "weight": 7 },
+        { "name": "green_cyan", "value": "#009966", "weight": 5 },
+        { "name": "bangladesh_green", "value": "#006a4e", "weight": 5 },
+        { "name": "la_salle_green", "value": "#007934", "weight": 5 },
+        { "name": "wageningen_green", "value": "#339933", "weight": 4 },
+        { "name": "pakistan_green", "value": "#006600", "weight": 3 },
+        { "name": "mughal_green", "value": "#336633", "weight": 2 },
+        { "name": "slimy_green", "value": "#3e9a00", "weight": 2 },
+        { "name": "philippine_green", "value": "#007e3a", "weight": 1 },
+        { "name": "dark_pastel_green", "value": "#14b53a", "weight": 1 }
+      ]
+    },
+    {
+      "primary": "orange",
+      "weight": 4,
+      "variations": [
+        { "name": "deep_saffron", "value": "#ff9932", "weight": 5 },
+        { "name": "tawny", "value": "#cc6600", "weight": 4 },
+        { "name": "primary_orange", "value": "#ff6602", "weight": 4 },
+        { "name": "vivid_gamboge", "value": "#ff9901", "weight": 2 }
+      ]
+    },
+    {
       "primary": "purple",
-      "weight": 1,
+      "weight": 3,
       "variations": [
         { "name": "patriarch", "value": "#760188", "weight": 3 },
         { "name": "spanish_purple", "value": "#630356", "weight": 3 },
-        { "name": "cameo_pink", "value": "#f3b3c9", "weight": 3 },
-        { "name": "telemagenta", "value": "#c42b70", "weight": 2 },
         { "name": "razzmic_berry", "value": "#925394", "weight": 2 },
-        { "name": "cerise_pink", "value": "#e93d8c", "weight": 3 },
-        { "name": "persian_rose", "value": "#ff1ea8", "weight": 2 },
         { "name": "midnight", "value": "#75197d", "weight": 2 },
         { "name": "grape", "value": "#6f1aa5", "weight": 1 }
       ]
+    },
+    {
+      "primary": "pink",
+      "weight": 2,
+      "variations": [
+        { "name": "cameo_pink", "value": "#f3b3c9", "weight": 3 },
+        { "name": "telemagenta", "value": "#c42b70", "weight": 2 },
+        { "name": "cerise_pink", "value": "#e93d8c", "weight": 3 },
+        { "name": "persian_rose", "value": "#ff1ea8", "weight": 2 },
+        { "name": "pink_raspberry", "value": "#990033", "weight": 2 }
+      ]
+    },
+    {
+      "primary": "brown",
+      "weight": 0.5,
+      "variations": [
+        { "name": "liver", "value": "#603814", "weight": 2 },
+        { "name": "russet", "value": "#784f16", "weight": 1 },
+        { "name": "saddle_brown", "value": "#935316", "weight": 2 }
+      ]
+    },
+    {
+      "primary": "white",
+      "weight": 8,
+      "type": "metal",
+      "variations": [
+        { "name": "white", "value": "#ffffff", "weight": 15 },
+        { "name": "gainsboro", "value": "#DCDCDC", "weight": 0.5 },
+        { "name": "silver", "value": "#C0C0C0", "weight": 0.5 }
+      ]
+    },
+    {
+      "primary": "yellow",
+      "weight": 6,
+      "type": "metal",
+      "variations": [
+        { "name": "tangerine_yellow", "value": "#ffce00", "weight": 9 },
+        { "name": "aztec_gold", "value": "#d0a650", "weight": 2 },
+        { "name": "mikado_yellow", "value": "#fec50c", "weight": 3 },
+        { "name": "sizzling_sunrise", "value": "#fcdc04", "weight": 2 },
+        { "name": "lemon_yellow", "value": "#fdef42", "weight": 1 }
+      ]
+    },
+    {
+      "primary": "black",
+      "weight": 9,
+      "variations": [
+        { "name": "black", "value": "#000000", "weight": 15 },
+        { "name": "raisin_black", "value": "#212121", "weight": 0.5 },
+        { "name": "slategray", "value": "#708090", "weight": 0.5 }
+      ]
     }
-  ],
 
-  "color_combination": [
-    ["red", "white", "purple"],
-    ["green", "yellow", "black"]
   ]
+
+
 }

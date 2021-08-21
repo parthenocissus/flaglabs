@@ -3,8 +3,9 @@ import svgwrite
 import time
 import math
 import random
-from random import choices
+from random import choices, random, randint, uniform, randrange
 from colour import Color
+
 
 # _________________________
 # Flag Generating Engine
@@ -15,7 +16,7 @@ class GenFlag:
         # Set the output directory
         out_dir = 'media/svgwrite-output/'
         time_stamp = time.strftime("%Y%m%d-%H%M%S") + "-" + str(time.time() * 1000)
-        time_stamp = time_stamp + '-' + str(random.randint(100, 1000))
+        time_stamp = time_stamp + '-' + str(randint(100, 1000))
         file_name = out_dir + time_stamp + '.svg'
 
         # Set dimensions
@@ -28,7 +29,7 @@ class GenFlag:
         rules = json.load(open(rules_path))
 
         # Create the actual flag using the Flag class
-        self.flag = Flag(flag_canvas=flag_canvas, rules=rules, width=self.w, height=self.h)
+        self.flag = Flag(origin=self, flag_canvas=flag_canvas, rules=rules, width=self.w, height=self.h)
         self.flag.draw()
 
     # Get SVG code as string
@@ -45,18 +46,34 @@ class GenFlag:
 class Flag:
 
     # Constructor
-    def __init__(self, flag_canvas, rules, width, height, recursive=False):
+    def __init__(self, origin, flag_canvas, rules, width, height, recursive=False):
 
+        self.genflag_origin = origin
         self.fc = flag_canvas
         self.rules = rules
         self.w = width
         self.h = height
         self.recursive = recursive
+        self.alternating = False
+        self.used_colors = []
 
         # Start generating flag elements.
         self.layout = self.select('layout')  # select basic layout
-        self.layer2 = self.set_layer2()  # set second layer (eg. chevron over the tricolor)
-        self.colors = self.get_colors()  # select colors
+        if "rules" in self.layout:
+            self.set_additional_layout_rules(self.layout)
+
+        # Set second layout layer (eg. chevron over the tricolor)
+        self.layer2 = self.set_layer2()
+        if "rules" in self.layout:
+            self.set_additional_layout_rules(self.layout)
+
+        # Select colors and primary color groups
+        self.primary_groups, self.colors = self.get_colors()
+
+        # Alternating color picker or just a regular one?
+        self.choose_different_color = self.choose_different_color_default
+        if random() < self.alternating_colors_chance():
+            self.choose_different_color = self.choose_different_color_alt
 
     # Getting the name of the function
     # from a distribution of possible functions
@@ -86,24 +103,65 @@ class Flag:
         else:
             return {'fn': 'none'}
 
+    # Set additional layout rules (eg. alternating colors for many-stripes flag)
+    def set_additional_layout_rules(self, layout):
+        for layout_rule in layout['rules']:
+            for base_rule in self.rules['special_rules']:
+                # Enforce and empower layout-related rules
+                if layout_rule == base_rule['name']:
+                    base_rule['weight'] *= 10
+
     # Get possible colors
     def get_colors(self):
-        dark = self.rules["color"]["dark"]
-        light = self.rules["color"]["light"]
-        flag_colors = dark + light
-        return flag_colors
+        groups = []
+        colors = []
+        for primary_group in self.rules['colors']:
+            groups.append(primary_group)
+            for c in primary_group['variations']:
+                colors.append(c)
+        return groups, colors
 
-    # Explicitly set colors
-    def set_colors(self, colors):
-        self.colors = colors
+    # Explicitly set a list of used colors
+    def set_used_colors(self, colors):
+        self.used_colors = colors
+
+    # Calculating chance for alternating color scheme (eg. Greek flag)
+    def alternating_colors_chance(self):
+        weights_total = 0
+        alternating_colors_weight = 0
+        for rule in self.rules['special_rules']:
+            if rule['name'] == 'alternating_colors':
+                alternating_colors_weight = rule['weight']
+            weights_total += rule['weight']
+        return alternating_colors_weight / weights_total
 
     # Choose different color every time
-    def choose_different_color(self):
-        if not self.colors:
-            self.colors = self.get_colors()
-        color = choices(self.colors)[0]
-        self.colors.remove(color)
-        return color
+    def choose_different_color_default(self):
+        if random() > 0.9:
+            color = Color(rgb=(random(), random(), random()))
+            color_object = {"name": "random", "value": color.get_web()}
+            self.used_colors.append(color_object)
+            return color_object['value']
+        if not self.primary_groups:
+            self.primary_groups, self.colors = self.get_colors()
+        primary_distribution = [d['weight'] for d in self.primary_groups]
+        primary = choices(self.primary_groups, primary_distribution)[0]
+        color_distribution = [d['weight'] for d in primary['variations']]
+        color = choices(primary['variations'], color_distribution)[0]
+        self.primary_groups.remove(primary)
+        self.used_colors.append(color)
+        return color["value"]
+
+    # Alternating between colors
+    def choose_different_color_alt(self):
+        self.alternating = True
+        if len(self.used_colors) < 2:
+            return self.choose_different_color_default()
+        else:
+            colors_len = len(self.used_colors)
+            color = self.used_colors[colors_len - 2]
+            self.used_colors.append(color)
+            return color["value"]
 
     # Get SVG code as string
     def svg_string(self):
@@ -153,29 +211,29 @@ class Flag:
 
     # Bend (left)
     def bend_left(self):
-        if random.random() > 0.5:
+        if random() > 0.5:
             self.bicolor_diagonal_left()
         else:
             self.unicolor()
         c = self.choose_different_color()
-        str_w = random.uniform(self.h / 10, self.h / 3)
-        if random.random() > 0.2:
+        str_w = uniform(self.h / 10, self.h / 3)
+        if random() > 0.2:
             c2 = self.choose_different_color()
-            str_w2 = random.uniform(str_w + self.h / 20, str_w + self.h / 3)
+            str_w2 = uniform(str_w + self.h / 20, str_w + self.h / 3)
             self.fc.add(self.fc.line((0, self.h), (self.w, 0), stroke=c2, fill='none', stroke_width=str_w2))
         self.fc.add(self.fc.line((0, self.h), (self.w, 0), stroke=c, fill='none', stroke_width=str_w))
 
     # Bend (right)
     def bend_right(self):
-        if random.random() > 0.5:
+        if random() > 0.5:
             self.bicolor_diagonal_right()
         else:
             self.unicolor()
         c = self.choose_different_color()
-        str_w = random.uniform(self.h / 10, self.h / 3)
-        if random.random() > 0.2:
+        str_w = uniform(self.h / 10, self.h / 3)
+        if random() > 0.2:
             c2 = self.choose_different_color()
-            str_w2 = random.uniform(str_w + self.h / 20, str_w + self.h / 3)
+            str_w2 = uniform(str_w + self.h / 20, str_w + self.h / 3)
             self.fc.add(self.fc.line((0, 0), (self.w, self.h), stroke=c2, fill='none', stroke_width=str_w2))
         self.fc.add(self.fc.line((0, 0), (self.w, self.h), stroke=c, fill='none', stroke_width=str_w))
 
@@ -191,23 +249,67 @@ class Flag:
             c = self.choose_different_color()
             self.fc.add(self.fc.rect((i * self.w / 3, 0), (self.w / 3, self.h), stroke='none', fill=c))
 
+    # Horizontal stripes
+    def stripes_horizontal(self):
+        n_stripes = randint(4, 14)
+        for i in range(n_stripes):
+            c = self.choose_different_color()
+            self.fc.add(self.fc.rect((0, i * self.h / n_stripes), (self.w, self.h / n_stripes),
+                                     stroke='none', fill=c))
+
+    # Vertical stripes
+    def stripes_vertical(self):
+        n_stripes = randint(4, 8)
+        for i in range(n_stripes):
+            c = self.choose_different_color()
+            self.fc.add(self.fc.rect((i * self.w / n_stripes, 0), (self.w / n_stripes, self.h),
+                                     stroke='none', fill=c))
+
+    # Checkered
+    def checkered(self):
+        n_hor = randint(4, 14)
+        n_ver = randrange(3, 10, 2)
+        for i in range(n_hor):
+            for j in range(n_ver):
+                c = self.choose_different_color()
+                self.fc.add(self.fc.rect((i * self.w / n_hor, j * self.h / n_ver),
+                                         (self.w / n_hor, self.h / n_ver),
+                                         stroke='none', fill=c))
+
+    # Lozenges
+    def lozenges(self):
+        n_hor = randint(4, 14)
+        n_ver = randrange(3, 10, 2)
+        skew_x, skew_y = uniform(10, 30), uniform(10, 30)
+        dim_x, dim_y = self.w, self.h
+        for i in range(5 * n_hor):
+            for j in range(5 * n_ver):
+                c = self.choose_different_color()
+                x1, x2 = i * dim_x / n_hor, j * dim_y / n_ver
+                r_w, r_h = dim_x / n_hor, dim_y / n_ver
+                t = f"translate({-2*self.w} {-2*self.h}) skewX({skew_x}) skewY({skew_y})"
+                self.fc.add(self.fc.rect((x1, x2), (r_w, r_h), stroke='none', fill=c, transform=t))
+
     # Diamond (eg. Brazilian flag)
     def diamond(self):
         self.unicolor()
         c = self.choose_different_color()
         q_y = 5 if self.layer2['fn'] is 'none' else 3
         q_x = 4 if self.layer2['fn'] is 'none' else 2.5
-        margin_y = random.uniform(0, self.h / q_y)
-        margin_x = random.uniform(0, self.h / q_x)
-        d = f"M{self.w / 2},{margin_y} L{self.w - margin_x},{self.h / 2} " \
-            f"L{self.w / 2},{self.h - margin_y} L{margin_x},{self.h / 2} z"
+        margin_y = uniform(0, self.h / q_y)
+        margin_x = uniform(0, self.h / q_x)
+        x1, y1 = self.w / 2, margin_y
+        x2, y2 = self.w - margin_x, self.h / 2
+        x3, y3 = self.w / 2, self.h - margin_y
+        x4, y4 = margin_x, self.h / 2
+        d = f"M{x1},{y1} L{x2},{y2} L{x3},{y3} L{x4},{y4} z"
         self.fc.add(self.fc.path(d=d, stroke='none', fill=c))
 
     # Pale (eg. Canadian flag)
     def pale(self):
         self.unicolor()
         c = self.choose_different_color()
-        qoef = random.uniform(2, 3)
+        qoef = uniform(2, 3)
         d = f"M{self.h / qoef},0 L{self.w - self.h / qoef},0 " \
             f"L{self.w - self.h / qoef},{self.h} L{self.h / qoef},{self.h} z"
         self.fc.add(self.fc.path(d=d, stroke='none', fill=c))
@@ -221,12 +323,12 @@ class Flag:
         d = f"M0,0 L{chevron_w},{self.h / 2} L0,{self.h} z"
         stroke = 'none'
         fill = c
-        if random.random() > 0.7:
+        if random() > 0.7:
             d2 = f"M0,0 L{chevron_w},{self.h / 2} L0,{self.h}"
             c2 = self.choose_different_color()
-            sw = self.h / random.uniform(6, 12)
+            sw = self.h / uniform(6, 12)
             self.fc.add(self.fc.path(d=d2, stroke=c2, fill='none', stroke_width=sw))
-            fill = 'none' if random.random() > 0.5 else c
+            fill = 'none' if random() > 0.5 else c
         self.fc.add(self.fc.path(d=d, stroke=stroke, fill=fill))
 
     # Hoist Stripe
@@ -234,7 +336,7 @@ class Flag:
         if self.layer2['fn'] is 'none':
             self.unicolor()
         c = self.choose_different_color()
-        wid = self.h / random.uniform(2, 3)
+        wid = self.h / uniform(2, 3)
         self.fc.add(self.fc.rect((0, 0), (wid, self.h), stroke='none', fill=c))
 
     # Fly Stripe
@@ -242,7 +344,7 @@ class Flag:
         if self.layer2['fn'] is 'none':
             self.unicolor()
         c = self.choose_different_color()
-        wid = self.w - (self.h / random.uniform(2, 3))
+        wid = self.w - (self.h / uniform(2, 3))
         self.fc.add(self.fc.rect((wid, 0), (self.w, self.h), stroke='none', fill=c))
 
     # Bottom Stripe
@@ -250,7 +352,7 @@ class Flag:
         if self.layer2['fn'] is 'none':
             self.unicolor()
         c = self.choose_different_color()
-        margin = self.h - (self.h / random.uniform(2.5, 4))
+        margin = self.h - (self.h / uniform(2.5, 4))
         self.fc.add(self.fc.rect((0, margin), (self.w, self.h), stroke='none', fill=c))
 
     # Top Stripe
@@ -258,7 +360,7 @@ class Flag:
         if self.layer2['fn'] is 'none':
             self.unicolor()
         c = self.choose_different_color()
-        margin = self.h / random.uniform(2.5, 4)
+        margin = self.h / uniform(2.5, 4)
         self.fc.add(self.fc.rect((0, 0), (self.w, margin), stroke='none', fill=c))
 
     # Offset stripes, vertical
@@ -266,8 +368,8 @@ class Flag:
         if self.layer2['fn'] is 'none':
             self.unicolor()
         c = self.choose_different_color()
-        margin = self.h / random.uniform(5, 10)
-        str_w = self.h / random.uniform(7, 16)
+        margin = self.h / uniform(5, 10)
+        str_w = self.h / uniform(7, 16)
         self.fc.add(self.fc.line((margin, 0), (margin, self.h), stroke=c, fill='none', stroke_width=str_w))
         self.fc.add(
             self.fc.line((self.w - margin, 0), (self.w - margin, self.h),
@@ -278,8 +380,8 @@ class Flag:
         if self.layer2['fn'] is 'none':
             self.unicolor()
         c = self.choose_different_color()
-        margin = self.h / random.uniform(5, 10)
-        str_w = self.h / random.uniform(7, 16)
+        margin = self.h / uniform(5, 10)
+        str_w = self.h / uniform(7, 16)
         self.fc.add(self.fc.line((0, margin), (self.w, margin), stroke=c, fill='none', stroke_width=str_w))
         self.fc.add(self.fc.line((0, self.h - margin), (self.w, self.h - margin),
                                  stroke=c, fill='none', stroke_width=str_w))
@@ -288,25 +390,30 @@ class Flag:
     def canton(self):
         if self.layer2['fn'] is 'none':
             self.unicolor()
-        c = self.choose_different_color()
+        # c = self.choose_different_color()
+
         # Recursively create another flag for canton (upper left rectangle):
-        recursive_flag = Flag(self.fc, self.rules, self.w / 2, self.h / 2, recursive=True)
-        recursive_flag.set_colors(self.colors)
-        recursive_flag.draw()
+        if self.h > self.genflag_origin.h * 0.25:
+            recursive_flag = Flag(self.genflag_origin, self.fc, self.rules,
+                                  self.w / 2, self.h / 2, recursive=True)
+            if self.alternating and random() > 0.3:
+                recursive_flag.set_used_colors(self.used_colors)
+                recursive_flag.choose_different_color = recursive_flag.choose_different_color_alt
+            recursive_flag.draw()
 
     # Border (also double border and border without the left hoist side)
     def border(self):
         if self.layer2['fn'] is 'none':
             self.unicolor()
         c = self.choose_different_color()
-        wid = random.uniform(self.h / 16, self.h / 6)
+        wid = uniform(self.h / 16, self.h / 6)
         m = wid / 2
-        fly = True if random.random() > 0.8 else False
+        fly = True if random() > 0.8 else False
         left = m if not fly else -m
         right = self.w - 2 * m if not fly else self.w
-        if random.random() > 0.2:
+        if random() > 0.2:
             c2 = self.choose_different_color()
-            wid2 = random.uniform(wid * 2, wid * 2.2)
+            wid2 = uniform(wid * 2, wid * 2.2)
             m2 = wid2 / 2
             left2 = m2 if not fly else -m2
             right2 = self.w - 2 * m2 if not fly else self.w
@@ -320,9 +427,9 @@ class Flag:
     def cross(self):
         self.unicolor()
         c = self.choose_different_color()
-        wid = self.h * random.uniform(0.1, 0.25)
-        if random.random() > 0.75:
-            wid2 = random.uniform(wid * 1.3, wid * 2)
+        wid = self.h * uniform(0.1, 0.25)
+        if random() > 0.75:
+            wid2 = uniform(wid * 1.3, wid * 2)
             c2 = self.choose_different_color()
             self.fc.add(self.fc.line((self.w / 2, 0), (self.w / 2, self.h),
                                      stroke=c2, fill='none', stroke_width=wid2))
@@ -337,9 +444,9 @@ class Flag:
     def nordic_cross(self):
         self.unicolor()
         c = self.choose_different_color()
-        wid = self.h * random.uniform(0.1, 0.25)
-        if random.random() > 0.75:
-            wid2 = random.uniform(wid * 1.3, wid * 2)
+        wid = self.h * uniform(0.1, 0.25)
+        if random() > 0.75:
+            wid2 = uniform(wid * 1.3, wid * 2)
             c2 = self.choose_different_color()
             self.fc.add(self.fc.line((self.h / 2, 0), (self.h / 2, self.h),
                                      stroke=c2, fill='none', stroke_width=wid2))
@@ -354,9 +461,9 @@ class Flag:
     def canton_cross(self):
         self.unicolor()
         c = self.choose_different_color()
-        wid = self.h * random.uniform(0.08, 0.2)
-        if random.random() > 0.75:
-            wid2 = random.uniform(wid * 1.3, wid * 2)
+        wid = self.h * uniform(0.08, 0.2)
+        if random() > 0.75:
+            wid2 = uniform(wid * 1.3, wid * 2)
             c2 = self.choose_different_color()
             self.fc.add(self.fc.line((self.h / 3, 0), (self.h / 3, self.h),
                                      stroke=c2, fill='none', stroke_width=wid2))
@@ -371,9 +478,9 @@ class Flag:
     def saltire(self):
         self.unicolor()
         c = self.choose_different_color()
-        wid = self.h * random.uniform(0.1, 0.25)
-        if random.random() > 0.75:
-            wid2 = random.uniform(wid * 1.3, wid * 2)
+        wid = self.h * uniform(0.1, 0.25)
+        if random() > 0.75:
+            wid2 = uniform(wid * 1.3, wid * 2)
             c2 = self.choose_different_color()
             self.fc.add(self.fc.line((0, 0), (self.w, self.h),
                                      stroke=c2, fill='none', stroke_width=wid2))
@@ -390,11 +497,11 @@ class Flag:
         c = self.choose_different_color()  # fill color
         c2 = self.choose_different_color()  # border color (if border)
 
-        border = True if random.random() > 0.75 else False
-        wid_cross = self.h * random.uniform(0.05, 0.18)
-        wid_saltire = wid_cross * random.uniform(0.6, 0.9)
-        wid_cross2 = wid_cross * random.uniform(1.8, 2.1)
-        wid_saltire2 = wid_saltire * random.uniform(1.8, 2.1)
+        border = True if random() > 0.75 else False
+        wid_cross = self.h * uniform(0.05, 0.18)
+        wid_saltire = wid_cross * uniform(0.6, 0.9)
+        wid_cross2 = wid_cross * uniform(1.8, 2.1)
+        wid_saltire2 = wid_saltire * uniform(1.8, 2.1)
 
         # Saltire
         if border:
@@ -420,7 +527,7 @@ class Flag:
     # Pall (Y-shape flags, eg. South African flag)
     def pall(self):
         if self.layer2['fn'] is 'none':
-            if random.random() > 0.5:
+            if random() > 0.5:
                 self.unicolor()
             else:
                 c1 = self.choose_different_color()
@@ -432,14 +539,14 @@ class Flag:
                 self.fc.add(self.fc.path(d=d, stroke='none', fill=c3))
         c = self.choose_different_color()
         c_border = self.choose_different_color()
-        wid = self.h * random.uniform(0.1, 0.25)
-        wid_border = wid * random.uniform(1.8, 2.1)
+        wid = self.h * uniform(0.1, 0.25)
+        wid_border = wid * uniform(1.8, 2.1)
         chevron_w = self.h * math.sqrt(3) / 2
         d_line = f"M0,0 L{chevron_w},{self.h / 2} L0,{self.h} " \
                  f"L{chevron_w},{self.h / 2} L{self.w},{self.h / 2}"
-        if random.random() > 0.7:
+        if random() > 0.7:
             self.fc.add(self.fc.path(d=d_line, stroke_width=wid_border, stroke=c_border, fill='none'))
-            if random.random() > 0.5:
+            if random() > 0.5:
                 c_border2 = self.choose_different_color()
                 diff = wid_border - wid
                 d_line2 = f"M{-diff},0 L{chevron_w - diff},{self.h / 2} L{-diff},{self.h}"
@@ -452,14 +559,6 @@ class Flag:
 
 
 if __name__ == '__main__':
-    for i in range(30):
+    for i in range(40):
         gf = GenFlag()
-        # print("\n" + str(i+1) + ". " + gf.svg_string())
         gf.save()
-
-    rules_path = 'conf/flag-rules.json'
-    rules = json.load(open(rules_path))
-    for primary_group in rules['colors']:
-        for c in primary_group['variations']:
-            clr = Color(c['value'])
-            print(f"{clr.get_web()}, {clr.get_rgb()}")
