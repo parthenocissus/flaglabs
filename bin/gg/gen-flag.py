@@ -56,6 +56,8 @@ class Flag:
         self.recursive = recursive
         self.alternating = False
         self.used_colors = []
+        self.symbol_chance = 0.5
+        self.symbol = None
 
         # Start generating flag elements.
         self.layout = self.select('layout')  # select basic layout
@@ -67,6 +69,9 @@ class Flag:
         if "rules" in self.layout:
             self.set_additional_layout_rules(self.layout)
 
+        # Set symbol (eg. coat of arms, a circle, a star, etc)
+        if random() > self.symbol_chance:
+            self.symbol = self.choose_symbol()
         # Select colors and primary color groups
         self.primary_groups, self.colors = self.get_colors()
 
@@ -86,6 +91,17 @@ class Flag:
     def draw(self):
         getattr(self, self.layout['fn'])()
         getattr(self, self.layer2['fn'])()
+
+    # Choose a symbol (eg. coat of arms, a circle, a star, etc)
+    def choose_symbol(self):
+        distribution = [d['weight'] for d in self.rules['symbols']]
+        symbol = choices(self.rules['symbols'], distribution)
+        if 'file_name' in symbol:
+            # symbol['svg'] =
+            pass
+        else:
+            symbol['svg'] = getattr(self, symbol['name'])()
+        return symbol
 
     # Choose a possible second layer (eg. chevron over the basic layout)
     def set_layer2(self):
@@ -172,7 +188,7 @@ class Flag:
         self.fc.save()
 
     # _________________________
-    # FLAG DRAWING METHODS
+    # FLAG LAYOUTS
 
     # Unicolor
     def unicolor(self):

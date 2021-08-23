@@ -1,56 +1,65 @@
-# Converting SVG paths into numpy arrays
-
+import svgutils.transform as sg
+import sys
 from svgpathtools import svg2paths, svg2paths2, wsvg
-import numpy as np
-import glob
+from xml.etree import ElementTree as ET
+from lxml import etree
 
-svg_ext = '.svg'
-# media_path = 'media/svg-pictograms/'
-media_path = 'media/svg-pictograms-stroke3/'
+def xml_test():
 
-# paths, attributes = svg2paths(file_name)
+    flag_tree = ET.parse('media/tmp/flag.svg')
+    flag_root = flag_tree.getroot()
+    # for item in root_flag:
+    #     print(item.attrib)
 
-svg_data = []
+    symbol_tree = ET.parse('media/tmp/symbol.svg')
+    symbol_root = symbol_tree.getroot()
 
-# Going trough all SVG files in the "media/svg-pictograms" directory
-for f in glob.iglob(media_path + "/*"):
-    print(f"\n_______\n{f}")
-    paths, attributes, svg_attributes = svg2paths2(f)
-    single_file_svg_data = []
+    flag_svg = flag_root.find('svg')
+    symbol_svg = symbol_root.find('svg')
+    # added = ET.SubElement(fleur_svg)
 
-    # Now going through all path within a single file
-    for i, p in enumerate(paths):
-        print(f"\npath{i}")
-        print(p)
-        path_segments = []
+    for element in symbol_tree.iter('svg'):
+        print(element)
+        print(element.attrib)
+        flag_svg.append(element)
 
-        # Now through all path segmets, that is all cubic bezier objects
-        for item in p:
-            # print(item)
-            points = []
+    # fleur_svg.insert(0, root_flag)
 
-            # Now through all points (x, y) in a within a signle cubic bezier path segment,
-            # points that consist of a real part and an imaginary part,
-            # since they are defined as complex numbers with 2 pars
-            for part in item:
-                points.append(part.real)
-                points.append(part.imag)
-                # print(f"[{part.real}, {part.imag}]")
+    flag_tree.write("media/tmp/final.svg")
 
-            # Appending all arrays in a nested fashion
-            path_segments.append(points)
-        single_file_svg_data.append(path_segments)
-    svg_data.append(single_file_svg_data)
+def svgutils_test():
 
-# Printing number data, as a basic Python nested array
-print("\n\nraw svg data:")
-print(svg_data)
+    #create a new SVG figure
+    fig = sg.SVGFigure()
+    fig.set_size(("150px", "100px"))
 
-# Now to covert it into a numpy array
-# (This np array will need to be reshaped!)
-print("\n\nsvg data as a basic numpy array:")
-data = np.array(svg_data, dtype=object)
-print(data)
+    # load figures
+    flag = sg.fromfile('media/tmp/flag.svg')
+    symbol = sg.fromfile('media/tmp/symbol.svg')
 
-# Saving to a new file...
-# wsvg(paths, attributes=attributes, svg_attributes=svg_attributes, filename=output_file)
+    # get the plot objects
+    flag_root = flag.getroot()
+    symbol_root = symbol.getroot()
+    symbol_root.scale(0.5)
+    symbol_root.moveto(50, 25)
+    symbol.attrib['fill'] = 'blue'
+    # print(symbol_root)
+
+    # append plots and labels to figure
+    fig.append([flag_root, symbol_root])
+
+    # save generated SVG files
+    fig.save("media/tmp/final.svg")
+
+
+def svgpathtools_test():
+    f1 = 'media/tmp/flag.svg'
+    f2 = 'media/tmp/symbol.svg'
+    f3 = 'media/tmp/final.svg'
+    paths1, attributes1, svg_attributes1 = svg2paths2(f1)
+    # wsvg(paths1, attributes=attributes1, svg_attributes=svg_attributes1, filename=f3)
+    wsvg(paths1, attributes=attributes1, filename=f3)
+
+# svgpathtools_test()
+# svgutils_test()
+xml_test()
