@@ -39,8 +39,8 @@ xml.etree.ElementTree
 
 def svg_remix():
 
-    flag_path = "media/tmp/flag.svg" # zastava dimenzija 150x100
-    symbol_path = "media/tmp/symbol.svg" # grb dimenzija 100x100
+    flag_path = "media/tmp/flag.svg"  # zastava dimenzija 150x100
+    symbol_path = "media/tmp/symbol.svg"  # grb dimenzija 100x100
     output_path = "media/tmp/final.svg"
 
     # ...
