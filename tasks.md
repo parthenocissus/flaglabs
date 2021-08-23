@@ -35,7 +35,7 @@ https://musescore.com/user/XXXXXX
 Example: https://musescore.com/user/16006641/scores/4197961
 NOTE: Save all these URLs in a TXT or CSV file
 
-	1. Write a Python script to go through the file created in Step 3 and extract all the ID numbers (which are the last set of numbers in each URL). Save all these ID numbers to a TXT or CSV file.
+	1. Write a Python script to go through the file created in Step 2 and extract all the ID numbers (which are the last set of numbers in each URL). Save all these ID numbers to a TXT or CSV file.
 
 	1. Write a Python script to go through the file created in Step 4. The script should iterate through each ID number, find the corresponding MSCZ file within the subdirectories of the Bulk MSCZ download, and finally, copy each of these found files placing them in one spot -- preferably a Directory called "Soundtrack".
 
