@@ -1,14 +1,15 @@
 {
   "symbols": [
-    { "name": "fleur-de-lis", "weight": 20, "file_name": "fleur-de-lis" },
-    { "name": "pentagram", "weight": 20, "file_name": "pentagram" }
+    { "name": "circle", "weight": 100 },
+    { "name": "random_star", "weight": 10},
+
+    { "name": "fleur_de_lis", "weight": 20, "file_name": "fleur_de_lis" },
+    { "name": "pentagram", "weight": 50, "file_name": "pentagram" },
+    { "name": "saltire_cross", "weight": 5000, "file_name": "saltire_cross" }
   ],
 
-  "symbols-todo": [
-    { "name": "circle", "weight": 100 },
-    { "name": "star", "weight": 30 },
-    { "name": "fleur-de-lis", "weight": 20, "file_name": "fleur-de-lis" },
-    { "name": "pentagram", "weight": 20, "file_name": "fleur-de-lis" }
+  "symbols-TODO": [
+    { "name": "", "weight": 0 }
   ]
 
 }

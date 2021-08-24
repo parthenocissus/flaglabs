@@ -1,79 +1,21 @@
-import json
-import svgwrite
-import time
 import math
-import random
 from random import choices, random, randint, uniform, randrange
-from colour import Color
-from svgpathtools import svg2paths, svg2paths2, wsvg
-from xml.etree import ElementTree as ET
-import re
 
 
-# _________________________
-# Flag Generating Engine
-class GenFlag:
+class FlagLayout:
 
-    # Constructor
-    def __init__(self, width=150, height=100,
-                 rules_path='conf/flag-rules.json',
-                 symbols_path='conf/flag-symbols.json'):
-        # Set the output directory
-        out_dir = 'media/svgwrite-output/'
-        time_stamp = time.strftime("%Y%m%d-%H%M%S") + "-" + str(time.time() * 1000)
-        time_stamp = time_stamp + '-' + str(randint(100, 1000))
-        file_name = out_dir + time_stamp + '.svg'
-
-        self.symbols_typical_dir = 'media/svg-flag-symbols/typical/'
-        self.symbols_other_dir = 'media/svg-flag-symbols/other/'
-
-        # Set dimensions
-        self.size = (width, height)
-        self.w = width
-        self.h = height
-
-        # Set the empty SVG canvas
-        flag_canvas = svgwrite.Drawing(file_name, size=(f'{self.w}px', f'{self.h}px'))
-
-        # Load rules, layouts, colors, and symbols
-        rules = json.load(open(rules_path))
-        symbols = json.load(open(symbols_path))
-        rules['symbols'] = symbols['symbols']
-
-        # Create the actual flag using the Flag class
-        self.flag = Flag(origin=self, flag_canvas=flag_canvas, rules=rules, width=self.w, height=self.h)
-        self.flag.draw()
-
-    # Get SVG code as string
-    def svg_string(self):
-        return self.flag.svg_string()
-
-    # Saving the flag into a SVG file
-    def save(self):
-        self.flag.save()
-
-
-# _________________________
-# Single Flag
-class Flag:
-
-    # Constructor
-    def __init__(self, origin, flag_canvas, rules, width, height, recursive=False):
-
+    def __init__(self, origin, flag):
         self.genflag_origin = origin
-        self.fc = flag_canvas
-        self.rules = rules
-        self.w = width
-        self.h = height
-        self.recursive = recursive
-        self.alternating = False
-        self.used_colors = []
+        self.flag = flag
+        self.fc = flag.fc
+        self.w = flag.w
+        self.h = flag.h
+        self.alternating = flag.alternating
+        self.rules = flag.rules
+        self.used_colors = flag.used_colors
+        self.symbol_data = flag.symbol_data
 
-        self.symbols = rules['symbols']
-        self.symbol_chance = 0
-        self.symbol = None
-
-        # Start generating flag elements.
+        # Start generating flag elements with the first layer of the layout
         self.layout = self.select('layout')  # select basic layout
         if "rules" in self.layout:
             self.set_additional_layout_rules(self.layout)
@@ -83,17 +25,10 @@ class Flag:
         if "rules" in self.layout:
             self.set_additional_layout_rules(self.layout)
 
-        # Set symbol (eg. coat of arms, a circle, a star, etc)
-        if random() > self.symbol_chance:
-            self.symbol = self.choose_symbol()
-
-        # Select colors and primary color groups
-        self.primary_groups, self.colors = self.get_colors()
-
-        # Alternating color picker or just a regular one?
-        self.choose_different_color = self.choose_different_color_default
-        if random() < self.alternating_colors_chance():
-            self.choose_different_color = self.choose_different_color_alt
+    # Draw layout
+    def draw(self):
+        getattr(self, self.layout['fn'])()
+        getattr(self, self.layer2['fn'])()
 
     # Getting the name of the function
     # from a distribution of possible functions
@@ -102,73 +37,9 @@ class Flag:
         distribution = [d['weight'] for d in self.rules[item]]
         return choices(self.rules[item], distribution)[0]
 
-    # Draw layout
-    def draw(self):
-        getattr(self, self.layout['fn'])()
-        getattr(self, self.layer2['fn'])()
-        self.draw_symbol()
-
-    # Draw symbol
-    def draw_symbol(self):
-        # group = self.fc.g(transform='translate(50, 25) scale(0.5) rotate(90, 50, 50)')
-        symbol = self.build_symbol(self.symbol, (50, 25), 0.5, 90, (50, 50))
-        symbol2 = self.build_symbol(self.symbol, (100, 25), 0.3, 0)
-        self.fc.add(symbol)
-        self.fc.add(symbol2)
-
-    # Create a single symbol from paths and put it in a group (<g> element)
-    def build_symbol_from_paths(self, symbol, position=(0, 0), scale=1,
-                            rotation_angle=0, anchor_position=(50, 50)):
-        x, y = position
-        anchor_x, anchor_y = anchor_position
-        t = f"translate({x}, {y}) scale({scale}) rotate({rotation_angle}, {anchor_x}, {anchor_y})"
-        group = self.fc.g(transform=t)
-        for path in symbol['paths']:
-            svg_path = self.fc.path(d=path['d'], fill='pink', stroke='none')
-            group.add(svg_path)
-        return group
-
-    # def build_symbol_from_scratch(self, symbol, position=(0, 0), scale=1,
-    #                         rotation_angle=0, anchor_position=(50, 50)):
-
-    # Choose a symbol (eg. coat of arms, a circle, a star, etc)
-    def choose_symbol(self):
-        distribution = [d['weight'] for d in self.rules['symbols']]
-        symbol = choices(self.rules['symbols'], distribution)[0]
-        if 'file_name' in symbol:
-            symbol['paths'] = self.get_svg_paths(symbol['file_name'])
-            self.build_symbol = self.build_symbol_from_paths
-        else:
-            self.build_symbol = getattr(self, symbol['name'])
-        return symbol
-
-    # Open a SVG file and get all path-related data
-    def get_svg_paths(self, file_name):
-
-        path = f"{self.genflag_origin.symbols_typical_dir}{file_name}.svg"
-        path_data = []
-
-        # tree = ET.parse(path)
-        # root = tree.getroot()
-        # path_data = []
-        # for item in root:
-        #     if 'd' in item.attrib:
-        #         path_object = {'d': item.attrib['d']}
-        #         if 'fill' in item.attrib:
-        #             path_object['fill'] = item.attrib['fill']
-        #         if 'stroke' in item.attrib:
-        #             path_object['stroke'] = item.attrib['stroke']
-        #         path_data.append(path_object)
-
-        paths, attrs, svg_attrs = svg2paths2(path)
-        for p, a in zip(paths, attrs):
-            path_object = {'d': p.d()}
-            if 'fill' in a:
-                path_object['fill'] = a['fill']
-            if 'stroke' in a:
-                path_object['stroke'] = a['stroke']
-            path_data.append(path_object)
-        return path_data
+    # Choose a color
+    def choose_different_color(self):
+        return self.flag.choose_different_color()
 
     # Choose a possible second layer (eg. chevron over the basic layout)
     def set_layer2(self):
@@ -193,66 +64,6 @@ class Flag:
                 # Enforce and empower layout-related rules
                 if layout_rule == base_rule['name']:
                     base_rule['weight'] *= 10
-
-    # Get possible colors
-    def get_colors(self):
-        groups = []
-        colors = []
-        for primary_group in self.rules['colors']:
-            groups.append(primary_group)
-            for c in primary_group['variations']:
-                colors.append(c)
-        return groups, colors
-
-    # Explicitly set a list of used colors
-    def set_used_colors(self, colors):
-        self.used_colors = colors
-
-    # Calculating chance for alternating color scheme (eg. Greek flag)
-    def alternating_colors_chance(self):
-        weights_total = 0
-        alternating_colors_weight = 0
-        for rule in self.rules['special_rules']:
-            if rule['name'] == 'alternating_colors':
-                alternating_colors_weight = rule['weight']
-            weights_total += rule['weight']
-        return alternating_colors_weight / weights_total
-
-    # Choose different color every time
-    def choose_different_color_default(self):
-        if random() > 0.9:
-            color = Color(rgb=(random(), random(), random()))
-            color_object = {"name": "random", "value": color.get_web()}
-            self.used_colors.append(color_object)
-            return color_object['value']
-        if not self.primary_groups:
-            self.primary_groups, self.colors = self.get_colors()
-        primary_distribution = [d['weight'] for d in self.primary_groups]
-        primary = choices(self.primary_groups, primary_distribution)[0]
-        color_distribution = [d['weight'] for d in primary['variations']]
-        color = choices(primary['variations'], color_distribution)[0]
-        self.primary_groups.remove(primary)
-        self.used_colors.append(color)
-        return color["value"]
-
-    # Alternating between colors
-    def choose_different_color_alt(self):
-        self.alternating = True
-        if len(self.used_colors) < 2:
-            return self.choose_different_color_default()
-        else:
-            colors_len = len(self.used_colors)
-            color = self.used_colors[colors_len - 2]
-            self.used_colors.append(color)
-            return color["value"]
-
-    # Get SVG code as string
-    def svg_string(self):
-        return self.fc.tostring()
-
-    # Save flag drawing as SVG
-    def save(self):
-        self.fc.save()
 
     # _________________________
     # FLAG LAYOUTS
@@ -306,7 +117,8 @@ class Flag:
             self.fc.add(self.fc.line((0, self.h), (self.w, 0), stroke=c2, fill='none', stroke_width=str_w2))
         self.fc.add(self.fc.line((0, self.h), (self.w, 0), stroke=c, fill='none', stroke_width=str_w))
 
-    # Bend (right)
+        # Bend (right)
+
     def bend_right(self):
         if random() > 0.5:
             self.bicolor_diagonal_right()
@@ -370,7 +182,7 @@ class Flag:
                 c = self.choose_different_color()
                 x1, x2 = i * dim_x / n_hor, j * dim_y / n_ver
                 r_w, r_h = dim_x / n_hor, dim_y / n_ver
-                t = f"translate({-2*self.w} {-2*self.h}) skewX({skew_x}) skewY({skew_y})"
+                t = f"translate({-2 * self.w} {-2 * self.h}) skewX({skew_x}) skewY({skew_y})"
                 self.fc.add(self.fc.rect((x1, x2), (r_w, r_h), stroke='none', fill=c, transform=t))
 
     # Sunburst (eg. Macedonian flag)
@@ -378,14 +190,14 @@ class Flag:
         n = randrange(6, 20, 2)
         theta = (2 * math.pi) / n
         offset = 0 if random() < 0.75 else uniform(0, theta)
-        r = math.sqrt(self.w*self.w + self.h*self.h)
+        # r = math.sqrt(self.w * self.w + self.h * self.h)
         r = self.w
         x1, y1 = r * math.sin(offset), r * math.cos(offset)
-        for i in range(1, n+1):
+        for i in range(1, n + 1):
             c = self.choose_different_color()
             x2, y2 = r * math.sin(i * theta + offset), r * math.cos(i * theta + offset)
             d = f"M0,0 L{x1},{y1} L{x2},{y2} z"
-            t = f"translate({self.w/2}, {self.h/2})"
+            t = f"translate({self.w / 2}, {self.h / 2})"
             self.fc.add(self.fc.path(d=d, stroke='none', fill=c, transform=t))
             x1, y1 = x2, y2
 
@@ -493,8 +305,10 @@ class Flag:
 
         # Recursively create another flag for canton (upper left rectangle):
         if self.h > self.genflag_origin.h * 0.25:
-            recursive_flag = Flag(self.genflag_origin, self.fc, self.rules,
-                                  self.w / 2, self.h / 2, recursive=True)
+            recursive_flag = self.genflag_origin.create_new_flag(self.genflag_origin,
+                                                                 self.fc, self.rules,
+                                                                 self.w / 2, self.h / 2,
+                                                                 recursive=True)
             if self.alternating and random() > 0.3:
                 recursive_flag.set_used_colors(self.used_colors)
                 recursive_flag.choose_different_color = recursive_flag.choose_different_color_alt
@@ -655,9 +469,3 @@ class Flag:
     # Neutral action
     def none(self):
         pass
-
-
-if __name__ == '__main__':
-    for i in range(1):
-        gf = GenFlag()
-        gf.save()

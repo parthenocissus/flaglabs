@@ -3,7 +3,10 @@
     { "weight": 3, "fn": "unicolor", "layer2": ["chevron", "canton", "border", "hoist_stripe",
         "offset_stripes_vertical", "offset_stripes_horizontal", "diamond", "hoist_stripe",
         "fly_stripe", "bottom_stripe", "top_stripe", "border", "cross_saltire", "pall",
-        "nordic_cross", "canton_cross", "saltire"] },
+        "nordic_cross", "canton_cross", "saltire"],
+        "symbol_position": [ "center", "center_left", "center_right", "upper_left" ],
+        "symbol_size": [ "regular", "small" ]
+    },
     { "weight": 5, "fn": "tricolor_vertical" },
     { "weight": 5, "fn": "tricolor_horizontal", "layer2": ["chevron", "canton", "border", "hoist_stripe"] },
     { "weight": 3, "fn": "bicolor_vertical" },
