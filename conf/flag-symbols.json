@@ -1,0 +1,14 @@
+{
+  "symbols": [
+    { "name": "fleur-de-lis", "weight": 20, "file_name": "fleur-de-lis" },
+    { "name": "pentagram", "weight": 20, "file_name": "pentagram" }
+  ],
+
+  "symbols-todo": [
+    { "name": "circle", "weight": 100 },
+    { "name": "star", "weight": 30 },
+    { "name": "fleur-de-lis", "weight": 20, "file_name": "fleur-de-lis" },
+    { "name": "pentagram", "weight": 20, "file_name": "fleur-de-lis" }
+  ]
+
+}

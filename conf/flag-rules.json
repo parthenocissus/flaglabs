@@ -39,7 +39,7 @@
     { "weight": 3, "fn": "checkered",
       "layer2": ["chevron", "canton", "diamond", "pall", "saltire"],
       "rules": ["alternating_colors"] },
-    { "weight": 2000, "fn": "lozenges",
+    { "weight": 2, "fn": "lozenges",
       "layer2": ["chevron", "canton", "diamond", "pall", "saltire"],
       "rules": ["alternating_colors"] },
     { "weight": 2, "fn": "sunburst",
@@ -49,16 +49,6 @@
   "special_rules": [
       { "name": "none", "weight": 10 },
       { "name": "alternating_colors", "weight": 2 }
-  ],
-
-  "symbols": [
-    { "name": "circle", "weight": 100 },
-    { "name": "star_5", "weight": 100 },
-    { "name": "star_6", "weight": 10 },
-    { "name": "star_3", "weight": 10 },
-    { "name": "star_4", "weight": 10 },
-    { "name": "star_7plus", "weight": 10 },
-    { "name": "fleur-de-lis", "weight": 10, "file_name": "fleur-de-lis"}
   ],
 
   "colors": [

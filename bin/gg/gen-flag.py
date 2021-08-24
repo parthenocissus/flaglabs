@@ -5,6 +5,9 @@ import math
 import random
 from random import choices, random, randint, uniform, randrange
 from colour import Color
+from svgpathtools import svg2paths, svg2paths2, wsvg
+from xml.etree import ElementTree as ET
+import re
 
 
 # _________________________
@@ -12,12 +15,17 @@ from colour import Color
 class GenFlag:
 
     # Constructor
-    def __init__(self, width=150, height=100, rules_path='conf/flag-rules.json'):
+    def __init__(self, width=150, height=100,
+                 rules_path='conf/flag-rules.json',
+                 symbols_path='conf/flag-symbols.json'):
         # Set the output directory
         out_dir = 'media/svgwrite-output/'
         time_stamp = time.strftime("%Y%m%d-%H%M%S") + "-" + str(time.time() * 1000)
         time_stamp = time_stamp + '-' + str(randint(100, 1000))
         file_name = out_dir + time_stamp + '.svg'
+
+        self.symbols_typical_dir = 'media/svg-flag-symbols/typical/'
+        self.symbols_other_dir = 'media/svg-flag-symbols/other/'
 
         # Set dimensions
         self.size = (width, height)
@@ -26,7 +34,11 @@ class GenFlag:
 
         # Set the empty SVG canvas
         flag_canvas = svgwrite.Drawing(file_name, size=(f'{self.w}px', f'{self.h}px'))
+
+        # Load rules, layouts, colors, and symbols
         rules = json.load(open(rules_path))
+        symbols = json.load(open(symbols_path))
+        rules['symbols'] = symbols['symbols']
 
         # Create the actual flag using the Flag class
         self.flag = Flag(origin=self, flag_canvas=flag_canvas, rules=rules, width=self.w, height=self.h)
@@ -56,7 +68,9 @@ class Flag:
         self.recursive = recursive
         self.alternating = False
         self.used_colors = []
-        self.symbol_chance = 0.5
+
+        self.symbols = rules['symbols']
+        self.symbol_chance = 0
         self.symbol = None
 
         # Start generating flag elements.
@@ -72,6 +86,7 @@ class Flag:
         # Set symbol (eg. coat of arms, a circle, a star, etc)
         if random() > self.symbol_chance:
             self.symbol = self.choose_symbol()
+
         # Select colors and primary color groups
         self.primary_groups, self.colors = self.get_colors()
 
@@ -91,17 +106,69 @@ class Flag:
     def draw(self):
         getattr(self, self.layout['fn'])()
         getattr(self, self.layer2['fn'])()
+        self.draw_symbol()
+
+    # Draw symbol
+    def draw_symbol(self):
+        # group = self.fc.g(transform='translate(50, 25) scale(0.5) rotate(90, 50, 50)')
+        symbol = self.build_symbol(self.symbol, (50, 25), 0.5, 90, (50, 50))
+        symbol2 = self.build_symbol(self.symbol, (100, 25), 0.3, 0)
+        self.fc.add(symbol)
+        self.fc.add(symbol2)
+
+    # Create a single symbol from paths and put it in a group (<g> element)
+    def build_symbol_from_paths(self, symbol, position=(0, 0), scale=1,
+                            rotation_angle=0, anchor_position=(50, 50)):
+        x, y = position
+        anchor_x, anchor_y = anchor_position
+        t = f"translate({x}, {y}) scale({scale}) rotate({rotation_angle}, {anchor_x}, {anchor_y})"
+        group = self.fc.g(transform=t)
+        for path in symbol['paths']:
+            svg_path = self.fc.path(d=path['d'], fill='pink', stroke='none')
+            group.add(svg_path)
+        return group
+
+    # def build_symbol_from_scratch(self, symbol, position=(0, 0), scale=1,
+    #                         rotation_angle=0, anchor_position=(50, 50)):
 
     # Choose a symbol (eg. coat of arms, a circle, a star, etc)
     def choose_symbol(self):
         distribution = [d['weight'] for d in self.rules['symbols']]
-        symbol = choices(self.rules['symbols'], distribution)
+        symbol = choices(self.rules['symbols'], distribution)[0]
         if 'file_name' in symbol:
-            # symbol['svg'] =
-            pass
+            symbol['paths'] = self.get_svg_paths(symbol['file_name'])
+            symbol['fn'] = self.build_symbol_from_paths
         else:
-            symbol['svg'] = getattr(self, symbol['name'])()
+            symbol['fn'] = getattr(self, symbol['name'])
         return symbol
+
+    # Open a SVG file and get all path-related data
+    def get_svg_paths(self, file_name):
+
+        path = f"{self.genflag_origin.symbols_typical_dir}{file_name}.svg"
+        path_data = []
+
+        # tree = ET.parse(path)
+        # root = tree.getroot()
+        # path_data = []
+        # for item in root:
+        #     if 'd' in item.attrib:
+        #         path_object = {'d': item.attrib['d']}
+        #         if 'fill' in item.attrib:
+        #             path_object['fill'] = item.attrib['fill']
+        #         if 'stroke' in item.attrib:
+        #             path_object['stroke'] = item.attrib['stroke']
+        #         path_data.append(path_object)
+
+        paths, attrs, svg_attrs = svg2paths2(path)
+        for p, a in zip(paths, attrs):
+            path_object = {'d': p.d()}
+            if 'fill' in a:
+                path_object['fill'] = a['fill']
+            if 'stroke' in a:
+                path_object['stroke'] = a['stroke']
+            path_data.append(path_object)
+        return path_data
 
     # Choose a possible second layer (eg. chevron over the basic layout)
     def set_layer2(self):
@@ -216,7 +283,7 @@ class Flag:
         self.fc.add(self.fc.path(d=d1, stroke='none', fill=c1))
         self.fc.add(self.fc.path(d=d2, stroke='none', fill=c2))
 
-    # Diagonal (left)
+    # Diagonal (right)
     def bicolor_diagonal_right(self):
         d1 = f"M0,0 L{self.w},{self.h} L{self.w},0 z"
         d2 = f"M0,0 L{self.w},{self.h} L0,{self.h} z"
@@ -591,6 +658,6 @@ class Flag:
 
 
 if __name__ == '__main__':
-    for i in range(40):
+    for i in range(1):
         gf = GenFlag()
         gf.save()
