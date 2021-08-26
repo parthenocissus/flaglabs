@@ -12,6 +12,7 @@
 
 **Antonije Petrović**:
 
+- [x] Clean the flags dataset 
 - [ ] Find out distributions of colors in the flags dataset. Also, find a way to map colors to the most similar color from our color vocabulary. Depends on: color vocabulary for flags by Uroš. 
 - [ ] Start working on text generation of mottos (and national anthem lyrics at some point): Find out if is it possible to use existing models, and then "finetune" them for this dataset. Depends on: national mottos dataset
 - [ ] Continue learning about RNNs in general
