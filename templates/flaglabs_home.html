@@ -1,0 +1,91 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <style>
+
+        @font-face {
+            font-family: "noe-display-bold";
+            src: url({{ url_for('static', filename='fonts/noe-display-bold.woff') }}) format("woff");
+        }
+
+        @font-face {
+            font-family: "apercu-mono-regular";
+            src: url({{ url_for('static', filename='fonts/apercu-mono-regular-pro.woff') }}) format("woff");
+        }
+
+    </style>
+
+    <link rel="shortcut icon" href="#">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/flaglabs.css') }}">
+
+    <script type=text/javascript>
+        $SCRIPT_ROOT = {{ request.script_root|tojson|safe }};
+    </script>
+
+{#    <script type="text/javascript" src="{{ url_for('static', filename='js/lib/jquery.min.js') }}"></script>#}
+    <script type="text/javascript" src='http://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js'></script>
+    <script type="text/javascript" src='https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js'></script>
+
+    <script type="text/javascript" src="{{ url_for('static', filename='js/lib/d3.min.js') }}"></script>
+    <script type="text/javascript" src="{{ url_for('static', filename='js/flaglabs.js') }}"></script>
+
+    <title>Fractal Nations</title>
+
+</head>
+<body>
+
+<main>
+
+    <h1 id="title">Fractal Nations</h1>
+
+    <div id="subtitle">What kind of flag do you need?</div>
+
+    <div id="slider-group">
+
+        <div class="slider-div">
+            <input type="range" id="warm" name="warm"
+                   min="0" max="100" value="10" step="10">
+            <label for="warm">Warm colors</label>
+        </div>
+
+        <div class="slider-div">
+            <input type="range" id="anarchist" name="anarchist"
+                   min="0" max="100" value="10" step="10">
+            <label for="anarchist">Anarchist</label>
+        </div>
+
+        <div class="slider-div">
+            <input type="range" id="african" name="african"
+                   min="0" max="100" value="10" step="10">
+            <label for="african">African</label>
+        </div>
+
+        <div class="slider-div">
+            <input type="range" id="slavic" name="slavic"
+                   min="0" max="100" value="10" step="10">
+            <label for="slavic">Slavic</label>
+        </div>
+
+        <div class="slider-div">
+            <input type="range" id="anarchist" name="anarchist"
+                   min="0" max="100" value="10" step="10">
+            <label for="cowbell">Corporate</label>
+        </div>
+
+    </div>
+
+    <button type="button" id="go">Generate</button>
+
+</main>
+
+<aside>
+    <div id="flags"></div>
+</aside>
+
+</body>
+</html>

@@ -13,9 +13,10 @@ from bin.gg.flag_symbol import FlagSymbol
 class GenFlag:
 
     # Constructor
-    def __init__(self, width=150, height=100,
+    def __init__(self, width=150, height=100, input_params=None,
                  rules_path='conf/flag-rules.json',
                  symbols_path='conf/flag-symbols.json'):
+
         # Set the output directory
         out_dir = 'media/svgwrite-output/'
         time_stamp = time.strftime("%Y%m%d-%H%M%S") + "-" + str(time.time() * 1000)
@@ -34,12 +35,16 @@ class GenFlag:
         flag_canvas = svgwrite.Drawing(file_name, size=(f'{self.w}px', f'{self.h}px'))
 
         # Load rules, layouts, colors, and symbols
-        rules = json.load(open(rules_path))
+        self.rules = json.load(open(rules_path))
         symbols = json.load(open(symbols_path))
-        rules['symbols'] = symbols['symbols']
+        self.rules['symbols'] = symbols['symbols']
+
+        # Adjust rules based on input parameters
+        if input_params:
+            self.apply_input_params(input_params)
 
         # Create the actual flag using the Flag class
-        self.flag = Flag(origin=self, flag_canvas=flag_canvas, rules=rules, width=self.w, height=self.h)
+        self.flag = Flag(origin=self, flag_canvas=flag_canvas, rules=self.rules, width=self.w, height=self.h)
         self.flag.draw()
 
     # Recursively create a flag within a flag (eg. canton flags, such as an Australian flag)
@@ -53,6 +58,28 @@ class GenFlag:
     # Saving the flag into a SVG file
     def save(self):
         self.flag.save()
+
+    # Adjusting rules based on input parameters from the user,
+    # parameters that the user set in frontend
+    def apply_input_params(self, input_params):
+        ruleset = [
+            {"key": "layout", "name": "fn"},
+            {"key": "special_rules", "name": "name"},
+            {"key": "colors", "name": "primary"},
+            {"key": "symbols", "name": "name"},
+        ]
+        for r in ruleset:
+            if r['key'] in input_params:
+                self.update_weights(input_params, r['key'], r['name'])
+
+    # Updating weights for input parameters
+    def update_weights(self, input_params, key, name='name'):
+        input_set = input_params[key]
+        default = self.rules[key]
+        for input_item in input_set:
+            for d_item in default:
+                if input_item[name] == d_item[name]:
+                    d_item['weight'] *= input_item['factor']
 
 
 # _________________________
@@ -77,9 +104,7 @@ class Flag:
             "scale": scale_factor,
             "size": self.h * scale_factor,
             "rotate": 0,
-            "anchor_position": (self.h/2, self.h/2),
-            "fill": "black",
-            "stroke": "none"
+            "anchor_position": (self.h/2, self.h/2)
         }
 
         # Alternating color picker or just a regular one?
@@ -163,5 +188,17 @@ class Flag:
 
 if __name__ == '__main__':
     for i in range(10):
-        gf = GenFlag()
+        input_data = {
+            "layout": [
+                {"fn": "unicolor", "factor": 100}
+            ],
+            "colors": [
+                {"primary": "red", "factor": 100}
+            ],
+            "symbols": [
+                {"name": "anarchism", "factor": 100}
+            ]
+        }
+        gf = GenFlag(input_params=input_data)
+        # gf = GenFlag()
         gf.save()

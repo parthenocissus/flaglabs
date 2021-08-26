@@ -1,6 +1,8 @@
 import math
 from random import choices, random, randint, uniform, randrange
 
+from bin.gg.flag_symbol_config import FlagSymbolConfig
+
 
 class FlagLayout:
 
@@ -13,7 +15,8 @@ class FlagLayout:
         self.alternating = flag.alternating
         self.rules = flag.rules
         self.used_colors = flag.used_colors
-        self.symbol_data = flag.symbol_data
+        self.sd = flag.symbol_data
+        self.fsc = FlagSymbolConfig(flag.symbol_data, self.w, flag.h)
 
         # Start generating flag elements with the first layer of the layout
         self.layout = self.select('layout')  # select basic layout
@@ -72,18 +75,21 @@ class FlagLayout:
     def unicolor(self):
         c = self.choose_different_color()
         self.fc.add(self.fc.rect((0, 0), (self.w, self.h), stroke='none', fill=c))
+        self.sd = self.fsc.default_center_center_left()
 
     # Horizontal bicolor
     def bicolor_horizontal(self):
         for i in range(2):
             c = self.choose_different_color()
             self.fc.add(self.fc.rect((0, i * self.h / 2), (self.w, self.h / 2), stroke='none', fill=c))
+        self.sd = self.fsc.default_center_center_left()
 
     # Vertical bicolor
     def bicolor_vertical(self):
         for i in range(2):
             c = self.choose_different_color()
             self.fc.add(self.fc.rect((i * self.w / 2, 2), (self.w / 2, self.h), stroke='none', fill=c))
+        self.sd = self.fsc.center(scale_factor=uniform(0.4, 0.7))
 
     # Diagonal (left)
     def bicolor_diagonal_left(self):
@@ -93,6 +99,7 @@ class FlagLayout:
         c2 = self.choose_different_color()
         self.fc.add(self.fc.path(d=d1, stroke='none', fill=c1))
         self.fc.add(self.fc.path(d=d2, stroke='none', fill=c2))
+        self.sd = self.fsc.default_center_canton_small()
 
     # Diagonal (right)
     def bicolor_diagonal_right(self):
@@ -102,6 +109,8 @@ class FlagLayout:
         c2 = self.choose_different_color()
         self.fc.add(self.fc.path(d=d1, stroke='none', fill=c1))
         self.fc.add(self.fc.path(d=d2, stroke='none', fill=c2))
+        # self.sd = self.fsc.center(scale_factor=uniform(0.4, 0.7))
+        self.sd = self.fsc.center(scale_factor=uniform(0.4, 0.7))
 
     # Bend (left)
     def bend_left(self):
@@ -116,9 +125,9 @@ class FlagLayout:
             str_w2 = uniform(str_w + self.h / 20, str_w + self.h / 3)
             self.fc.add(self.fc.line((0, self.h), (self.w, 0), stroke=c2, fill='none', stroke_width=str_w2))
         self.fc.add(self.fc.line((0, self.h), (self.w, 0), stroke=c, fill='none', stroke_width=str_w))
+        self.sd = self.fsc.default_center_canton_small()
 
-        # Bend (right)
-
+    # Bend (right)
     def bend_right(self):
         if random() > 0.5:
             self.bicolor_diagonal_right()
@@ -131,6 +140,8 @@ class FlagLayout:
             str_w2 = uniform(str_w + self.h / 20, str_w + self.h / 3)
             self.fc.add(self.fc.line((0, 0), (self.w, self.h), stroke=c2, fill='none', stroke_width=str_w2))
         self.fc.add(self.fc.line((0, 0), (self.w, self.h), stroke=c, fill='none', stroke_width=str_w))
+        size_ratio = str_w / self.h
+        self.sd = self.fsc.center(scale_factor=uniform(0.4, 0.7))
 
     # Horizontal tricolor
     def tricolor_horizontal(self):

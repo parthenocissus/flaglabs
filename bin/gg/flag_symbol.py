@@ -17,13 +17,16 @@ class FlagSymbol:
         self.used_colors = flag.used_colors
 
         self.symbols = self.rules['symbols']
-        self.symbol_chance = 0
+        self.symbol_chance = 0.5
         self.symbol = None
         self.build_symbol = None
 
         # Set symbol (eg. coat of arms, a circle, a star, etc)
-        if random() > self.symbol_chance:
+        if random() < self.symbol_chance:
             self.symbol = self.choose_symbol()
+        else:
+            self.build_symbol = self.empty_symbol
+            # self.symbol = self.empty_symbol()
 
         # Alternating color fix
         if flag.alternating:
@@ -34,10 +37,6 @@ class FlagSymbol:
     def draw(self):
         symbol = self.build_symbol()
         self.fc.add(symbol)
-        # symbol = self.build_symbol(self.symbol, (50, 25), 0.5, 90, (50, 50))
-        # symbol2 = self.build_symbol(self.symbol, (100, 25), 0.3, 0)
-        # self.fc.add(symbol)
-        # self.fc.add(symbol2)
 
     # Choose a color
     def choose_different_color(self):
@@ -73,11 +72,18 @@ class FlagSymbol:
         distribution = [d['weight'] for d in self.rules['symbols']]
         symbol = choices(self.rules['symbols'], distribution)[0]
         if 'file_name' in symbol:
-            symbol['paths'] = self.get_svg_paths(symbol['file_name'])
-            self.build_symbol = self.build_symbol_from_paths
+            try:
+                symbol['paths'] = self.get_svg_paths(symbol['file_name'])
+                self.build_symbol = self.build_symbol_from_paths
+            except:
+                print(symbol['file_name'])
         else:
             self.build_symbol = getattr(self, symbol['name'])
         return symbol
+
+    # Empty symbol
+    def empty_symbol(self):
+        return self.fc.circle(center=(-1, -1), r=0, fill='none', stroke='none')
 
     # Open a SVG file and get all path-related data
     def get_svg_paths(self, file_name):
@@ -114,7 +120,7 @@ class FlagSymbol:
     def circle(self):
         d = self.flag.symbol_data
         c = self.choose_different_color()
-        return self.fc.circle(center=d['pos'], r=d['size'] / 2, fill=c, stroke='none')
+        return self.fc.circle(center=d['pos'], r=d['size'] * 0.4, fill=c, stroke='none')
 
     # Random Star
     def random_star(self):
