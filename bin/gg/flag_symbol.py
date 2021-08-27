@@ -17,21 +17,20 @@ class FlagSymbol:
         self.used_colors = flag.used_colors
 
         self.symbols = self.rules['symbols']
-        self.symbol_chance = 0.5
+        self.symbol_chance = 0.25
         self.symbol = None
         self.build_symbol = None
 
         # Set symbol (eg. coat of arms, a circle, a star, etc)
         if random() < self.symbol_chance:
             self.symbol = self.choose_symbol()
+            # Alternating color fix
+            if flag.alternating:
+                self.flag.choose_different_color = self.flag.choose_different_color_default
+                self.flag.alternating = False
         else:
             self.build_symbol = self.empty_symbol
             # self.symbol = self.empty_symbol()
-
-        # Alternating color fix
-        if flag.alternating:
-            self.flag.choose_different_color = self.flag.choose_different_color_default
-            self.flag.alternating = False
 
     # Draw symbol
     def draw(self):

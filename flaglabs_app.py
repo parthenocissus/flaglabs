@@ -24,6 +24,7 @@ def generate():
     svg_data = []
     for _ in range(30):
         svg_data.append(GenFlag(input_params=data).svg_string())
+        # svg_data.append(GenFlag().svg_string())
     svg_data_txt = json.dumps(svg_data)
     return svg_data_txt
 

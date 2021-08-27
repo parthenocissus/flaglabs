@@ -27,9 +27,9 @@
         $SCRIPT_ROOT = {{ request.script_root|tojson|safe }};
     </script>
 
-{#    <script type="text/javascript" src="{{ url_for('static', filename='js/lib/jquery.min.js') }}"></script>#}
-    <script type="text/javascript" src='http://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js'></script>
-    <script type="text/javascript" src='https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js'></script>
+    <script type="text/javascript" src="{{ url_for('static', filename='js/lib/jquery.min.js') }}"></script>
+{#    <script type="text/javascript" src='http://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js'></script>#}
+{#    <script type="text/javascript" src='https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js'></script>#}
 
     <script type="text/javascript" src="{{ url_for('static', filename='js/lib/d3.min.js') }}"></script>
     <script type="text/javascript" src="{{ url_for('static', filename='js/flaglabs.js') }}"></script>
@@ -49,32 +49,32 @@
 
         <div class="slider-div">
             <input type="range" id="warm" name="warm"
-                   min="0" max="100" value="10" step="10">
+                   min="1" max="100" value="1" step="9">
             <label for="warm">Warm colors</label>
         </div>
 
         <div class="slider-div">
             <input type="range" id="anarchist" name="anarchist"
-                   min="0" max="100" value="10" step="10">
+                   min="1" max="100" value="1" step="9">
             <label for="anarchist">Anarchist</label>
         </div>
 
         <div class="slider-div">
             <input type="range" id="african" name="african"
-                   min="0" max="100" value="10" step="10">
+                   min="1" max="100" value="1" step="9">
             <label for="african">African</label>
         </div>
 
         <div class="slider-div">
             <input type="range" id="slavic" name="slavic"
-                   min="0" max="100" value="10" step="10">
+                   min="1" max="100" value="1" step="9">
             <label for="slavic">Slavic</label>
         </div>
 
         <div class="slider-div">
-            <input type="range" id="anarchist" name="anarchist"
-                   min="0" max="100" value="10" step="10">
-            <label for="cowbell">Corporate</label>
+            <input type="range" id="corporate" name="corporate"
+                   min="1" max="100" value="1" step="9">
+            <label for="corporate">Corporate</label>
         </div>
 
     </div>

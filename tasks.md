@@ -2,10 +2,11 @@
 
 *please add each week's tasks to the top of this document*
 
-## August 21st - August 27th
+## August 27th - September 3rd
 
 **Miloš Rančić**:
 
+- [ ] Color semantics
 - [ ] Find a way to map the text from the Design section of a flag-related Wiki page onto a particular flag variant layout that we can use for generating (https://www.reddit.com/r/vexillology/comments/agbwrb/flag_variants/)
 - [ ] Create Coat of Arms dataset
 - [ ] Assist team with text generation of "National Mottos"
@@ -19,9 +20,8 @@
 
 **Uroš Krčadinac**:
 
-- [ ] Create a Web app for generating flags with the rule-based system gen-flag.py.
+- [ ] Continute making a Web app.
 - [ ] Create more SVG vector stick-figure pictograms.
-- [ ] Create a complete color vocabulary for flags
 - [ ] Be involved with text generation of mottos
 
 **Jacques Laroche**:

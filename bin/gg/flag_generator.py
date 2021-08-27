@@ -66,7 +66,7 @@ class GenFlag:
             {"key": "layout", "name": "fn"},
             {"key": "special_rules", "name": "name"},
             {"key": "colors", "name": "primary"},
-            {"key": "symbols", "name": "name"},
+            {"key": "symbols", "name": "name"}
         ]
         for r in ruleset:
             if r['key'] in input_params:
@@ -107,18 +107,19 @@ class Flag:
             "anchor_position": (self.h/2, self.h/2)
         }
 
-        # Alternating color picker or just a regular one?
-        self.choose_different_color = self.choose_different_color_default
-        if random() < self.alternating_colors_chance():
-            self.alternating = True
-            self.choose_different_color = self.choose_different_color_alt
-
         # Set layouts and symbols
         self.flag_layout = FlagLayout(self.genflag_origin, self)
         self.flag_symbol = FlagSymbol(self.genflag_origin, self)
 
         # Select colors and primary color groups
         self.primary_groups, self.colors = self.get_colors()
+
+        # Alternating color picker or just a regular one?
+        self.choose_different_color = self.choose_different_color_default
+        if random() < self.alternating_colors_chance():
+            self.alternating = True
+            self.choose_different_color = self.choose_different_color_alt
+        # print(self.alternating_colors_chance())
 
     # Draw layout
     def draw(self):
