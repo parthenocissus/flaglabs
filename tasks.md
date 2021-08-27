@@ -20,7 +20,7 @@
 
 **Uroš Krčadinac**:
 
-- [ ] Continute making a Web app.
+- [ ] Continue working on a Web app.
 - [ ] Create more SVG vector stick-figure pictograms.
 - [ ] Be involved with text generation of mottos
 
@@ -53,7 +53,7 @@ NOTE: Save all these URLs in a TXT or CSV file
 	NOTE: https://en.wikipedia.org/wiki/List_of_national_mottos
 
 
-## August 14th - August 20th
+## August 14th - August 27th
 
 **Jacques Laroche**:
 
