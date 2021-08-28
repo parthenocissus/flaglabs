@@ -1,6 +1,6 @@
 {
   "layout": [
-    { "weight": 3, "fn": "unicolor", "layer2": ["chevron", "canton", "border", "hoist_stripe",
+    { "weight": 3, "fn": "unicolor", "layer2XXX": ["chevron", "canton", "border", "hoist_stripe",
         "offset_stripes_vertical", "offset_stripes_horizontal", "diamond", "hoist_stripe",
         "fly_stripe", "bottom_stripe", "top_stripe", "border", "cross_saltire", "pall",
         "nordic_cross", "canton_cross", "saltire"]
@@ -24,13 +24,13 @@
     { "weight": 1, "fn": "offset_stripes_vertical" },
     { "weight": 1, "fn": "offset_stripes_horizontal" },
     { "weight": 1, "fn": "top_stripe" },
-    { "weight": 2, "fn": "border" },
-    { "weight": 3, "fn": "cross" },
-    { "weight": 3, "fn": "saltire" },
-    { "weight": 3, "fn": "cross_saltire" },
-    { "weight": 5, "fn": "pall" },
-    { "weight": 3, "fn": "nordic_cross" },
-    { "weight": 3, "fn": "canton_cross" },
+    { "weight": 200, "fn": "border" },
+    { "weight": 300, "fn": "cross" },
+    { "weight": 300, "fn": "saltire" },
+    { "weight": 300, "fn": "cross_saltire" },
+    { "weight": 500, "fn": "pall" },
+    { "weight": 300, "fn": "nordic_cross" },
+    { "weight": 3000, "fn": "canton_cross" },
     { "weight": 4, "fn": "stripes_horizontal",
       "layer2": ["chevron", "canton", "diamond", "pall", "saltire"],
       "rules": ["alternating_colors"] },

@@ -65,7 +65,7 @@ $(document).ready(function () {
                 {"factor": 100, "primary": "white"}
             ],
             "symbols": [
-                {"factor": 10, "name": "pentagram"},
+                {"factor": 3, "name": "pentagram"},
                 {"factor": 20, "name": "orthodox_cross"},
                 {"factor": 20, "name": "russian_cross"}
             ]
@@ -118,6 +118,9 @@ $(document).ready(function () {
 
     $("#go").click(() => {
 
+        let flags = $("#flags");
+        flags.empty();
+
         let duplicateFactors = JSON.parse(JSON.stringify(factors));
         data = JSON.parse(JSON.stringify(dataDefault));
         Object.keys(duplicateFactors).forEach((key) => {
@@ -129,7 +132,6 @@ $(document).ready(function () {
 
         // let dataOut = { vector: JSON.stringify(dummyData) };
         let dataOut = { vector: JSON.stringify(data) };
-        let flags = $("#flags");
         $.getJSON(url, dataOut, (result) => {
             flags.empty();
             result.forEach((i) => {

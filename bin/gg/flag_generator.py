@@ -48,8 +48,8 @@ class GenFlag:
         self.flag.draw()
 
     # Recursively create a flag within a flag (eg. canton flags, such as an Australian flag)
-    def create_new_flag(self, origin, canvas, rules, w, h, recursive=True):
-        return Flag(origin, canvas, rules, w, h, recursive)
+    def create_new_flag(self, origin, canvas, rules, w, h, recursive=True, recursive_level=0):
+        return Flag(origin, canvas, rules, w, h, recursive, recursive_level)
 
     # Get SVG code as string
     def svg_string(self):
@@ -87,24 +87,29 @@ class GenFlag:
 class Flag:
 
     # Constructor
-    def __init__(self, origin, flag_canvas, rules, width, height, recursive=False):
+    def __init__(self, origin, flag_canvas, rules, width, height,
+                 recursive=False, recursive_level=0):
 
         self.genflag_origin = origin
+        self.origin_h = origin.h
         self.fc = flag_canvas
         self.rules = rules
         self.w = width
         self.h = height
         self.recursive = recursive
+        self.recursive_level = recursive_level
         self.alternating = False
         self.used_colors = []
 
-        scale_factor = 0.5
+        scale_baseline = 1 / (2**recursive_level)
+        scale_factor = 0.5 * scale_baseline
         self.symbol_data = {
             "pos": (self.w/2, self.h/2),
             "scale": scale_factor,
-            "size": self.h * scale_factor,
+            "size": self.origin_h * scale_factor,
             "rotate": 0,
-            "anchor_position": (self.h/2, self.h/2)
+            "anchor_position": (self.h/2, self.h/2),
+            "scale_baseline": scale_baseline
         }
 
         # Set layouts and symbols
@@ -119,7 +124,6 @@ class Flag:
         if random() < self.alternating_colors_chance():
             self.alternating = True
             self.choose_different_color = self.choose_different_color_alt
-        # print(self.alternating_colors_chance())
 
     # Draw layout
     def draw(self):
@@ -200,6 +204,6 @@ if __name__ == '__main__':
                 {"name": "anarchism", "factor": 100}
             ]
         }
-        gf = GenFlag(input_params=input_data)
-        # gf = GenFlag()
+        # gf = GenFlag(input_params=input_data)
+        gf = GenFlag()
         gf.save()

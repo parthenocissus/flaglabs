@@ -19,7 +19,6 @@ def home():
 @app.route('/_generate')
 def generate():
     data_txt = request.args.get('vector')
-    print(data_txt)
     data = json.loads(data_txt)
     svg_data = []
     for _ in range(30):

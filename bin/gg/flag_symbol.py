@@ -12,34 +12,38 @@ class FlagSymbol:
         self.fc = flag.fc
         self.w = flag.w
         self.h = flag.h
+        self.origin_h = origin.h
 
         self.rules = flag.rules
         self.used_colors = flag.used_colors
 
         self.symbols = self.rules['symbols']
-        self.symbol_chance = 0.25
+        self.symbol_chance = 1  # 0.25
         self.symbol = None
         self.build_symbol = None
 
         # Set symbol (eg. coat of arms, a circle, a star, etc)
         if random() < self.symbol_chance:
             self.symbol = self.choose_symbol()
-            # Alternating color fix
-            if flag.alternating:
-                self.flag.choose_different_color = self.flag.choose_different_color_default
-                self.flag.alternating = False
         else:
             self.build_symbol = self.empty_symbol
             # self.symbol = self.empty_symbol()
 
     # Draw symbol
     def draw(self):
+        self.change_alternating(1)
         symbol = self.build_symbol()
         self.fc.add(symbol)
 
     # Choose a color
     def choose_different_color(self):
         return self.flag.choose_different_color()
+
+    # Alternating color fix
+    def change_alternating(self, unalternate=0.5):
+        if self.flag.alternating and random() < unalternate:
+            self.flag.choose_different_color = self.flag.choose_different_color_default
+            self.flag.alternating = False
 
     # Build symbol from paths taken from a SVG file
     def build_symbol_from_paths(self):
@@ -50,7 +54,8 @@ class FlagSymbol:
     @staticmethod
     def center_symbol(symbol_data):
         x, y = symbol_data['pos']
-        symbol_data['pos'] = (x - symbol_data['size'] / 2, y - symbol_data['size'] / 2)
+        symbol_data['pos'] = (x - symbol_data['size'] / 2,
+                              y - symbol_data['size'] / 2)
         return symbol_data
 
     # Create a single symbol from paths and put it in a group (<g> element)
@@ -82,26 +87,13 @@ class FlagSymbol:
 
     # Empty symbol
     def empty_symbol(self):
-        return self.fc.circle(center=(-1, -1), r=0, fill='none', stroke='none')
+        # return self.fc.circle(center=(-1, -1), r=0, fill='none', stroke='none')
+        return self.fc.g(id="empty")
 
     # Open a SVG file and get all path-related data
     def get_svg_paths(self, file_name):
-
         path = f"{self.genflag_origin.symbols_typical_dir}{file_name}.svg"
         path_data = []
-
-        # tree = ET.parse(path)
-        # root = tree.getroot()
-        # path_data = []
-        # for item in root:
-        #     if 'd' in item.attrib:
-        #         path_object = {'d': item.attrib['d']}
-        #         if 'fill' in item.attrib:
-        #             path_object['fill'] = item.attrib['fill']
-        #         if 'stroke' in item.attrib:
-        #             path_object['stroke'] = item.attrib['stroke']
-        #         path_data.append(path_object)
-
         paths, attrs, svg_attrs = svg2paths2(path)
         for p, a in zip(paths, attrs):
             path_object = {'d': p.d()}
