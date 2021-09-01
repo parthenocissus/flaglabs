@@ -14,6 +14,7 @@ class GenFlag:
 
     # Constructor
     def __init__(self, width=150, height=100, input_params=None,
+                 raw_input=None, raw=False,
                  rules_path='conf/flag-rules.json',
                  symbols_path='conf/flag-symbols.json'):
 
@@ -39,9 +40,17 @@ class GenFlag:
         symbols = json.load(open(symbols_path))
         self.rules['symbols'] = symbols['symbols']
 
+        # Compute flag complexity
+        self.complexity = self.rules['fixed_rules']['complexity']
+
         # Adjust rules based on input parameters
-        if input_params:
+        if input_params and not raw:
             self.apply_input_params(input_params)
+        if raw_input and raw:
+            # TODO
+            # computed_params = GenFlag.process_raw_input(raw_input)
+            # self.apply_input_params(computed_params)
+            pass
 
         # Create the actual flag using the Flag class
         self.flag = Flag(origin=self, flag_canvas=flag_canvas, rules=self.rules, width=self.w, height=self.h)
@@ -59,18 +68,53 @@ class GenFlag:
     def save(self):
         self.flag.save()
 
+    # Process raw input
+    @staticmethod
+    def process_raw_input(input=[]):
+        dummy_input = [
+            {"key": "cold-v-warm", "value": 0.5, "type": "bipolar"},
+            {"key": "complex", "value": 0.5, "type": "direct"},
+            {"key": "anarchist", "value": 0, "type": "unipolar"},
+            {"key": "african", "value": 0, "type": "unipolar"},
+            {"key": "slavic", "value": 0, "type": "unipolar"},
+            {"key": "corporate", "value": 0, "type": "unipolar"}
+        ]
+        input = dummy_input
+
+        class RawInputRule:
+
+            def __init__(self, item):
+                self.key = item['key']
+                self.value = item['value']
+                self.type = item['type']
+
+            def unipolar(self):
+                print("uni")
+
+            def bipolar(self):
+                print("bi")
+
+            def direct(self):
+                print("direct.")
+        # for item in input:
+        #     raw_item = RawInputRule(item)
+        #     getattr(raw_item, item['type'])
+
+        for item in input:
+            if item['type'] == 'unipolar':
+                print(f"{item['key']}, UNI-POLAR")
+            elif item['type'] == 'bipolar':
+                print(f"{item['key']}, BI-POLAR")
+            else:
+                print(f"{item['key']}, --DIRECT")
+
     # Adjusting rules based on input parameters from the user,
     # parameters that the user set in frontend
     def apply_input_params(self, input_params):
-        ruleset = [
-            {"key": "layout", "name": "fn"},
-            {"key": "special_rules", "name": "name"},
-            {"key": "colors", "name": "primary"},
-            {"key": "symbols", "name": "name"}
-        ]
-        for r in ruleset:
-            if r['key'] in input_params:
-                self.update_weights(input_params, r['key'], r['name'])
+        rule_keys = ["layout", "colors", "symbols"]
+        for r in rule_keys:
+            if r in input_params:
+                self.update_weights(input_params, r)
 
     # Updating weights for input parameters
     def update_weights(self, input_params, key, name='name'):
@@ -100,6 +144,10 @@ class Flag:
         self.recursive_level = recursive_level
         self.alternating = False
         self.used_colors = []
+        self.choose_different_color = self.choose_different_color_default
+
+        self.symbol_chance = rules['fixed_rules']['symbol_chance']
+        self.alternating_chance = rules['fixed_rules']['alternating_colors_chance']
 
         scale_baseline = 1 / (2**recursive_level)
         scale_factor = 0.5 * scale_baseline
@@ -118,12 +166,6 @@ class Flag:
 
         # Select colors and primary color groups
         self.primary_groups, self.colors = self.get_colors()
-
-        # Alternating color picker or just a regular one?
-        self.choose_different_color = self.choose_different_color_default
-        if random() < self.alternating_colors_chance():
-            self.alternating = True
-            self.choose_different_color = self.choose_different_color_alt
 
     # Draw layout
     def draw(self):
@@ -144,15 +186,12 @@ class Flag:
     def set_used_colors(self, colors):
         self.used_colors = colors
 
-    # Calculating chance for alternating color scheme (eg. Greek flag)
-    def alternating_colors_chance(self):
-        weights_total = 0
-        alternating_colors_weight = 0
-        for rule in self.rules['special_rules']:
-            if rule['name'] == 'alternating_colors':
-                alternating_colors_weight = rule['weight']
-            weights_total += rule['weight']
-        return alternating_colors_weight / weights_total
+    # Set a chance for colors to alternate (eg. Greek flag)
+    def set_alternating_colors_chance(self, factor=1):
+        self.alternating_chance *= factor
+        # if random() < self.alternating_chance:
+        #     self.alternating = True
+        #     self.choose_different_color = self.choose_different_color_alt
 
     # Choose different color every time
     def choose_different_color_default(self):
@@ -192,18 +231,7 @@ class Flag:
 
 
 if __name__ == '__main__':
-    for i in range(10):
-        input_data = {
-            "layout": [
-                {"fn": "unicolor", "factor": 100}
-            ],
-            "colors": [
-                {"primary": "red", "factor": 100}
-            ],
-            "symbols": [
-                {"name": "anarchism", "factor": 100}
-            ]
-        }
-        # gf = GenFlag(input_params=input_data)
-        gf = GenFlag()
-        gf.save()
+    GenFlag.process_raw_input()
+    # for i in range(10):
+    #     gf = GenFlag()
+    #     gf.save()

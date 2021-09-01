@@ -1,60 +1,60 @@
 {
+  "fixed_rules": {
+    "complexity": 0.5,
+    "symbol_chance": 0.5,
+    "alternating_colors_chance": 0.2
+  },
+
+  "layout_complexity": {
+    "simple_layouts": ["unicolor", "tricolor_vertical", "tricolor_horizontal",
+        "bicolor_vertical", "bicolor_horizontal", "bicolor_diagonal_left", "bicolor_diagonal_right",
+        "pale", "chevron"],
+    "complex_layouts": ["canton", "canton_cross", "stripes_horizontal", "stripes_vertical",
+        "checkered", "lozenges", "sunburst"]
+  },
+
   "layout": [
-    { "weight": 3, "fn": "unicolor", "layer2XXX": ["chevron", "canton", "border", "hoist_stripe",
+    { "weight": 3, "name": "unicolor", "layer2": ["chevron", "canton", "border", "hoist_stripe",
         "offset_stripes_vertical", "offset_stripes_horizontal", "diamond", "hoist_stripe",
         "fly_stripe", "bottom_stripe", "top_stripe", "border", "cross_saltire", "pall",
         "nordic_cross", "canton_cross", "saltire"]
     },
-    { "weight": 5, "fn": "tricolor_vertical" },
-    { "weight": 5, "fn": "tricolor_horizontal", "layer2": ["chevron", "canton", "border", "hoist_stripe"] },
-    { "weight": 3, "fn": "bicolor_vertical" },
-    { "weight": 5, "fn": "bicolor_horizontal", "layer2": ["chevron", "canton", "border", "hoist_stripe",
+    { "weight": 5, "name": "tricolor_vertical" },
+    { "weight": 5, "name": "tricolor_horizontal", "layer2": ["chevron", "canton", "border", "hoist_stripe"] },
+    { "weight": 3, "name": "bicolor_vertical" },
+    { "weight": 5, "name": "bicolor_horizontal", "layer2": ["chevron", "canton", "border", "hoist_stripe",
         "cross", "nordic_cross"] },
-    { "weight": 4, "fn": "bicolor_diagonal_left" },
-    { "weight": 1, "fn": "bicolor_diagonal_right" },
-    { "weight": 3, "fn": "bend_left" },
-    { "weight": 2, "fn": "bend_right" },
-    { "weight": 3, "fn": "pale" },
-    { "weight": 2, "fn": "diamond", "layer2": ["border", "offset_stripes_vertical", "offset_stripes_horizontal"] },
-    { "weight": 5, "fn": "chevron", "layer2": ["pall", "fly_stripe"] },
-    { "weight": 3, "fn": "canton" },
-    { "weight": 3, "fn": "hoist_stripe" },
-    { "weight": 1, "fn": "fly_stripe" },
-    { "weight": 2, "fn": "bottom_stripe" },
-    { "weight": 1, "fn": "offset_stripes_vertical" },
-    { "weight": 1, "fn": "offset_stripes_horizontal" },
-    { "weight": 1, "fn": "top_stripe" },
-    { "weight": 200, "fn": "border" },
-    { "weight": 300, "fn": "cross" },
-    { "weight": 300, "fn": "saltire" },
-    { "weight": 300, "fn": "cross_saltire" },
-    { "weight": 500, "fn": "pall" },
-    { "weight": 300, "fn": "nordic_cross" },
-    { "weight": 3000, "fn": "canton_cross" },
-    { "weight": 4, "fn": "stripes_horizontal",
-      "layer2": ["chevron", "canton", "diamond", "pall", "saltire"],
-      "rules": ["alternating_colors"] },
-    { "weight": 2, "fn": "stripes_vertical",
-      "layer2": ["chevron", "canton", "diamond", "pall", "saltire"],
-      "rules": ["alternating_colors"] },
-    { "weight": 3, "fn": "checkered",
-      "layer2": ["chevron", "canton", "diamond", "pall", "saltire"],
-      "rules": ["alternating_colors"] },
-    { "weight": 2, "fn": "lozenges",
-      "layer2": ["chevron", "canton", "diamond", "pall", "saltire"],
-      "rules": ["alternating_colors"] },
-    { "weight": 2, "fn": "sunburst",
-      "layer2": ["canton"], "rules": ["alternating_colors"] }
-  ],
-
-  "special_rules": [
-      { "name": "none", "weight": 10 },
-      { "name": "alternating_colors", "weight": 2 }
+    { "weight": 4, "name": "bicolor_diagonal_left" },
+    { "weight": 1, "name": "bicolor_diagonal_right" },
+    { "weight": 3, "name": "bend_left" },
+    { "weight": 2, "name": "bend_right" },
+    { "weight": 3, "name": "pale" },
+    { "weight": 2, "name": "diamond", "layer2": ["border", "offset_stripes_vertical", "offset_stripes_horizontal"] },
+    { "weight": 5, "name": "chevron", "layer2": ["pall", "fly_stripe"] },
+    { "weight": 3, "name": "canton" },
+    { "weight": 3, "name": "hoist_stripe" },
+    { "weight": 1, "name": "fly_stripe" },
+    { "weight": 2, "name": "bottom_stripe" },
+    { "weight": 1, "name": "offset_stripes_vertical" },
+    { "weight": 1, "name": "offset_stripes_horizontal" },
+    { "weight": 1, "name": "top_stripe" },
+    { "weight": 2, "name": "border" },
+    { "weight": 3, "name": "cross" },
+    { "weight": 3, "name": "saltire" },
+    { "weight": 3, "name": "cross_saltire" },
+    { "weight": 5, "name": "pall" },
+    { "weight": 3, "name": "nordic_cross" },
+    { "weight": 3, "name": "canton_cross" },
+    { "weight": 4, "name": "stripes_horizontal", "layer2": ["chevron", "canton", "diamond", "saltire"] },
+    { "weight": 2, "name": "stripes_vertical", "layer2": ["chevron", "canton", "diamond", "saltire"] },
+    { "weight": 3, "name": "checkered", "layer2": ["chevron", "canton", "diamond", "saltire"] },
+    { "weight": 2, "name": "lozenges", "layer2": ["chevron", "canton", "diamond", "saltire"] },
+    { "weight": 2, "name": "sunburst", "layer2": ["canton"] }
   ],
 
   "colors": [
     {
-      "primary": "red",
+      "name": "red",
       "weight": 10,
       "variations": [
         { "name": "blood_orange", "value": "#CB001E", "weight": 10 },
@@ -72,7 +72,7 @@
       ]
     },
     {
-      "primary": "blue",
+      "name": "blue",
       "weight": 9,
       "variations": [
         { "name": "dark_powder_blue", "value": "#003897", "weight": 9 },
@@ -97,7 +97,7 @@
       ]
     },
     {
-      "primary": "green",
+      "name": "green",
       "weight": 7,
       "variations": [
         { "name": "sea_green", "value": "#229e45", "weight": 7 },
@@ -113,7 +113,7 @@
       ]
     },
     {
-      "primary": "orange",
+      "name": "orange",
       "weight": 4,
       "variations": [
         { "name": "deep_saffron", "value": "#ff9932", "weight": 5 },
@@ -123,7 +123,7 @@
       ]
     },
     {
-      "primary": "purple",
+      "name": "purple",
       "weight": 3,
       "variations": [
         { "name": "patriarch", "value": "#760188", "weight": 3 },
@@ -134,7 +134,7 @@
       ]
     },
     {
-      "primary": "pink",
+      "name": "pink",
       "weight": 2,
       "variations": [
         { "name": "cameo_pink", "value": "#f3b3c9", "weight": 3 },
@@ -145,7 +145,7 @@
       ]
     },
     {
-      "primary": "brown",
+      "name": "brown",
       "weight": 0.5,
       "variations": [
         { "name": "liver", "value": "#603814", "weight": 2 },
@@ -154,7 +154,7 @@
       ]
     },
     {
-      "primary": "white",
+      "name": "white",
       "weight": 8,
       "type": "metal",
       "variations": [
@@ -164,7 +164,7 @@
       ]
     },
     {
-      "primary": "yellow",
+      "name": "yellow",
       "weight": 6,
       "type": "metal",
       "variations": [
@@ -176,7 +176,7 @@
       ]
     },
     {
-      "primary": "black",
+      "name": "black",
       "weight": 9,
       "variations": [
         { "name": "black", "value": "#000000", "weight": 15 },

@@ -4,10 +4,10 @@ $(document).ready(function () {
     let url = $SCRIPT_ROOT + flagGenAPI;
 
     let data;
+    // let ruleKeys = ["layout", "colors", "symbols"];
     let dataDefault = {
         "layout": [],
         "colors": [],
-        "special_rules": [],
         "symbols": []
     };
 
@@ -15,25 +15,25 @@ $(document).ready(function () {
 
         "warm": {
             "colors": [
-                {"factor": 100, "primary": "red"},
-                {"factor": 100, "primary": "orange"},
-                {"factor": 100, "primary": "yellow"},
-                {"factor": 50, "primary": "white"},
-                {"factor": 50, "primary": "pink"},
-                {"factor": 20, "primary": "brown"}
+                {"factor": 100, "name": "red"},
+                {"factor": 100, "name": "orange"},
+                {"factor": 100, "name": "yellow"},
+                {"factor": 50, "name": "white"},
+                {"factor": 50, "name": "pink"},
+                {"factor": 20, "name": "brown"}
             ]
         },
 
         "anarchist": {
             "layout": [
-                {"factor": 100, "fn": "bicolor_diagonal_left"},
-                {"factor": 100, "fn": "bicolor_diagonal_right"},
-                {"factor": 20, "fn": "bend_left"},
-                {"factor": 20, "fn": "bend_right"},
+                {"factor": 100, "name": "bicolor_diagonal_left"},
+                {"factor": 100, "name": "bicolor_diagonal_right"},
+                {"factor": 20, "name": "bend_left"},
+                {"factor": 20, "name": "bend_right"},
             ],
             "colors": [
-                {"factor": 5, "primary": "red"},
-                {"factor": 100, "primary": "black"}
+                {"factor": 5, "name": "red"},
+                {"factor": 100, "name": "black"}
             ],
             "symbols": [
                 {"factor": 100, "name": "anarchism"},
@@ -43,26 +43,40 @@ $(document).ready(function () {
         },
 
         "african": {
+            // "colors": [
+            //     {"factor": 100, "name": "red"},
+            //     {"factor": 100, "name": "black"},
+            //     {"factor": 100, "name": "green"},
+            //     {"factor": 100, "name": "yellow"}
+            // ]
             "colors": [
-                {"factor": 100, "primary": "red"},
-                {"factor": 100, "primary": "black"},
-                {"factor": 100, "primary": "green"},
-                {"factor": 100, "primary": "yellow"}
+                {"factor": 60, "name": "red"},
+                {"factor": 100, "name": "pink"},
+                {"factor": 100, "name": "purple"},
+                {"factor": 50, "name": "blue"},
+                {"factor": 50, "name": "yellow"},
+                {"factor": 50, "name": "green"},
+                {"factor": 50, "name": "brown"},
+                {"factor": 50, "name": "orange"}
+            ],
+            "layout": [
+                {"factor": 10, "name": "stripes_horizontal"},
+                {"factor": 5, "name": "stripes_vertical"}
             ]
         },
 
         "slavic": {
             "layout": [
-                {factor: 20, "fn": "tricolor_vertical" },
-                {factor: 100, "fn": "tricolor_horizontal"},
-                {factor: 10, "fn": "bicolor_vertical" },
-                {factor: 10, "fn": "bicolor_horizontal"},
-                {factor: 10, "fn": "chevron"}
+                {"factor": 20, "name": "tricolor_vertical" },
+                {"factor": 100, "name": "tricolor_horizontal"},
+                {"factor": 10, "name": "bicolor_vertical" },
+                {"factor": 10, "name": "bicolor_horizontal"},
+                {"factor": 10, "name": "chevron"}
             ],
             "colors": [
-                {"factor": 100, "primary": "red"},
-                {"factor": 100, "primary": "blue"},
-                {"factor": 100, "primary": "white"}
+                {"factor": 100, "name": "red"},
+                {"factor": 100, "name": "blue"},
+                {"factor": 100, "name": "white"}
             ],
             "symbols": [
                 {"factor": 3, "name": "pentagram"},
@@ -82,12 +96,12 @@ $(document).ready(function () {
     };
 
     let dummyData = {
-        "layout": [{"fn": "unicolor", "factor": 100}],
-        "colors": [{"primary": "red", "factor": 100}],
+        "layout": [{"name": "unicolor", "factor": 100}],
+        "colors": [{"name": "red", "factor": 100}],
         "symbols": [{"name": "anarchism", "factor": 100}]
     };
 
-    let fineTune = function (input, qoef, key, name) {
+    let fineTune = function (input, qoef, key, name="name") {
         if (input.hasOwnProperty(key)) {
             input[key].forEach((inItem) => {
                 let result = data[key].filter(dItem => {
@@ -105,13 +119,8 @@ $(document).ready(function () {
     };
 
     let adjustFactors = function (input, qoef) {
-        [
-            {key: "layout", name: "fn"},
-            {key: "special_rules", name: "name"},
-            {key: "colors", name: "primary"},
-            {key: "symbols", name: "name"}
-        ].forEach((i) => {
-            fineTune(input, qoef, i.key, i.name);
+        Object.keys(dataDefault).forEach((key) => {
+            fineTune(input, qoef, key);
         });
 
     };
@@ -125,7 +134,6 @@ $(document).ready(function () {
         data = JSON.parse(JSON.stringify(dataDefault));
         Object.keys(duplicateFactors).forEach((key) => {
             let qoef = $('#' + key).val() / 100;
-            console.log(key + " " + qoef);
             adjustFactors(duplicateFactors[key], qoef);
         });
         console.log(data);

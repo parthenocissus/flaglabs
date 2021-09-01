@@ -18,7 +18,7 @@ class FlagSymbol:
         self.used_colors = flag.used_colors
 
         self.symbols = self.rules['symbols']
-        self.symbol_chance = 1  # 0.25
+        self.symbol_chance = flag.symbol_chance
         self.symbol = None
         self.build_symbol = None
 
@@ -27,7 +27,6 @@ class FlagSymbol:
             self.symbol = self.choose_symbol()
         else:
             self.build_symbol = self.empty_symbol
-            # self.symbol = self.empty_symbol()
 
     # Draw symbol
     def draw(self):
@@ -112,6 +111,14 @@ class FlagSymbol:
         d = self.flag.symbol_data
         c = self.choose_different_color()
         return self.fc.circle(center=d['pos'], r=d['size'] * 0.4, fill=c, stroke='none')
+
+    # Ring
+    def ring(self):
+        d = self.flag.symbol_data
+        c = self.choose_different_color()
+        r = d['size'] * 0.5
+        sw = self.h * uniform(0.05, 0.15)
+        return self.fc.circle(center=d['pos'], r=r, fill='none', stroke=c, stroke_width=sw)
 
     # Random Star
     def random_star(self):

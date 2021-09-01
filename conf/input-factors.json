@@ -1,0 +1,83 @@
+{
+
+  "cold-v-warm": {
+    "threshold": 0.5, "down": "cold", "up": "warm"
+  },
+
+  "cold": {
+    "colors": [
+      {"factor": 100, "name": "blue"},
+      {"factor": 100, "name": "green"},
+      {"factor": 100, "name": "black"},
+      {"factor": 50, "name": "white"},
+      {"factor": 20, "name": "purple"}
+    ]
+  },
+
+  "warm": {
+    "colors": [
+      {"factor": 100, "name": "red"},
+      {"factor": 100, "name": "orange"},
+      {"factor": 100, "name": "yellow"},
+      {"factor": 50, "name": "white"},
+      {"factor": 50, "name": "pink"},
+      {"factor": 20, "name": "brown"}
+    ]
+  },
+
+  "anarchist": {
+    "layout": [
+      {"factor": 100, "name": "bicolor_diagonal_left"},
+      {"factor": 100, "name": "bicolor_diagonal_right"},
+      {"factor": 20, "name": "bend_left"},
+      {"factor": 20, "name": "bend_right"},
+    ],
+    "colors": [
+      {"factor": 5, "name": "red"},
+      {"factor": 100, "name": "black"}
+    ],
+    "symbols": [
+      {"factor": 100, "name": "anarchism"},
+      {"factor": 100, "name": "anarchism_rough"},
+      {"factor": 10, "name": "pentagram"}
+    ]
+  },
+
+  "african": {
+    "colors": [
+      {"factor": 100, "name": "red"},
+      {"factor": 100, "name": "black"},
+      {"factor": 100, "name": "green"},
+      {"factor": 100, "name": "yellow"}
+    ]
+  },
+
+  "slavic": {
+    "layout": [
+      {"factor": 20, "name": "tricolor_vertical" },
+      {"factor": 100, "name": "tricolor_horizontal"},
+      {"factor": 10, "name": "bicolor_vertical" },
+      {"factor": 10, "name": "bicolor_horizontal"},
+      {"factor": 10, "name": "chevron"}
+    ],
+    "colors": [
+      {"factor": 100, "name": "red"},
+      {"factor": 100, "name": "blue"},
+      {"factor": 100, "name": "white"}
+    ],
+    "symbols": [
+      {"factor": 3, "name": "pentagram"},
+      {"factor": 20, "name": "orthodox_cross"},
+      {"factor": 20, "name": "russian_cross"}
+    ]
+  },
+
+  "corporate": {
+    "symbols": [
+      {"factor": 100, "name": "dollar"},
+      {"factor": 100, "name": "apple_logo"},
+      {"factor": 100, "name": "nike"},
+      {"factor": 100, "name": "mcdonalds"}]
+  }
+
+}
