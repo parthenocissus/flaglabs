@@ -1,4 +1,4 @@
-import wikipediaapi, wikipedia, re, pathlib, time, pickle, sys, os, json
+import wikipedia, re, pathlib, time, pickle, sys, os, json
 from os.path import *
 
 def exec_cmd(cmd,torun,toprint,towrite,togo,args):
@@ -97,7 +97,6 @@ def get_args():
         args['output-json'] = args['data-dir'] + "/flag_data.json"
 
     # wikimedia-specific
-    args['wiki'] = wikipediaapi.Wikipedia('en')
     args['wikipedia'] = wikipedia
     args['wikipedia'].set_lang('en')
     args = get_arg('--keyword',args)
@@ -105,7 +104,7 @@ def get_args():
     return args, data
 
 def search(args,data):
-    print(wikipedia.search(keyword))
+    print(args['wikipedia'].search(keyword))
     return data
 
 def main():
