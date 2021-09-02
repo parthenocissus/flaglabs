@@ -1,5 +1,6 @@
-import wikipedia, re, pathlib, time, pickle, sys, os, json
+import wikipedia, wikidata, re, pathlib, time, pickle, sys, os, json, requests
 from os.path import *
+from wikidata.client import Client as WDC
 
 def exec_cmd(cmd,torun,toprint,towrite,togo,args):
     ret = False
@@ -103,8 +104,59 @@ def get_args():
 
     return args, data
 
+def get_wikidata_id(args,data,title):
+    session = requests.Session()
+    url = "https://en.wikipedia.org/w/api.php"
+    params = {
+        "action": "query",
+        "titles": "Flag of Serbia",
+        "prop": "pageprops",
+        "format": "json",
+        "ppprop": "wikibase_item"
+    }
+
+    reader = session.get(url=url, params=params)
+    output = reader.json()
+    pg_dict = output['query']['pages']
+    pg_key = list(pg_dict.keys())[0]
+    wikidata_id = pg_dict[pg_key]['pageprops']['wikibase_item']
+
+    return wikidata_id
+
+def list_items(Items):
+    items = []
+    print(Items)
+    for item in Items:
+        for e in item:
+            print(e.label)
+            items.append(dir(item))
+    return items
+
+def get_wikidata_content(args,data,wd_id):
+    wdc = WDC()
+    ent = wdc.get(wd_id, load=True)
+    #image_prop = wdc.get('P18')
+    ent_inception = wdc.get('P571')
+    ent_jurisdiction = wdc.get('P1001')
+    ent_genre = wdc.get('P136')
+    ent_aspect_ratio = wdc.get('P2061')
+    ent_color = wdc.get('P462')
+    ent_depicts = wdc.get('P180')
+    wd_content = {
+        'inception': type(ent[ent_inception]),
+        'jurisdiction': ent[ent_jurisdiction].label,
+        'genre': list_items(ent[ent_genre].items()),
+        'aspect ratio': ent[ent_aspect_ratio],
+        'color': ent[ent_color],
+        'depitcs': ent[ent_depicts],
+    }
+    return wd_content
+
 def search(args,data):
-    print(args['wikipedia'].search(keyword))
+    wd_id = get_wikidata_id(args,data,"Flag of Serbia")
+    wd_content = get_wikidata_content(args,data,wd_id)
+    print(wd_id)
+    print(wd_content)
     return data
 
 def main():
