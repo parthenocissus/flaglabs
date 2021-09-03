@@ -1,5 +1,5 @@
 {
-  "fixed_rules": {
+  "direct_rules": {
     "complexity": 0.5,
     "symbol_chance": 0.5,
     "alternating_colors_chance": 0.2
@@ -12,6 +12,45 @@
     "complex_layouts": ["canton", "canton_cross", "stripes_horizontal", "stripes_vertical",
         "checkered", "lozenges", "sunburst"]
   },
+
+  "layoutX": [
+    { "weight": 3, "name": "unicolor", "layer2": ["chevron", "canton", "border", "hoist_stripe",
+        "offset_stripes_vertical", "offset_stripes_horizontal", "diamond", "hoist_stripe",
+        "fly_stripe", "bottom_stripe", "top_stripe", "border", "cross_saltire", "pall",
+        "nordic_cross", "canton_cross", "saltire"]
+    },
+    { "weight": 5, "name": "tricolor_vertical" },
+    { "weight": 5, "name": "tricolor_horizontal", "layer2": ["chevron", "canton", "border", "hoist_stripe"] },
+    { "weight": 1, "name": "bicolor_vertical" },
+    { "weight": 5, "name": "bicolor_horizontal", "layer2": ["chevron", "canton", "border", "hoist_stripe",
+        "cross", "nordic_cross"] },
+    { "weight": 3, "name": "bicolor_diagonal_left" },
+    { "weight": 0.5, "name": "bicolor_diagonal_right" },
+    { "weight": 1, "name": "bend_left" },
+    { "weight": 0.5, "name": "bend_right" },
+    { "weight": 1, "name": "pale" },
+    { "weight": 0.5, "name": "diamond", "layer2": ["border", "offset_stripes_vertical", "offset_stripes_horizontal"] },
+    { "weight": 5, "name": "chevron", "layer2": ["pall", "fly_stripe"] },
+    { "weight": 1, "name": "canton" },
+    { "weight": 1, "name": "hoist_stripe" },
+    { "weight": 0.1, "name": "fly_stripe" },
+    { "weight": 0.5, "name": "bottom_stripe" },
+    { "weight": 0.1, "name": "offset_stripes_vertical" },
+    { "weight": 0.1, "name": "offset_stripes_horizontal" },
+    { "weight": 0.1, "name": "top_stripe" },
+    { "weight": 0.5, "name": "border" },
+    { "weight": 1, "name": "cross" },
+    { "weight": 1, "name": "saltire" },
+    { "weight": 1, "name": "cross_saltire" },
+    { "weight": 5, "name": "pall" },
+    { "weight": 1, "name": "nordic_cross" },
+    { "weight": 1, "name": "canton_cross" },
+    { "weight": 3, "name": "stripes_horizontal", "layer2": ["chevron", "canton", "diamond", "saltire"] },
+    { "weight": 0.5, "name": "stripes_vertical", "layer2": ["chevron", "canton", "diamond", "saltire"] },
+    { "weight": 1, "name": "checkered", "layer2": ["chevron", "canton", "diamond", "saltire"] },
+    { "weight": 0.5, "name": "lozenges", "layer2": ["chevron", "canton", "diamond", "saltire"] },
+    { "weight": 0.5, "name": "sunburst", "layer2": ["canton"] }
+  ],
 
   "layout": [
     { "weight": 3, "name": "unicolor", "layer2": ["chevron", "canton", "border", "hoist_stripe",

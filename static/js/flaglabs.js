@@ -3,7 +3,7 @@ $(document).ready(function () {
     let flagGenAPI = "_generate";
     let url = $SCRIPT_ROOT + flagGenAPI;
 
-    let data;
+    let data1;
     // let ruleKeys = ["layout", "colors", "symbols"];
     let dataDefault = {
         "layout": [],
@@ -43,26 +43,26 @@ $(document).ready(function () {
         },
 
         "african": {
-            // "colors": [
-            //     {"factor": 100, "name": "red"},
-            //     {"factor": 100, "name": "black"},
-            //     {"factor": 100, "name": "green"},
-            //     {"factor": 100, "name": "yellow"}
-            // ]
             "colors": [
-                {"factor": 60, "name": "red"},
-                {"factor": 100, "name": "pink"},
-                {"factor": 100, "name": "purple"},
-                {"factor": 50, "name": "blue"},
-                {"factor": 50, "name": "yellow"},
-                {"factor": 50, "name": "green"},
-                {"factor": 50, "name": "brown"},
-                {"factor": 50, "name": "orange"}
-            ],
-            "layout": [
-                {"factor": 10, "name": "stripes_horizontal"},
-                {"factor": 5, "name": "stripes_vertical"}
+                {"factor": 100, "name": "red"},
+                {"factor": 100, "name": "black"},
+                {"factor": 100, "name": "green"},
+                {"factor": 100, "name": "yellow"}
             ]
+            // "colors": [
+            //     {"factor": 60, "name": "red"},
+            //     {"factor": 100, "name": "pink"},
+            //     {"factor": 100, "name": "purple"},
+            //     {"factor": 50, "name": "blue"},
+            //     {"factor": 50, "name": "yellow"},
+            //     {"factor": 50, "name": "green"},
+            //     {"factor": 50, "name": "brown"},
+            //     {"factor": 50, "name": "orange"}
+            // ],
+            // "layout": [
+            //     {"factor": 10, "name": "stripes_horizontal"},
+            //     {"factor": 5, "name": "stripes_vertical"}
+            // ]
         },
 
         "slavic": {
@@ -122,7 +122,6 @@ $(document).ready(function () {
         Object.keys(dataDefault).forEach((key) => {
             fineTune(input, qoef, key);
         });
-
     };
 
     $("#go").click(() => {
@@ -130,15 +129,32 @@ $(document).ready(function () {
         let flags = $("#flags");
         flags.empty();
 
-        let duplicateFactors = JSON.parse(JSON.stringify(factors));
-        data = JSON.parse(JSON.stringify(dataDefault));
-        Object.keys(duplicateFactors).forEach((key) => {
-            let qoef = $('#' + key).val() / 100;
-            adjustFactors(duplicateFactors[key], qoef);
-        });
-        console.log(data);
+        // let duplicateFactors = JSON.parse(JSON.stringify(factors));
+        // data = JSON.parse(JSON.stringify(dataDefault));
+        // Object.keys(duplicateFactors).forEach((key) => {
+        //     let qoef = $('#' + key).val() / 100;
+        //     adjustFactors(duplicateFactors[key], qoef);
+        // });
+        // console.log(data);
 
+        let data = [];
+        $("input").each(function(){
+            let input = $(this);
+            let d = {
+                "value": +input.val(),
+                "key": input.attr("name"),
+                "type": input.attr("data-input-type")
+            };
+            data.push(d);
+        });
+
+        // Object.keys(duplicateFactors).forEach((key) => {
+        //     let qoef = $('#' + key).val() / 100;
+        //     adjustFactors(duplicateFactors[key], qoef);
+        // });
+        //
         // let dataOut = { vector: JSON.stringify(dummyData) };
+
         let dataOut = { vector: JSON.stringify(data) };
         $.getJSON(url, dataOut, (result) => {
             flags.empty();

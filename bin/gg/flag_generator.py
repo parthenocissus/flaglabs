@@ -6,6 +6,7 @@ from colour import Color
 
 from bin.gg.flag_layout import FlagLayout
 from bin.gg.flag_symbol import FlagSymbol
+from bin.gg.input_utils import InputUtil
 
 
 # _________________________
@@ -40,17 +41,21 @@ class GenFlag:
         symbols = json.load(open(symbols_path))
         self.rules['symbols'] = symbols['symbols']
 
-        # Compute flag complexity
-        self.complexity = self.rules['fixed_rules']['complexity']
+        input_factors_path = 'conf/input-factors.json'
+        input_factors = json.load(open(input_factors_path))
 
         # Adjust rules based on input parameters
         if input_params and not raw:
             self.apply_input_params(input_params)
         if raw_input and raw:
-            # TODO
-            # computed_params = GenFlag.process_raw_input(raw_input)
-            # self.apply_input_params(computed_params)
-            pass
+            iu = InputUtil(default_rules=self.rules,
+                           input_factors=input_factors,
+                           raw_input=raw_input)
+            # self.rules = iu.process_raw_input()
+            self.rules = iu.update_rules()
+
+        # Compute flag complexity
+        self.complexity = self.rules['direct_rules']['complexity']
 
         # Create the actual flag using the Flag class
         self.flag = Flag(origin=self, flag_canvas=flag_canvas, rules=self.rules, width=self.w, height=self.h)
@@ -67,46 +72,6 @@ class GenFlag:
     # Saving the flag into a SVG file
     def save(self):
         self.flag.save()
-
-    # Process raw input
-    @staticmethod
-    def process_raw_input(input=[]):
-        dummy_input = [
-            {"key": "cold-v-warm", "value": 0.5, "type": "bipolar"},
-            {"key": "complex", "value": 0.5, "type": "direct"},
-            {"key": "anarchist", "value": 0, "type": "unipolar"},
-            {"key": "african", "value": 0, "type": "unipolar"},
-            {"key": "slavic", "value": 0, "type": "unipolar"},
-            {"key": "corporate", "value": 0, "type": "unipolar"}
-        ]
-        input = dummy_input
-
-        class RawInputRule:
-
-            def __init__(self, item):
-                self.key = item['key']
-                self.value = item['value']
-                self.type = item['type']
-
-            def unipolar(self):
-                print("uni")
-
-            def bipolar(self):
-                print("bi")
-
-            def direct(self):
-                print("direct.")
-        # for item in input:
-        #     raw_item = RawInputRule(item)
-        #     getattr(raw_item, item['type'])
-
-        for item in input:
-            if item['type'] == 'unipolar':
-                print(f"{item['key']}, UNI-POLAR")
-            elif item['type'] == 'bipolar':
-                print(f"{item['key']}, BI-POLAR")
-            else:
-                print(f"{item['key']}, --DIRECT")
 
     # Adjusting rules based on input parameters from the user,
     # parameters that the user set in frontend
@@ -146,8 +111,8 @@ class Flag:
         self.used_colors = []
         self.choose_different_color = self.choose_different_color_default
 
-        self.symbol_chance = rules['fixed_rules']['symbol_chance']
-        self.alternating_chance = rules['fixed_rules']['alternating_colors_chance']
+        self.symbol_chance = rules['direct_rules']['symbol_chance']
+        self.alternating_chance = rules['direct_rules']['alternating_colors_chance']
 
         scale_baseline = 1 / (2**recursive_level)
         scale_factor = 0.5 * scale_baseline
@@ -189,9 +154,9 @@ class Flag:
     # Set a chance for colors to alternate (eg. Greek flag)
     def set_alternating_colors_chance(self, factor=1):
         self.alternating_chance *= factor
-        # if random() < self.alternating_chance:
-        #     self.alternating = True
-        #     self.choose_different_color = self.choose_different_color_alt
+        if random() < self.alternating_chance:
+            self.alternating = True
+            self.choose_different_color = self.choose_different_color_alt
 
     # Choose different color every time
     def choose_different_color_default(self):

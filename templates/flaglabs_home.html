@@ -49,31 +49,43 @@
 
         <div class="slider-div">
             <input type="range" id="warm" name="warm"
-                   min="1" max="100" value="1" step="9">
-            <label for="warm">Warm colors</label>
+                   min="0" max="1" value="0.5" step="0.1" data-input-type="bipolar">
+            <label for="warm">Cold/warm colors</label>
+        </div>
+
+        <div class="slider-div">
+            <input type="range" id="complex" name="complex"
+                   min="0" max="1" value="0.5" step="0.1" data-input-type="bipolar">
+            <label for="complex">Simple/complex</label>
         </div>
 
         <div class="slider-div">
             <input type="range" id="anarchist" name="anarchist"
-                   min="1" max="100" value="1" step="9">
+                   min="0" max="1" value="0" step="0.1" data-input-type="unipolar">
             <label for="anarchist">Anarchist</label>
         </div>
 
         <div class="slider-div">
             <input type="range" id="african" name="african"
-                   min="1" max="100" value="1" step="9">
-            <label for="african">Queer</label>
+                   min="0" max="1" value="0" step="0.1" data-input-type="unipolar">
+            <label for="african">African</label>
         </div>
 
         <div class="slider-div">
             <input type="range" id="slavic" name="slavic"
-                   min="1" max="100" value="1" step="9">
+                   min="0" max="1" value="0" step="0.1" data-input-type="unipolar">
             <label for="slavic">Slavic</label>
         </div>
 
         <div class="slider-div">
+            <input type="range" id="queer" name="queer"
+                   min="0" max="1" value="0" step="0.1" data-input-type="unipolar">
+            <label for="queer">Queer</label>
+        </div>
+
+        <div class="slider-div">
             <input type="range" id="corporate" name="corporate"
-                   min="1" max="100" value="1" step="9">
+                   min="0" max="1" value="0" step="0.1" data-input-type="unipolar">
             <label for="corporate">Corporate</label>
         </div>
 

@@ -1,83 +1,99 @@
 {
 
-  "cold-v-warm": {
-    "threshold": 0.5, "down": "cold", "up": "warm"
-  },
-
-  "cold": {
-    "colors": [
-      {"factor": 100, "name": "blue"},
-      {"factor": 100, "name": "green"},
-      {"factor": 100, "name": "black"},
-      {"factor": 50, "name": "white"},
-      {"factor": 20, "name": "purple"}
-    ]
-  },
-
   "warm": {
     "colors": [
-      {"factor": 100, "name": "red"},
-      {"factor": 100, "name": "orange"},
-      {"factor": 100, "name": "yellow"},
-      {"factor": 50, "name": "white"},
-      {"factor": 50, "name": "pink"},
-      {"factor": 20, "name": "brown"}
+      {"ponder": 1, "name": "red"},
+      {"ponder": 1, "name": "orange"},
+      {"ponder": 1, "name": "yellow"},
+      {"ponder": 0.5, "name": "pink"},
+      {"ponder": 0.2, "name": "brown"},
+      {"ponder": 1, "name": "blue", "valence": "inverse"},
+      {"ponder": 1, "name": "green", "valence": "inverse"},
+      {"ponder": 0.2, "name": "purple", "valence": "inverse"}
     ]
+  },
+
+  "complex": {
+    "direct_rules": {
+      "complexity": 1
+    }
   },
 
   "anarchist": {
     "layout": [
-      {"factor": 100, "name": "bicolor_diagonal_left"},
-      {"factor": 100, "name": "bicolor_diagonal_right"},
-      {"factor": 20, "name": "bend_left"},
-      {"factor": 20, "name": "bend_right"},
+      {"ponder": 1, "name": "bicolor_diagonal_left"},
+      {"ponder": 1, "name": "bicolor_diagonal_right"},
+      {"ponder": 0.2, "name": "bend_left"},
+      {"ponder": 0.2, "name": "bend_right"}
     ],
     "colors": [
-      {"factor": 5, "name": "red"},
-      {"factor": 100, "name": "black"}
+      {"ponder": 0.5, "name": "red"},
+      {"ponder": 1, "name": "black"}
     ],
     "symbols": [
-      {"factor": 100, "name": "anarchism"},
-      {"factor": 100, "name": "anarchism_rough"},
-      {"factor": 10, "name": "pentagram"}
+      {"ponder": 1, "name": "anarchism"},
+      {"ponder": 1, "name": "anarchism_rough"},
+      {"ponder": 0.1, "name": "pentagram"}
     ]
   },
 
   "african": {
     "colors": [
-      {"factor": 100, "name": "red"},
-      {"factor": 100, "name": "black"},
-      {"factor": 100, "name": "green"},
-      {"factor": 100, "name": "yellow"}
+      {"ponder": 1, "name": "red"},
+      {"ponder": 1, "name": "black"},
+      {"ponder": 1, "name": "green"},
+      {"ponder": 1, "name": "yellow"}
     ]
   },
 
   "slavic": {
     "layout": [
-      {"factor": 20, "name": "tricolor_vertical" },
-      {"factor": 100, "name": "tricolor_horizontal"},
-      {"factor": 10, "name": "bicolor_vertical" },
-      {"factor": 10, "name": "bicolor_horizontal"},
-      {"factor": 10, "name": "chevron"}
+      {"ponder": 0.2, "name": "tricolor_vertical" },
+      {"ponder": 1, "name": "tricolor_horizontal"},
+      {"ponder": 0.1, "name": "bicolor_vertical" },
+      {"ponder": 0.1, "name": "bicolor_horizontal"},
+      {"ponder": 0.1, "name": "chevron"}
     ],
     "colors": [
-      {"factor": 100, "name": "red"},
-      {"factor": 100, "name": "blue"},
-      {"factor": 100, "name": "white"}
+      {"ponder": 1, "name": "red"},
+      {"ponder": 1, "name": "blue"},
+      {"ponder": 1, "name": "white"},
+      {"ponder": 1, "name": "green"}
     ],
     "symbols": [
-      {"factor": 3, "name": "pentagram"},
-      {"factor": 20, "name": "orthodox_cross"},
-      {"factor": 20, "name": "russian_cross"}
+      {"ponder": 0.3, "name": "pentagram"},
+      {"ponder": 1, "name": "orthodox_cross"},
+      {"ponder": 1, "name": "russian_cross"}
     ]
+  },
+  
+  "queer": {
+    "colors": [
+      {"ponder": 1, "name": "purple"},
+      {"ponder": 0.9, "name": "pink"},
+      {"ponder": 0.8, "name": "red"},
+      {"ponder": 0.7, "name": "orange"},
+      {"ponder": 0.75, "name": "yellow"},
+      {"ponder": 0.75, "name": "green"},
+      {"ponder": 0.75, "name": "blue"},
+      {"ponder": 0.6, "name": "brown"}
+    ],
+    "layout": [
+      {"ponder": 1, "name": "stripes_horizontal"},
+      {"ponder": 0.5, "name": "stripes_vertical"}
+    ],
+    "direct_rules": {
+      "complexity": 0.7,
+      "alternating_colors_chance": 0
+    }
   },
 
   "corporate": {
     "symbols": [
-      {"factor": 100, "name": "dollar"},
-      {"factor": 100, "name": "apple_logo"},
-      {"factor": 100, "name": "nike"},
-      {"factor": 100, "name": "mcdonalds"}]
+      {"ponder": 1, "name": "dollar"},
+      {"ponder": 1, "name": "apple_logo"},
+      {"ponder": 1, "name": "nike"},
+      {"ponder": 1, "name": "mcdonalds"}]
   }
 
 }
