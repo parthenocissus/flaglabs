@@ -20,7 +20,7 @@
 
 **Uroš Krčadinac**:
 
-- [ ] Continue working on a Web app.
+- [x] Continue working on a Web app.
 - [ ] Create more SVG vector stick-figure pictograms.
 - [ ] Be involved with text generation of mottos
 
