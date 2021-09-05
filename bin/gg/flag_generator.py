@@ -6,7 +6,7 @@ from colour import Color
 
 from bin.gg.flag_layout import FlagLayout
 from bin.gg.flag_symbol import FlagSymbol
-from bin.gg.input_data_utils import InputDataUtil as IDU
+from bin.gg.input_data_utils import InputDataUtil as IU
 
 
 # _________________________
@@ -44,7 +44,7 @@ class GenFlag:
         # Adjust rules based on input parameters
         if raw_input and raw:
             ponders = json.load(open(ponders_path))
-            iu = IDU(default_rules=self.rules, input_ponders=ponders, raw_input=raw_input)
+            iu = IU(default_rules=self.rules, input_ponders=ponders, raw_input=raw_input)
             self.rules = iu.update_rules()
 
         # Compute flag complexity
