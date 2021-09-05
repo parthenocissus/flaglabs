@@ -19,10 +19,12 @@ def home():
 def generate():
     data_txt = request.args.get('vector')
     data = json.loads(data_txt)
+    # data = [{"key": "african", "value": 0.8, "type": "unipolar"}]
+    # n_flags = 1
+    # print(data)
     svg_data = []
     for _ in range(n_flags):
         svg_data.append(GenFlag(raw_input=data, raw=True).svg_string())
-        # svg_data.append(GenFlag().svg_string())
     svg_data_txt = json.dumps(svg_data)
     return svg_data_txt
 

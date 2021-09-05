@@ -15,8 +15,27 @@
 
   "complex": {
     "direct_rules": {
-      "complexity": 1
-    }
+      "complexity": 1,
+      "symbol_chance": 0.1
+    },
+    "layout": [
+      {"ponder": 1, "name": "unicolor", "valence": "inverse"},
+      {"ponder": 0.7, "name": "tricolor_vertical", "valence": "inverse"},
+      {"ponder": 0.7, "name": "tricolor_horizontal", "valence": "inverse"},
+      {"ponder": 0.9, "name": "bicolor_vertical", "valence": "inverse"},
+      {"ponder": 0.9, "name": "bicolor_horizontal", "valence": "inverse"},
+      {"ponder": 0.6, "name": "bicolor_diagonal_left", "valence": "inverse"},
+      {"ponder": 0.6, "name": "bicolor_diagonal_right", "valence": "inverse"},
+      {"ponder": 0.3, "name": "pale", "valence": "inverse"},
+      {"ponder": 0.3, "name": "chevron", "valence": "inverse"},
+      {"ponder": 1, "name": "canton"},
+      {"ponder": 0.7, "name": "canton_cross"},
+      {"ponder": 0.6, "name": "stripes_horizontal"},
+      {"ponder": 0.6, "name": "stripes_vertical"},
+      {"ponder": 1, "name": "checkered"},
+      {"ponder": 1, "name": "lozenges"},
+      {"ponder": 1, "name": "sunburst"}
+    ]
   },
 
   "anarchist": {
@@ -80,11 +99,15 @@
     ],
     "layout": [
       {"ponder": 1, "name": "stripes_horizontal"},
-      {"ponder": 0.5, "name": "stripes_vertical"}
+      {"ponder": 0.7, "name": "stripes_vertical"},
+      {"ponder": 0.5, "name": "lozenges"},
+      {"ponder": 0.5, "name": "checkered"},
+      {"ponder": 0.5, "name": "sunburst"}
     ],
     "direct_rules": {
       "complexity": 0.7,
-      "alternating_colors_chance": 0
+      "alternating_colors_chance": 0,
+      "rainbow_palette": 1
     }
   },
 

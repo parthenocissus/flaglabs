@@ -6,7 +6,7 @@ from colour import Color
 
 from bin.gg.flag_layout import FlagLayout
 from bin.gg.flag_symbol import FlagSymbol
-from bin.gg.input_utils import InputUtil
+from bin.gg.input_data_utils import InputDataUtil as IDU
 
 
 # _________________________
@@ -24,9 +24,9 @@ class GenFlag:
         time_stamp = time.strftime("%Y%m%d-%H%M%S") + "-" + str(time.time() * 1000)
         time_stamp = time_stamp + '-' + str(randint(100, 1000))
         file_name = out_dir + time_stamp + '.svg'
-
         self.symbols_typical_dir = 'media/svg-flag-symbols/typical/'
         self.symbols_other_dir = 'media/svg-flag-symbols/other/'
+        ponders_path = 'conf/input-ponders.json'
 
         # Set dimensions
         self.size = (width, height)
@@ -41,17 +41,10 @@ class GenFlag:
         symbols = json.load(open(symbols_path))
         self.rules['symbols'] = symbols['symbols']
 
-        input_factors_path = 'conf/input-factors.json'
-        input_factors = json.load(open(input_factors_path))
-
         # Adjust rules based on input parameters
-        if input_params and not raw:
-            self.apply_input_params(input_params)
         if raw_input and raw:
-            iu = InputUtil(default_rules=self.rules,
-                           input_factors=input_factors,
-                           raw_input=raw_input)
-            # self.rules = iu.process_raw_input()
+            ponders = json.load(open(ponders_path))
+            iu = IDU(default_rules=self.rules, input_ponders=ponders, raw_input=raw_input)
             self.rules = iu.update_rules()
 
         # Compute flag complexity
@@ -72,23 +65,6 @@ class GenFlag:
     # Saving the flag into a SVG file
     def save(self):
         self.flag.save()
-
-    # Adjusting rules based on input parameters from the user,
-    # parameters that the user set in frontend
-    def apply_input_params(self, input_params):
-        rule_keys = ["layout", "colors", "symbols"]
-        for r in rule_keys:
-            if r in input_params:
-                self.update_weights(input_params, r)
-
-    # Updating weights for input parameters
-    def update_weights(self, input_params, key, name='name'):
-        input_set = input_params[key]
-        default = self.rules[key]
-        for input_item in input_set:
-            for d_item in default:
-                if input_item[name] == d_item[name]:
-                    d_item['weight'] *= input_item['factor']
 
 
 # _________________________
@@ -114,14 +90,25 @@ class Flag:
         self.symbol_chance = rules['direct_rules']['symbol_chance']
         self.alternating_chance = rules['direct_rules']['alternating_colors_chance']
 
-        scale_baseline = 1 / (2**recursive_level)
+        # Set rules if rainbow palette
+        self.ordered_palette = []
+        self.ordered_palette_index = 0
+        self.pick_primary_color = self.pick_primary_color_default
+        self.rainbow_palette = random() < rules['direct_rules']['rainbow_palette'] * 0.7
+        if self.rainbow_palette:
+            self.pick_primary_color = self.pick_primary_color_rainbow
+            self.ordered_palette = ["red", "orange", "yellow", "green", "blue", "purple", "brown"]
+            self.ordered_palette_index = randrange(len(self.ordered_palette))
+
+        # Set symbol data, such as position and scale
+        scale_baseline = 1 / (2 ** recursive_level)
         scale_factor = 0.5 * scale_baseline
         self.symbol_data = {
-            "pos": (self.w/2, self.h/2),
+            "pos": (self.w / 2, self.h / 2),
             "scale": scale_factor,
             "size": self.origin_h * scale_factor,
             "rotate": 0,
-            "anchor_position": (self.h/2, self.h/2),
+            "anchor_position": (self.h / 2, self.h / 2),
             "scale_baseline": scale_baseline
         }
 
@@ -158,17 +145,30 @@ class Flag:
             self.alternating = True
             self.choose_different_color = self.choose_different_color_alt
 
+    def pick_primary_color_default(self):
+        primary_distribution = [d['weight'] for d in self.primary_groups]
+        return choices(self.primary_groups, primary_distribution)[0]
+
+    def pick_primary_color_rainbow(self):
+        i = self.ordered_palette_index
+        primary_name = self.ordered_palette[i]
+        self.ordered_palette_index = 0 if i == len(self.ordered_palette) - 1 else i + 1
+        result = [c for c in self.primary_groups if c['name'] == primary_name]
+        if len(result) == 0:
+            self.primary_groups, self.colors = self.get_colors()
+            result = [c for c in self.primary_groups if c['name'] == primary_name]
+        return result[0]
+
     # Choose different color every time
     def choose_different_color_default(self):
-        if random() > 0.9:
+        if random() > 0.9 and not self.rainbow_palette:
             color = Color(rgb=(random(), random(), random()))
             color_object = {"name": "random", "value": color.get_web()}
             self.used_colors.append(color_object)
             return color_object['value']
         if not self.primary_groups:
             self.primary_groups, self.colors = self.get_colors()
-        primary_distribution = [d['weight'] for d in self.primary_groups]
-        primary = choices(self.primary_groups, primary_distribution)[0]
+        primary = self.pick_primary_color()
         color_distribution = [d['weight'] for d in primary['variations']]
         color = choices(primary['variations'], color_distribution)[0]
         self.primary_groups.remove(primary)

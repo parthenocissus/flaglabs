@@ -1,0 +1,119 @@
+{
+  "warm": {
+    "colors": {
+      "red": 1,
+      "orange": 1,
+      "yellow": 1,
+      "pink": 0.5,
+      "brown": 0.2,
+      "blue": -1,
+      "green": -1,
+      "purple": -0.2
+    }
+  },
+
+  "complex": {
+    "direct_rules": {
+      "complexity": 1,
+      "symbol_chance": 1
+    },
+    "layout": {
+      "unicolor": -1,
+      "tricolor_vertical": -0.7,
+      "tricolor_horizontal": -0.7,
+      "bicolor_vertical": -0.9,
+      "bicolor_horizontal": -0.9,
+      "bicolor_diagonal_left": -0.6,
+      "bicolor_diagonal_right": -0.6,
+      "pale": -0.3,
+      "chevron": -0.3,
+      "canton": 1,
+      "canton_cross": 0.7,
+      "stripes_horizontal": 0.6,
+      "stripes_vertical": 0.6,
+      "checkered": 1,
+      "sunburst": 1,
+      "lozenges": 1
+    }
+  },
+
+  "anarchist": {
+    "layout": {
+      "bicolor_diagonal_left": 1,
+      "bicolor_diagonal_right": 1,
+      "bend_left": 0.2,
+      "bend_right": 0.2
+    },
+    "colors": {
+      "red": 0.5,
+      "black": 1
+    },
+    "symbols": {
+      "anarchism": 1,
+      "anarchism_rough": 1,
+      "pentagram": 0.1
+    }
+  },
+
+  "african": {
+    "colors": {
+      "red": 1,
+      "green": 1,
+      "black": 1,
+      "yellow": 1
+    }
+  },
+
+  "slavic": {
+    "layout": {
+      "tricolor_vertical": 0.2,
+      "tricolor_horizontal": 1,
+      "bicolor_vertical": 0.1,
+      "bicolor_horizontal": 0.1,
+      "chevron": 0.1
+    },
+    "colors": {
+      "red": 1,
+      "white": 1,
+      "blue": 1
+    },
+    "symbols": {
+      "pentagram": 0.3,
+      "orthodox_cross": 1,
+      "russian_cross": 1
+    }
+  },
+
+  "queer": {
+    "colors": {
+      "purple": 1,
+      "pink": 1,
+      "red": 0.5,
+      "orange": 0.2,
+      "yellow": 0.2,
+      "blue": 0.5,
+      "brown": 0.3
+    },
+    "layout": {
+      "stripes_horizontal": 1,
+      "stripes_vertical": 0.7,
+      "lozenges": 0.5,
+      "checkered": 0.5,
+      "sunburst": 0.5
+    },
+    "direct_rules": {
+      "complexity": 0.7,
+      "alternating_colors_chance": 0,
+      "rainbow_palette": 1
+    }
+  },
+
+  "corporate": {
+    "symbols": {
+      "dollar": 1,
+      "apple_logo": 1,
+      "nike": 1,
+      "mcdonalds": 1
+    }
+  }
+}
