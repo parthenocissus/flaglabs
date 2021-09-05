@@ -1,7 +1,7 @@
 {
   "symbols": [
     { "name": "circle", "weight": 0.5 },
-    { "name": "ring", "weight": 0.5 },
+    { "name": "ring", "weight": 0.2 },
     { "name": "random_star", "weight": 1},
 
     { "name": "fleur_de_lis", "weight": 0.5, "file_name": "fleur_de_lis" },
@@ -25,16 +25,21 @@
     { "name": "heart", "weight": 0.5, "file_name": "heart" },
     { "name": "mercedes_benz", "weight": 0.5, "file_name": "mercedes_benz" },
     { "name": "trollface", "weight": 0.5, "file_name": "trollface" },
-    { "name": "roma_wheel", "weight": 0.1, "file_name": "roma_wheel" },
-    { "name": "om", "weight": 0.1, "file_name": "om" },
-    { "name": "albanian_eagle", "weight": 0.1, "file_name": "albanian_eagle" },
-    { "name": "croatian_checkerboard", "weight": 0.1, "file_name": "croatian_checkerboard" },
-    { "name": "star_of_david", "weight": 0.1, "file_name": "star_of_david" },
-    { "name": "vojvodina_stars", "weight": 0.1, "file_name": "vojvodina_stars" }
-  ],
-
-  "symbols-TODO": [
-    { "name": "", "weight": 0 }
+    { "name": "roma_wheel", "weight": 0.3, "file_name": "roma_wheel" },
+    { "name": "om", "weight": 0.3, "file_name": "om" },
+    { "name": "albanian_eagle", "weight": 0.3, "file_name": "albanian_eagle" },
+    { "name": "croatian_checkerboard", "weight": 0.3, "file_name": "croatian_checkerboard" },
+    { "name": "star_of_david", "weight": 0.3, "file_name": "star_of_david" },
+    { "name": "vojvodina_stars", "weight": 0.3, "file_name": "vojvodina_stars" },
+    { "name": "africa", "weight": 0.3, "file_name": "africa" },
+    { "name": "europe", "weight": 0.3, "file_name": "europe" },
+    { "name": "transgender", "weight": 0.3, "file_name": "transgender" },
+    { "name": "transgender2", "weight": 0.3, "file_name": "transgender2" },
+    { "name": "lesbian", "weight": 0.3, "file_name": "lesbian" },
+    { "name": "gay", "weight": 0.3, "file_name": "gay" },
+    { "name": "maasai_shield", "weight": 0.3, "file_name": "maasai_shield" },
+    { "name": "bitcoin", "weight": 0.3, "file_name": "bitcoin" },
+    { "name": "kolovrat", "weight": 0.3, "file_name": "kolovrat" }
   ]
 
 }

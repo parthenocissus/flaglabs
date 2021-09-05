@@ -51,7 +51,8 @@
     "symbols": {
       "anarchism": 1,
       "anarchism_rough": 1,
-      "pentagram": 0.1
+      "pentagram": 0.1,
+      "bitcoin": 0.2
     }
   },
 
@@ -61,6 +62,10 @@
       "green": 1,
       "black": 1,
       "yellow": 1
+    },
+    "symbols": {
+      "africa": 1,
+      "maasai_shield": 0.8
     }
   },
 
@@ -78,9 +83,13 @@
       "blue": 1
     },
     "symbols": {
-      "pentagram": 0.3,
+      "pentagram": 0.5,
       "orthodox_cross": 1,
-      "russian_cross": 1
+      "russian_cross": 1,
+      "kolovrat": 0.7,
+      "hammer_sickle": 0.7,
+      "croatian_checkerboard": 0.7,
+      "serbian_cross": 0.7
     }
   },
 
@@ -101,6 +110,12 @@
       "checkered": 0.5,
       "sunburst": 0.5
     },
+    "symbols": {
+      "transgender": 1,
+      "transgender2": 1,
+      "gay": 1,
+      "lesbian": 1
+    },
     "direct_rules": {
       "complexity": 0.7,
       "alternating_colors_chance": 0,
@@ -113,7 +128,9 @@
       "dollar": 1,
       "apple_logo": 1,
       "nike": 1,
-      "mcdonalds": 1
+      "mcdonalds": 1,
+      "mercedes_benz": 1,
+      "bitcoin": 0.5
     }
   }
 }

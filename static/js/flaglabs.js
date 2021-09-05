@@ -155,6 +155,7 @@ $(document).ready(function () {
         //
         // let dataOut = { vector: JSON.stringify(dummyData) };
 
+        console.log(JSON.stringify(data));
         let dataOut = { vector: JSON.stringify(data) };
         $.getJSON(url, dataOut, (result) => {
             flags.empty();

@@ -52,7 +52,8 @@
     "symbols": [
       {"ponder": 1, "name": "anarchism"},
       {"ponder": 1, "name": "anarchism_rough"},
-      {"ponder": 0.1, "name": "pentagram"}
+      {"ponder": 0.1, "name": "pentagram"},
+      {"ponder": 0.2, "name": "bitcoin"}
     ]
   },
 
@@ -62,7 +63,12 @@
       {"ponder": 1, "name": "black"},
       {"ponder": 1, "name": "green"},
       {"ponder": 1, "name": "yellow"}
-    ]
+    ],
+    "symbols": {
+      {"ponder": 1, "name": "red"},
+      {"ponder": 1, "name": "red"},
+      {"ponder": 1, "name": "red"}
+    }
   },
 
   "slavic": {
@@ -82,7 +88,10 @@
     "symbols": [
       {"ponder": 0.3, "name": "pentagram"},
       {"ponder": 1, "name": "orthodox_cross"},
-      {"ponder": 1, "name": "russian_cross"}
+      {"ponder": 1, "name": "russian_cross"},
+      {"ponder": 0.2, "name": "kolovrat"},
+      {"ponder": 0.2, "name": "serbian_cross"},
+      {"ponder": 0.4, "name": "hammer_sicle"}
     ]
   },
   
@@ -104,6 +113,12 @@
       {"ponder": 0.5, "name": "checkered"},
       {"ponder": 0.5, "name": "sunburst"}
     ],
+    "symbols": [
+      {"ponder": 1, "name": "transgender"},
+      {"ponder": 1, "name": "transgender2"},
+      {"ponder": 1, "name": "gay"},
+      {"ponder": 1, "name": "lesbian"}
+    ],
     "direct_rules": {
       "complexity": 0.7,
       "alternating_colors_chance": 0,
@@ -116,7 +131,10 @@
       {"ponder": 1, "name": "dollar"},
       {"ponder": 1, "name": "apple_logo"},
       {"ponder": 1, "name": "nike"},
-      {"ponder": 1, "name": "mcdonalds"}]
+      {"ponder": 1, "name": "mcdonalds"},
+      {"ponder": 1, "name": "mercedes_benz"},
+      {"ponder": 1, "name": "bitcoin"}
+    ]
   }
 
 }
