@@ -27,13 +27,13 @@
       "bicolor_diagonal_right": -0.6,
       "pale": -0.3,
       "chevron": -0.3,
-      "canton": 1,
-      "canton_cross": 0.7,
-      "stripes_horizontal": 0.6,
-      "stripes_vertical": 0.6,
-      "checkered": 1,
-      "sunburst": 1,
-      "lozenges": 1
+      "canton": 0.5,
+      "canton_cross": 0.5,
+      "stripes_horizontal": 0.5,
+      "stripes_vertical": 0.5,
+      "checkered": 0.6,
+      "sunburst": 0.6,
+      "lozenges": 0.6
     }
   },
 

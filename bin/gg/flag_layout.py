@@ -24,6 +24,8 @@ class FlagLayout:
         self.rules = flag.rules
         self.used_colors = flag.used_colors
         self.sd = flag.symbol_data
+        self.complexity = self.rules['direct_rules']['complexity']
+        self.complex_factor = math.pow(self.complexity, 2)
         self.fsc = FlagSymbolConfig(flag.genflag_origin, flag.symbol_data, self.w, flag.h)
 
         # Start generating flag elements with the first layer of the layout
@@ -66,7 +68,6 @@ class FlagLayout:
             return choices(possible_layers2, distribution)[0]
         else:
             return {'name': 'none'}
-
 
     # _________________________
     # FLAG LAYOUTS
@@ -116,7 +117,7 @@ class FlagLayout:
 
     # Bend (left)
     def bend_left(self):
-        if random() > 0.5:
+        if random() < self.complexity:
             self.bicolor_diagonal_left()
         else:
             self.unicolor()
@@ -131,7 +132,7 @@ class FlagLayout:
 
     # Bend (right)
     def bend_right(self):
-        if random() > 0.5:
+        if random() < self.complexity:
             self.bicolor_diagonal_right()
         else:
             self.unicolor()
@@ -168,7 +169,7 @@ class FlagLayout:
         for i in range(n_stripes):
             c = self.choose_different_color()
             self.g.add(self.fc.rect((0, i * self.h / n_stripes), (self.w, self.h / n_stripes),
-                                     stroke='none', fill=c))
+                                    stroke='none', fill=c))
         self.fsc.default_center_center_left()
         self.symbol_chance *= 1.2
 
@@ -179,7 +180,7 @@ class FlagLayout:
         for i in range(n_stripes):
             c = self.choose_different_color()
             self.g.add(self.fc.rect((i * self.w / n_stripes, 0), (self.w / n_stripes, self.h),
-                                     stroke='none', fill=c))
+                                    stroke='none', fill=c))
         self.fsc.center(scale_factor=uniform(0.4, 0.7))
         self.symbol_chance *= 1.2
 
@@ -192,8 +193,8 @@ class FlagLayout:
             for j in range(n_ver):
                 c = self.choose_different_color()
                 self.g.add(self.fc.rect((i * self.w / n_hor, j * self.h / n_ver),
-                                         (self.w / n_hor, self.h / n_ver),
-                                         stroke='none', fill=c))
+                                        (self.w / n_hor, self.h / n_ver),
+                                        stroke='none', fill=c))
         self.fsc.center(scale_factor=uniform(0.4, 0.7))
         self.symbol_chance *= 1.2
 
@@ -269,7 +270,7 @@ class FlagLayout:
         d = f"M0,0 L{chevron_w},{self.h / 2} L0,{self.h} z"
         stroke = 'none'
         fill = c
-        if random() > 0.7:
+        if random() < self.complex_factor:
             d2 = f"M0,0 L{chevron_w},{self.h / 2} L0,{self.h}"
             c2 = self.choose_different_color()
             sw = self.h / uniform(6, 12)
@@ -286,7 +287,7 @@ class FlagLayout:
         c = self.choose_different_color()
         wid = self.h / uniform(2, 3)
         self.g.add(self.fc.rect((0, 0), (wid, self.h), stroke='none', fill=c))
-        wf = (wid + (self.w - wid)/2) / self.w
+        wf = (wid + (self.w - wid) / 2) / self.w
         self.fsc.center_right(scale_factor=uniform(0.4, 0.7), width_fraction=wf)
         self.symbol_chance *= 1.6
 
@@ -324,7 +325,7 @@ class FlagLayout:
         sf = uniform(0.3, 0.6)
         cd = (margin / self.h) / 2
         self.fsc.default_canton_center_down(scale_factor=sf, height_fraction=hf,
-                                                      canton_dim=cd)
+                                            canton_dim=cd)
         self.symbol_chance *= 1.7
 
     # Offset stripes, vertical
@@ -350,7 +351,7 @@ class FlagLayout:
         str_w = self.h / uniform(7, 16)
         self.g.add(self.fc.line((0, margin), (self.w, margin), stroke=c, fill='none', stroke_width=str_w))
         self.g.add(self.fc.line((0, self.h - margin), (self.w, self.h - margin),
-                                 stroke=c, fill='none', stroke_width=str_w))
+                                stroke=c, fill='none', stroke_width=str_w))
         self.fsc.default_center_center_left()
         self.symbol_chance *= 1.6
 
@@ -362,12 +363,10 @@ class FlagLayout:
         self.symbol_chance *= 1.2
         # Recursively create another flag for canton (upper left rectangle):
         if self.h > self.genflag_origin.h * 0.25:
+            new_flag = self.genflag_origin.create_new_flag
             meta_lvl = self.recursive_level + 1
-            recursive_flag = self.genflag_origin.create_new_flag(self.genflag_origin,
-                                                                 self.fc, self.rules,
-                                                                 self.w / 2, self.h / 2,
-                                                                 recursive=True,
-                                                                 recursive_level=meta_lvl)
+            recursive_flag = new_flag(self.genflag_origin, self.fc, self.rules, self.w / 2, self.h / 2,
+                                      recursive=True, recursive_level=meta_lvl)
             if self.alternating and random() > 0.3:
                 recursive_flag.set_used_colors(self.used_colors)
                 recursive_flag.choose_different_color = recursive_flag.choose_different_color_alt
@@ -379,12 +378,12 @@ class FlagLayout:
             self.unicolor()
         c = self.choose_different_color()
         wid = uniform(self.h / 16, self.h / 6)
-        space = wid*2
+        space = wid * 2
         m = wid / 2
         fly = True if random() > 0.1 else False
         left = m if not fly else -m
         right = self.w - 2 * m if not fly else self.w
-        if random() > 0.2:
+        if random() < self.complex_factor:
             c2 = self.choose_different_color()
             wid2 = uniform(wid * 2, wid * 2.2)
             space = wid2 * 2
@@ -395,8 +394,7 @@ class FlagLayout:
                 self.fc.rect((left2, m2), (right2, self.h - 2 * m2),
                              stroke=c2, fill='none', stroke_width=wid2))
         self.g.add(self.fc.rect((left, m), (right, self.h - 2 * m),
-                                 stroke=c, fill='none', stroke_width=wid))
-        # scale_factor = uniform(0.7, 1) * (space / self.h)
+                                stroke=c, fill='none', stroke_width=wid))
         if fly:
             self.fsc.default_center_center_left(scale_factor=uniform(0.3, 0.6))
         else:
@@ -408,17 +406,17 @@ class FlagLayout:
         self.unicolor()
         c = self.choose_different_color()
         wid = self.h * uniform(0.1, 0.25)
-        if random() > 0.75:
+        if random() < self.complex_factor:
             wid2 = uniform(wid * 1.3, wid * 2)
             c2 = self.choose_different_color()
             self.g.add(self.fc.line((self.w / 2, 0), (self.w / 2, self.h),
-                                     stroke=c2, fill='none', stroke_width=wid2))
+                                    stroke=c2, fill='none', stroke_width=wid2))
             self.g.add(self.fc.line((0, self.h / 2), (self.w, self.h / 2),
-                                     stroke=c2, fill='none', stroke_width=wid2))
+                                    stroke=c2, fill='none', stroke_width=wid2))
         self.g.add(self.fc.line((self.w / 2, 0), (self.w / 2, self.h),
-                                 stroke=c, fill='none', stroke_width=wid))
+                                stroke=c, fill='none', stroke_width=wid))
         self.g.add(self.fc.line((0, self.h / 2), (self.w, self.h / 2),
-                                 stroke=c, fill='none', stroke_width=wid))
+                                stroke=c, fill='none', stroke_width=wid))
         self.fsc.center(scale_factor=uniform(0.1, 0.7))
         self.symbol_chance *= 0.8
 
@@ -427,19 +425,19 @@ class FlagLayout:
         self.unicolor()
         c = self.choose_different_color()
         wid = self.h * uniform(0.1, 0.25)
-        if random() > 0.75:
+        if random() < self.complex_factor:
             wid2 = uniform(wid * 1.3, wid * 2)
             c2 = self.choose_different_color()
             self.g.add(self.fc.line((self.h / 2, 0), (self.h / 2, self.h),
-                                     stroke=c2, fill='none', stroke_width=wid2))
+                                    stroke=c2, fill='none', stroke_width=wid2))
             self.g.add(self.fc.line((0, self.h / 2), (self.w, self.h / 2),
-                                     stroke=c2, fill='none', stroke_width=wid2))
+                                    stroke=c2, fill='none', stroke_width=wid2))
         self.g.add(self.fc.line((self.h / 2, 0), (self.h / 2, self.h),
-                                 stroke=c, fill='none', stroke_width=wid))
+                                stroke=c, fill='none', stroke_width=wid))
         self.g.add(self.fc.line((0, self.h / 2), (self.w, self.h / 2),
-                                 stroke=c, fill='none', stroke_width=wid))
+                                stroke=c, fill='none', stroke_width=wid))
         sf = uniform(0.1, 0.6)
-        wf = (self.h/2) / self.w
+        wf = (self.h / 2) / self.w
         self.fsc.center_left(scale_factor=sf, width_fraction=wf)
         self.symbol_chance *= 0.6
 
@@ -448,18 +446,18 @@ class FlagLayout:
         self.unicolor()
         c = self.choose_different_color()
         wid = self.h * uniform(0.08, 0.2)
-        if random() > 0.75:
+        if random() < self.complex_factor:
             wid2 = uniform(wid * 1.3, wid * 2)
             c2 = self.choose_different_color()
             self.g.add(self.fc.line((self.h / 3, 0), (self.h / 3, self.h),
-                                     stroke=c2, fill='none', stroke_width=wid2))
+                                    stroke=c2, fill='none', stroke_width=wid2))
             self.g.add(self.fc.line((0, self.h / 3), (self.w, self.h / 3),
-                                     stroke=c2, fill='none', stroke_width=wid2))
+                                    stroke=c2, fill='none', stroke_width=wid2))
         self.g.add(self.fc.line((self.h / 3, 0), (self.h / 3, self.h),
-                                 stroke=c, fill='none', stroke_width=wid))
+                                stroke=c, fill='none', stroke_width=wid))
         self.g.add(self.fc.line((0, self.h / 3), (self.w, self.h / 3),
-                                 stroke=c, fill='none', stroke_width=wid))
-        self.fsc.canton_small(scale_factor=uniform(0.2, 0.33), dim=(1/3, 1/3))
+                                stroke=c, fill='none', stroke_width=wid))
+        self.fsc.canton_small(scale_factor=uniform(0.2, 0.33), dim=(1 / 3, 1 / 3))
         self.symbol_chance *= 0.6
 
     # Saltire (X-cross)
@@ -467,17 +465,17 @@ class FlagLayout:
         self.unicolor()
         c = self.choose_different_color()
         wid = self.h * uniform(0.1, 0.25)
-        if random() > 0.75:
+        if random() < self.complex_factor:
             wid2 = uniform(wid * 1.3, wid * 2)
             c2 = self.choose_different_color()
             self.g.add(self.fc.line((0, 0), (self.w, self.h),
-                                     stroke=c2, fill='none', stroke_width=wid2))
+                                    stroke=c2, fill='none', stroke_width=wid2))
             self.g.add(self.fc.line((0, self.h), (self.w, 0),
-                                     stroke=c2, fill='none', stroke_width=wid2))
+                                    stroke=c2, fill='none', stroke_width=wid2))
         self.g.add(self.fc.line((0, 0), (self.w, self.h),
-                                 stroke=c, fill='none', stroke_width=wid))
+                                stroke=c, fill='none', stroke_width=wid))
         self.g.add(self.fc.line((0, self.h), (self.w, 0),
-                                 stroke=c, fill='none', stroke_width=wid))
+                                stroke=c, fill='none', stroke_width=wid))
         self.fsc.center(scale_factor=uniform(0.1, 0.7))
         self.symbol_chance *= 0.6
 
@@ -486,7 +484,7 @@ class FlagLayout:
         self.unicolor()
         c = self.choose_different_color()  # fill color
         c2 = self.choose_different_color()  # border color (if border)
-        border = True if random() > 0.75 else False
+        border = True if random() < self.complex_factor else False
         wid_cross = self.h * uniform(0.05, 0.18)
         wid_saltire = wid_cross * uniform(0.6, 0.9)
         wid_cross2 = wid_cross * uniform(1.8, 2.1)
@@ -494,30 +492,30 @@ class FlagLayout:
         # Saltire
         if border:
             self.g.add(self.fc.line((0, 0), (self.w, self.h),
-                                     stroke=c2, fill='none', stroke_width=wid_saltire2))
+                                    stroke=c2, fill='none', stroke_width=wid_saltire2))
             self.g.add(self.fc.line((0, self.h), (self.w, 0),
-                                     stroke=c2, fill='none', stroke_width=wid_saltire2))
+                                    stroke=c2, fill='none', stroke_width=wid_saltire2))
         self.g.add(self.fc.line((0, 0), (self.w, self.h),
-                                 stroke=c, fill='none', stroke_width=wid_saltire))
+                                stroke=c, fill='none', stroke_width=wid_saltire))
         self.g.add(self.fc.line((0, self.h), (self.w, 0),
-                                 stroke=c, fill='none', stroke_width=wid_saltire))
+                                stroke=c, fill='none', stroke_width=wid_saltire))
         # Cross
         if border:
             self.g.add(self.fc.line((self.w / 2, 0), (self.w / 2, self.h),
-                                     stroke=c2, fill='none', stroke_width=wid_cross2))
+                                    stroke=c2, fill='none', stroke_width=wid_cross2))
             self.g.add(self.fc.line((0, self.h / 2), (self.w, self.h / 2),
-                                     stroke=c2, fill='none', stroke_width=wid_cross2))
+                                    stroke=c2, fill='none', stroke_width=wid_cross2))
         self.g.add(self.fc.line((self.w / 2, 0), (self.w / 2, self.h),
-                                 stroke=c, fill='none', stroke_width=wid_cross))
+                                stroke=c, fill='none', stroke_width=wid_cross))
         self.g.add(self.fc.line((0, self.h / 2), (self.w, self.h / 2),
-                                 stroke=c, fill='none', stroke_width=wid_cross))
+                                stroke=c, fill='none', stroke_width=wid_cross))
         self.fsc.center(scale_factor=uniform(0.1, 0.7))
         self.symbol_chance *= 0.6
 
     # Pall (Y-shape flags, eg. South African flag)
     def pall(self):
         if self.layer2['name'] is 'none':
-            if random() > 0.5:
+            if random() > self.complexity:
                 self.unicolor()
             else:
                 c1 = self.choose_different_color()
@@ -534,9 +532,9 @@ class FlagLayout:
         chevron_w = self.h * math.sqrt(3) / 2
         d_line = f"M0,0 L{chevron_w},{self.h / 2} L0,{self.h} " \
                  f"L{chevron_w},{self.h / 2} L{self.w},{self.h / 2}"
-        if random() > 0.7:
+        if random() < self.complex_factor:
             self.g.add(self.fc.path(d=d_line, stroke_width=wid_border, stroke=c_border, fill='none'))
-            if random() > 0.5:
+            if random() < self.complexity:
                 c_border2 = self.choose_different_color()
                 diff = wid_border - wid
                 d_line2 = f"M{-diff},0 L{chevron_w - diff},{self.h / 2} L{-diff},{self.h}"
