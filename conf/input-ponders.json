@@ -366,5 +366,33 @@
     "direct_rules": {
       "symbol_chance": 1
     }
+  },
+
+  "scandinavian": {
+    "layout": {
+      "nordic_cross": 1,
+      "cross": 0.5,
+      "saltire": 0.5,
+      "unicolor": 0.4,
+      "canton_cross": 0.2
+    },
+    "colors": {
+      "blue": 1,
+      "white": 1,
+      "red": 1,
+      "yellow": 0.5,
+      "black": 0.5
+    },
+    "symbols": {
+      "vevigsir": 1,
+      "swedish_crowns": 1,
+      "swedish_crowns2": 1,
+      "norway_army": 1,
+      "norway_lion": 1,
+      "norway_wyvern": 1,
+      "norway_wyvern2": 1,
+      "denmark_lions": 1,
+      "hannunvaakuna": 1
+    }
   }
 }

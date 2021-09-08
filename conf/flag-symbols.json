@@ -53,7 +53,16 @@
     { "name": "serbian_empire_eagle", "weight": 1, "file_name": "serbian_empire_eagle" },
     { "name": "sol_de_mayo", "weight": 1, "file_name": "sol_de_mayo" },
     { "name": "venezuela_stars", "weight": 1, "file_name": "venezuela_stars" },
-    { "name": "hispanic_star", "weight": 1, "file_name": "hispanic_star" }
+    { "name": "hispanic_star", "weight": 1, "file_name": "hispanic_star" },
+    { "name": "vevigsir", "weight": 1, "file_name": "vevigsir" },
+    { "name": "swedish_crowns", "weight": 1, "file_name": "swedish_crowns" },
+    { "name": "swedish_crowns2", "weight": 1, "file_name": "swedish_crowns2" },
+    { "name": "norway_army", "weight": 1, "file_name": "norway_army" },
+    { "name": "norway_lion", "weight": 1, "file_name": "norway_lion" },
+    { "name": "norway_wyvern", "weight": 1, "file_name": "norway_wyvern" },
+    { "name": "norway_wyvern2", "weight": 1, "file_name": "norway_wyvern2" },
+    { "name": "denmark_lions", "weight": 1, "file_name": "denmark_lions" },
+    { "name": "hannunvaakuna", "weight": 1, "file_name": "hannunvaakuna" }
   ]
 
 }
