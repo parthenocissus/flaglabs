@@ -130,12 +130,21 @@
     "symbols": {
       "anarchism": 1,
       "anarchism_rough": 1,
-      "pentagram": 0.1,
+      "fist": 1,
+      "pentagram": 0.2,
       "bitcoin": 0.2
     }
   },
 
   "african": {
+    "layout": {
+      "tricolor_vertical": 0.1,
+      "tricolor_horizontal": 0.1,
+      "bicolor_vertical": 0.1,
+      "bicolor_horizontal": 0.1,
+      "chevron": 0.1,
+      "pall": 0.5
+    },
     "colors": {
       "red": 1,
       "green": 1,
@@ -210,6 +219,152 @@
       "mcdonalds": 1,
       "mercedes_benz": 1,
       "bitcoin": 0.5
+    }
+  },
+
+  "socialist": {
+    "layout": {
+      "unicolor": 0.7,
+      "bicolor_diagonal_left": 0.1,
+      "bicolor_diagonal_right": 0.4,
+      "sunburst": 0.1,
+      "tricolor_horizontal": 0.2
+    },
+    "colors": {
+      "red": 1,
+      "black": 0.3,
+      "white": 0.2
+    },
+    "symbols": {
+      "anarchism": 0.1,
+      "anarchism_rough": 0.1,
+      "pentagram": 1,
+      "hammer_sickle": 1,
+      "fist": 1,
+      "socialism_star_hammer": 1,
+      "socialism_rose": 1,
+      "china_stars": 0.8
+    }
+  },
+
+  "christian": {
+    "layout": {
+      "unicolor": 1,
+      "canton": 0.5,
+      "cross": 1,
+      "cross_saltire": 0.5,
+      "nordic_cross": 0.9,
+      "canton_cross": 0.9
+    },
+    "colors": {
+      "red": 0.5,
+      "blue": 0.5,
+      "brown": 0.2,
+      "white": 0.2,
+      "yellow": 0.2
+    },
+    "symbols": {
+      "pentagram": -1,
+      "orthodox_cross": 1,
+      "russian_cross": 1,
+      "hammer_sickle": -1,
+      "serbian_cross": 0.7,
+      "greek_cross": 1,
+      "swiss_cross": 1
+    }
+  },
+
+  "islamic": {
+    "layout": {
+      "unicolor": 1,
+      "tricolor_horizontal": 0.5,
+      "chevron": 0.5,
+      "hoist_stripe": 1,
+      "fly_stripe": 0.5,
+      "top_stripe": 0.5,
+      "bottom_stripe": 0.5
+    },
+    "colors": {
+      "green": 1,
+      "black": 0.5,
+      "white": 0.5,
+      "red": 0.5
+    },
+    "symbols": {
+      "islam": 1,
+      "quran": 1,
+      "rub_el_hizb": 1,
+      "crescent_star": 1,
+      "crescent_star_up": 1
+    }
+  },
+
+  "serbian": {
+    "layout": {
+      "tricolor_horizontal": 1,
+      "bicolor_horizontal": 0.3
+    },
+    "colors": {
+      "red": 1,
+      "white": 1,
+      "blue": 1
+    },
+    "symbols": {
+      "pentagram": 0.2,
+      "orthodox_cross": 0.5,
+      "russian_cross": 0.3,
+      "hammer_sickle": 0.7,
+      "serbian_cross": 1,
+      "serbian_eagle_bw": 1,
+      "serbian_empire_eagle": 1
+    }
+  },
+
+  "croatian": {
+    "layout": {
+      "tricolor_horizontal": 1,
+      "bicolor_horizontal": 0.3,
+      "checkered": 1
+    },
+    "colors": {
+      "red": 1,
+      "white": 1,
+      "blue": 1
+    },
+    "symbols": {
+      "swiss_cross": 0.5,
+      "croatian_checkerboard": 1
+    }
+  },
+
+  "south_american": {
+    "layout": {
+      "tricolor_horizontal": 0.9,
+      "diamond": 0.9,
+      "stripes_horizontal": 0.5,
+      "checkered": 0.2
+    },
+    "colors": {
+      "red": 1,
+      "yellow": 1,
+      "blue": 1,
+      "white": 1
+    },
+    "symbols": {
+      "pentagram": 0.5,
+      "random_star": 1,
+      "sol_de_mayo": 1,
+      "hispanic_star": 1,
+      "venezuela_stars": 0.8
+    },
+    "direct_rules": {
+      "alternating_colors_chance": 0.6
+    }
+  },
+
+  "symbolic": {
+    "direct_rules": {
+      "symbol_chance": 1
     }
   }
 }
