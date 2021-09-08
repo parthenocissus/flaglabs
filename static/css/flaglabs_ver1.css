@@ -4,29 +4,30 @@ html, body {
 }
 
 body {
-    padding: 4em 8em 0 8em;
+    padding: 6em 10em;
     display: grid;
-    grid-template-columns: 2fr 3fr;
-    grid-gap: 5em;
+    grid-template-columns: 3fr 5fr;
+    grid-gap: 1em;
 }
 
 svg {
+    /*padding: 50px 16px;*/
     padding: 1em 0.5em;
 }
 
 aside {
-    padding: 0.3em 0 0 0;
+    padding: 2em 0;
 }
 
 h1 {
     font-family: "noe-display-bold", sans-serif;
     font-size: 4.5em;
     padding-right: 0;
-    margin: 0 0 0.5em 0;
+    margin-top: 0.5em;
 }
 
 #subtitle {
-    font-size: 1.3em;
+    font-size: 1.5em;
     padding: 0 1em 1em 0;
 }
 
@@ -35,15 +36,12 @@ h1 {
 label {
     position: relative;
     bottom: 5px;
-    font-size: 1.3em;
+    font-size: 1.5em;
     padding-left: 0.6em;
 }
 
 #slider-group {
-    padding: 0 0 1.2em 0;
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    grid-gap: 3em;
+    padding: 0 0 2em 0;
 }
 
 .slider-div {
@@ -53,15 +51,15 @@ label {
 /* Button */
 
 #go {
-    margin-top: 1.8em;
-    width: 80%;
+    margin-top: 1em;
+    width: 50%;
     background-color: white;
     display: inline-block;
     cursor: pointer;
     color: black;
     font-family: "apercu-mono-regular", monospace;
-    font-size: 1.3em;
-    padding: 0.6em 1em;
+    font-size: 1.5em;
+    padding: 1em 2em;
     text-decoration: none;
     border: 0;
 }

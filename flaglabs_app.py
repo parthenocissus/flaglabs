@@ -8,7 +8,7 @@ from bin.gg.flag_generator import GenFlag
 DEBUG = True
 app = Flask(__name__)
 app.config.from_object(__name__)
-n_flags = 30  # 1
+n_flags = 36  # 1
 
 @app.route("/")
 def home():

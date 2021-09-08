@@ -1,0 +1,349 @@
+{
+  "a": [
+    {
+      'name': 'blood_orange',
+      'value': '#CB001E',
+      'weight': 0.18315638888734181
+    },
+    {
+      'name': 'vivid_crimson',
+      'value': '#cc0033',
+      'weight': 6
+    },
+    {
+      'name': 'persian_red',
+      'value': '#cc3333',
+      'weight': 6
+    },
+    {
+      'name': 'university_red',
+      'value': '#cc0000',
+      'weight': 6
+    },
+    {
+      'name': 'mahogany',
+      'value': '#cc3200',
+      'weight': 6
+    },
+    {
+      'name': 'primary_red',
+      'value': '#ff0000',
+      'weight': 6
+    },
+    {
+      'name': 'deep_carmine_pink',
+      'value': '#ff3333',
+      'weight': 272.99075016572124
+    },
+    {
+      'name': 'carmine_red',
+      'value': '#ff0032',
+      'weight': 4
+    },
+    {
+      'name': 'japanese_carmine',
+      'value': '#993332',
+      'weight': 0.05494691666620255
+    },
+    {
+      'name': 'vivid_auburn',
+      'value': '#971e1d',
+      'weight': 0.018315638888734182
+    },
+    {
+      'name': 'puce_red',
+      'value': '#663233',
+      'weight': 0.018315638888734182
+    },
+    {
+      'name': 'crimson_red',
+      'value': '#990000',
+      'weight': 0.018315638888734182
+    },
+    {
+      'name': 'dark_powder_blue',
+      'value': '#003897',
+      'weight': 0.16484074999860765
+    },
+    {
+      'name': 'dark_midnight_blue',
+      'value': '#003265',
+      'weight': 0.09157819444367091
+    },
+    {
+      'name': 'rich_electric_blue',
+      'value': '#0099cc',
+      'weight': 5
+    },
+    {
+      'name': 'dark_blue',
+      'value': '#00008b',
+      'weight': 0.07326255555493673
+    },
+    {
+      'name': 'blue_gray',
+      'value': '#6699cc',
+      'weight': 218.39260013257697
+    },
+    {
+      'name': 'moonstone',
+      'value': '#3299cc',
+      'weight': 4
+    },
+    {
+      'name': 'celtic_blue',
+      'value': '#3366cc',
+      'weight': 3
+    },
+    {
+      'name': 'sea_blue',
+      'value': '#006699',
+      'weight': 0.05494691666620255
+    },
+    {
+      'name': 'true_blue',
+      'value': '#0066cc',
+      'weight': 3
+    },
+    {
+      'name': 'cornflower_blue',
+      'value': '#6699ff',
+      'weight': 163.79445009943274
+    },
+    {
+      'name': 'aero',
+      'value': '#68bfe5',
+      'weight': 163.79445009943274
+    },
+    {
+      'name': 'crayola',
+      'value': '#0032cc',
+      'weight': 2
+    },
+    {
+      'name': 'celestial_blue',
+      'value': '#4997d0',
+      'weight': 109.19630006628849
+    },
+    {
+      'name': 'dark_cornflower_blue',
+      'value': '#313d83',
+      'weight': 0.036631277777468364
+    },
+    {
+      'name': 'st_patricks_blue',
+      'value': '#221e88',
+      'weight': 0.018315638888734182
+    },
+    {
+      'name': 'philippine_blue',
+      'value': '#0039a6',
+      'weight': 0.018315638888734182
+    },
+    {
+      'name': 'cadmium_blue',
+      'value': '#171796',
+      'weight': 0.018315638888734182
+    },
+    {
+      'name': 'medium_persian_blue',
+      'value': '#005da4',
+      'weight': 0.018315638888734182
+    },
+    {
+      'name': 'cobalt_blue',
+      'value': '#0046ae',
+      'weight': 0.018315638888734182
+    },
+    {
+      'name': 'sea_green',
+      'value': '#229e45',
+      'weight': 0.12820947222113926
+    },
+    {
+      'name': 'green_cyan',
+      'value': '#009966',
+      'weight': 0.09157819444367091
+    },
+    {
+      'name': 'bangladesh_green',
+      'value': '#006a4e',
+      'weight': 0.09157819444367091
+    },
+    {
+      'name': 'la_salle_green',
+      'value': '#007934',
+      'weight': 0.09157819444367091
+    },
+    {
+      'name': 'wageningen_green',
+      'value': '#339933',
+      'weight': 4
+    },
+    {
+      'name': 'pakistan_green',
+      'value': '#006600',
+      'weight': 0.05494691666620255
+    },
+    {
+      'name': 'mughal_green',
+      'value': '#336633',
+      'weight': 0.036631277777468364
+    },
+    {
+      'name': 'slimy_green',
+      'value': '#3e9a00',
+      'weight': 2
+    },
+    {
+      'name': 'philippine_green',
+      'value': '#007e3a',
+      'weight': 0.018315638888734182
+    },
+    {
+      'name': 'dark_pastel_green',
+      'value': '#14b53a',
+      'weight': 1
+    },
+    {
+      'name': 'deep_saffron',
+      'value': '#ff9932',
+      'weight': 272.99075016572124
+    },
+    {
+      'name': 'tawny',
+      'value': '#cc6600',
+      'weight': 4
+    },
+    {
+      'name': 'primary_orange',
+      'value': '#ff6602',
+      'weight': 218.39260013257697
+    },
+    {
+      'name': 'vivid_gamboge',
+      'value': '#ff9901',
+      'weight': 109.19630006628849
+    },
+    {
+      'name': 'patriarch',
+      'value': '#760188',
+      'weight': 0.05494691666620255
+    },
+    {
+      'name': 'spanish_purple',
+      'value': '#630356',
+      'weight': 0.05494691666620255
+    },
+    {
+      'name': 'razzmic_berry',
+      'value': '#925394',
+      'weight': 2
+    },
+    {
+      'name': 'midnight',
+      'value': '#75197d',
+      'weight': 0.036631277777468364
+    },
+    {
+      'name': 'grape',
+      'value': '#6f1aa5',
+      'weight': 0.018315638888734182
+    },
+    {
+      'name': 'cameo_pink',
+      'value': '#f3b3c9',
+      'weight': 163.79445009943274
+    },
+    {
+      'name': 'telemagenta',
+      'value': '#c42b70',
+      'weight': 2
+    },
+    {
+      'name': 'cerise_pink',
+      'value': '#e93d8c',
+      'weight': 163.79445009943274
+    },
+    {
+      'name': 'persian_rose',
+      'value': '#ff1ea8',
+      'weight': 109.19630006628849
+    },
+    {
+      'name': 'pink_raspberry',
+      'value': '#990033',
+      'weight': 0.036631277777468364
+    },
+    {
+      'name': 'liver',
+      'value': '#603814',
+      'weight': 0.036631277777468364
+    },
+    {
+      'name': 'russet',
+      'value': '#784f16',
+      'weight': 0.018315638888734182
+    },
+    {
+      'name': 'saddle_brown',
+      'value': '#935316',
+      'weight': 0.036631277777468364
+    },
+    {
+      'name': 'white',
+      'value': '#ffffff',
+      'weight': 818.9722504971636
+    },
+    {
+      'name': 'gainsboro',
+      'value': '#DCDCDC',
+      'weight': 27.29907501657212
+    },
+    {
+      'name': 'silver',
+      'value': '#C0C0C0',
+      'weight': 27.29907501657212
+    },
+    {
+      'name': 'tangerine_yellow',
+      'value': '#ffce00',
+      'weight': 491.3833502982982
+    },
+    {
+      'name': 'aztec_gold',
+      'value': '#d0a650',
+      'weight': 109.19630006628849
+    },
+    {
+      'name': 'mikado_yellow',
+      'value': '#fec50c',
+      'weight': 163.79445009943274
+    },
+    {
+      'name': 'sizzling_sunrise',
+      'value': '#fcdc04',
+      'weight': 109.19630006628849
+    },
+    {
+      'name': 'lemon_yellow',
+      'value': '#fdef42',
+      'weight': 54.59815003314424
+    },
+    {
+      'name': 'black',
+      'value': '#000000',
+      'weight': 0.27473458333101275
+    },
+    {
+      'name': 'raisin_black',
+      'value': '#212121',
+      'weight': 0.009157819444367091
+    },
+    {
+      'name': 'slategray',
+      'value': '#708090',
+      'weight': 0.5
+    }
+  ]
+}

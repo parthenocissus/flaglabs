@@ -13,8 +13,9 @@ class InputDataUtil:
         self.input_ponders = input_ponders
         self.domain = domain
         self.range = range
+        self.particular_colors = self.list_particular_colors()
 
-        self.rule_keys = ["layout", "colors", "symbols", "direct_rules"]
+        self.rule_keys = ["layout", "colors", "symbols", "direct_rules", "particular_colors"]
         self.data = {}
 
         self.process_raw_input()
@@ -38,6 +39,15 @@ class InputDataUtil:
         value = InputDataUtil.map_range(value, domain, pondered_range)
         result = math.exp(value) / math.e
         return result
+
+    # Append particular colors
+    # (granular ones within primary color groups)
+    def list_particular_colors(self):
+        particular_colors = []
+        for primary in self.rules['colors']:
+            for color in primary['variations']:
+                particular_colors.append(color)
+        return particular_colors
 
     # Check if inverse applies
     # Inverse value if ponder is negative
@@ -95,19 +105,15 @@ class InputDataUtil:
                 v = self.adjust_to_half_range(v, t)
                 self.rules[key][name] = v * p
                 # self.rules[key][name] = (v + p) / 2
+            elif key == 'particular_colors':
+                # pass
+                rule = [r for r in self.particular_colors if r['name'] == name][0]
+                factor = self.exponential_map(v, p)
+                rule['weight'] *= factor
             else:
                 rule = [r for r in self.rules[key] if r['name'] == name][0]
                 factor = self.exponential_map(v, p)
                 rule['weight'] *= factor
-
-        # print()
-        # for k in self.data.keys():
-        #     key, name = k
-        #     v = self.data[k]['value']
-        #     p = self.data[k]['ponder_total'] / self.data[k]['ponder_count']
-        #     print(f"{key}, {name}, {v}, p: {p} ")
-        # print()
-        # print(json.dumps(self.rules))
 
         return self.rules
 
@@ -137,6 +143,9 @@ if __name__ == '__main__':
     #     {"key": "warm", "value": 0.4, "type": "bipolar"},
     #     {"key": "slavic", "value": 1, "type": "unipolar"}
     # ]
+    dummy_input = [
+        {"key": "light", "value": 1, "type": "bipolar"}
+    ]
 
     iu = InputDataUtil(default_rules=rules, input_ponders=input_ponders, raw_input=dummy_input)
     iu.update_rules()

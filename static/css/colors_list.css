@@ -1,0 +1,77 @@
+* {
+
+	/* Light colors */
+	color: #ff3333;  /* deep_carmine_pink, 0.60 */
+	color: #6699cc;  /* blue_gray, 0.60 */
+	color: #6699ff;  /* cornflower_blue, 0.70 */
+	color: #68bfe5;  /* aero, 0.65 */
+	color: #4997d0;  /* celestial_blue, 0.55 */
+	color: #ff9932;  /* deep_saffron, 0.60 */
+	color: #ff6602;  /* primary_orange, 0.50 */
+	color: #ff9901;  /* vivid_gamboge, 0.50 */
+	color: #f3b3c9;  /* cameo_pink, 0.83 */
+	color: #e93d8c;  /* cerise_pink, 0.58 */
+	color: #ff1ea8;  /* persian_rose, 0.56 */
+	color: #ffffff;  /* white, 1.00 */
+	color: #DCDCDC;  /* gainsboro, 0.86 */
+	color: #C0C0C0;  /* silver, 0.75 */
+	color: #d0a650;  /* aztec_gold, 0.56 */
+	color: #fec50c;  /* mikado_yellow, 0.52 */
+	color: #fcdc04;  /* sizzling_sunrise, 0.50 */
+	color: #fdef42;  /* lemon_yellow, 0.63 */
+	color: #708090;  /* slategray, 0.50 */
+
+	/* Mid-colors */
+	color: #cc0033;  /* vivid_crimson, 0.40 */
+	color: #cc3333;  /* persian_red, 0.50 */
+	color: #cc0000;  /* university_red, 0.40 */
+	color: #cc3200;  /* mahogany, 0.40 */
+	color: #ff0000;  /* primary_red, 0.50 */
+	color: #ff0032;  /* carmine_red, 0.50 */
+	color: #0099cc;  /* rich_electric_blue, 0.40 */
+	color: #3299cc;  /* moonstone, 0.50 */
+	color: #3366cc;  /* celtic_blue, 0.50 */
+	color: #0066cc;  /* true_blue, 0.40 */
+	color: #0032cc;  /* crayola, 0.40 */
+	color: #339933;  /* wageningen_green, 0.40 */
+	color: #cc6600;  /* tawny, 0.40 */
+	color: #925394;  /* razzmic_berry, 0.45 */
+	color: #c42b70;  /* telemagenta, 0.47 */
+	color: #ffce00;  /* tangerine_yellow, 0.50 */
+
+	/* Dark colors */
+	color: #CB001E;  /* blood_orange, 0.40 */
+	color: #993332;  /* japanese_carmine, 0.40 */
+	color: #971e1d;  /* vivid_auburn, 0.35 */
+	color: #663233;  /* puce_red, 0.30 */
+	color: #990000;  /* crimson_red, 0.30 */
+	color: #003897;  /* dark_powder_blue, 0.30 */
+	color: #003265;  /* dark_midnight_blue, 0.20 */
+	color: #00008b;  /* dark_blue, 0.27 */
+	color: #006699;  /* sea_blue, 0.30 */
+	color: #313d83;  /* dark_cornflower_blue, 0.35 */
+	color: #221e88;  /* st_patricks_blue, 0.33 */
+	color: #0039a6;  /* philippine_blue, 0.33 */
+	color: #171796;  /* cadmium_blue, 0.34 */
+	color: #005da4;  /* medium_persian_blue, 0.32 */
+	color: #0046ae;  /* cobalt_blue, 0.34 */
+	color: #229e45;  /* sea_green, 0.38 */
+	color: #009966;  /* green_cyan, 0.30 */
+	color: #006a4e;  /* bangladesh_green, 0.21 */
+	color: #007934;  /* la_salle_green, 0.24 */
+	color: #006600;  /* pakistan_green, 0.20 */
+	color: #336633;  /* mughal_green, 0.30 */
+	color: #3e9a00;  /* slimy_green, 0.30 */
+	color: #007e3a;  /* philippine_green, 0.25 */
+	color: #14b53a;  /* dark_pastel_green, 0.39 */
+	color: #760188;  /* patriarch, 0.27 */
+	color: #630356;  /* spanish_purple, 0.20 */
+	color: #75197d;  /* midnight, 0.29 */
+	color: #6f1aa5;  /* grape, 0.37 */
+	color: #990033;  /* pink_raspberry, 0.30 */
+	color: #603814;  /* liver, 0.23 */
+	color: #784f16;  /* russet, 0.28 */
+	color: #935316;  /* saddle_brown, 0.33 */
+	color: #000000;  /* black, 0.00 */
+	color: #212121;  /* raisin_black, 0.13 */
+}

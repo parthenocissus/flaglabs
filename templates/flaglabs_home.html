@@ -28,9 +28,6 @@
     </script>
 
     <script type="text/javascript" src="{{ url_for('static', filename='js/lib/jquery.min.js') }}"></script>
-{#    <script type="text/javascript" src='http://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js'></script>#}
-{#    <script type="text/javascript" src='https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js'></script>#}
-
     <script type="text/javascript" src="{{ url_for('static', filename='js/lib/d3.min.js') }}"></script>
     <script type="text/javascript" src="{{ url_for('static', filename='js/flaglabs.js') }}"></script>
 
@@ -43,55 +40,179 @@
 
     <h1 id="title">Fractal Nations</h1>
 
-    <div id="subtitle">What kind of flag do you need?</div>
+    <div id="subtitle">AI toolkit for nation building. Need a flag?</div>
 
     <div id="slider-group">
 
-        <div class="slider-div">
-            <input type="range" id="warm" name="warm"
-                   min="-1" max="1" value="0" step="0.2" data-input-type="bipolar">
-            <label for="warm">Cold/warm colors</label>
+        <div id="left">
+
+            <div class="slider-div">
+                <input type="range" id="warm" name="warm"
+                       min="-1" max="1" value="0" step="0.2" data-input-type="bipolar">
+                <label for="warm">Cold/warm</label>
+            </div>
+
+            <div class="slider-div">
+                <input type="range" id="light" name="light"
+                       min="-1" max="1" value="0" step="0.2" data-input-type="bipolar">
+                <label for="light">Dark/light</label>
+            </div>
+
+            <div class="slider-div">
+                <input type="range" id="complex" name="complex"
+                       min="-1" max="1" value="0" step="0.2" data-input-type="bipolar">
+                <label for="complex">Simple/complex</label>
+            </div>
+
+            <div class="slider-div">
+                <input type="range" id="anarchist" name="anarchist"
+                       min="0" max="1" value="0" step="0.1" data-input-type="unipolar">
+                <label for="anarchist">Anarchist</label>
+            </div>
+
+            <div class="slider-div">
+                <input type="range" id="african" name="african"
+                       min="0" max="1" value="0" step="0.1" data-input-type="unipolar">
+                <label for="african">African</label>
+            </div>
+
+            <div class="slider-div">
+                <input type="range" id="slavic" name="slavic"
+                       min="0" max="1" value="0" step="0.1" data-input-type="unipolar">
+                <label for="slavic">Slavic</label>
+            </div>
+
+            <div class="slider-div">
+                <input type="range" id="queer" name="queer"
+                       min="0" max="1" value="0" step="0.1" data-input-type="unipolar">
+                <label for="queer">Queer</label>
+            </div>
+
+            <div class="slider-div">
+                <input type="range" id="corporate" name="corporate"
+                       min="0" max="1" value="0" step="0.1" data-input-type="unipolar">
+                <label for="corporate">Corporate</label>
+            </div>
+
+            <div class="slider-div">
+                <input type="range" id="anarchist" name="anarchist"
+                       min="0" max="1" value="0" step="0.1" data-input-type="unipolar">
+                <label for="anarchist">Socialist</label>
+            </div>
+
+            <div class="slider-div">
+                <input type="range" id="slavic" name="slavic"
+                       min="0" max="1" value="0" step="0.1" data-input-type="unipolar">
+                <label for="slavic">Christian</label>
+            </div>
+
+            <div class="slider-div">
+                <input type="range" id="queer" name="queer"
+                       min="0" max="1" value="0" step="0.1" data-input-type="unipolar">
+                <label for="queer">Islamic</label>
+            </div>
+
+            <div class="slider-div">
+                <input type="range" id="corporate" name="corporate"
+                       min="0" max="1" value="0" step="0.1" data-input-type="unipolar">
+                <label for="corporate">Serbian</label>
+            </div>
+
+            <div class="slider-div">
+                <input type="range" id="corporate" name="corporate"
+                       min="0" max="1" value="0" step="0.1" data-input-type="unipolar">
+                <label for="corporate">Croatian</label>
+            </div>
+
+            <div class="slider-div">
+                <input type="range" id="corporate" name="corporate"
+                       min="0" max="1" value="0" step="0.1" data-input-type="unipolar">
+                <label for="corporate">South American</label>
+            </div>
+
         </div>
 
-        <div class="slider-div">
-            <input type="range" id="complex" name="complex"
-                   min="-1" max="1" value="0" step="0.2" data-input-type="bipolar">
-            <label for="complex">Simple/complex</label>
-        </div>
+        <div id="right">
 
-        <div class="slider-div">
-            <input type="range" id="anarchist" name="anarchist"
-                   min="0" max="1" value="0" step="0.1" data-input-type="unipolar">
-            <label for="anarchist">Anarchist</label>
-        </div>
+            <div class="slider-div">
+                <input type="range" id="warm" name="warm"
+                       min="-1" max="1" value="0" step="0.2" data-input-type="bipolar">
+                <label for="warm">Symbolic</label>
+            </div>
 
-        <div class="slider-div">
-            <input type="range" id="african" name="african"
-                   min="0" max="1" value="0" step="0.1" data-input-type="unipolar">
-            <label for="african">African</label>
-        </div>
+            <div class="slider-div">
+                <input type="range" id="monochrome" name="monochrome"
+                       min="-1" max="1" value="0" step="0.2" data-input-type="bipolar">
+                <label for="monochrome">Color/BW</label>
+            </div>
 
-        <div class="slider-div">
-            <input type="range" id="slavic" name="slavic"
-                   min="0" max="1" value="0" step="0.1" data-input-type="unipolar">
-            <label for="slavic">Slavic</label>
-        </div>
+            <div class="slider-div">
+                <input type="range" id="anarchist" name="anarchist"
+                       min="0" max="1" value="0" step="0.1" data-input-type="unipolar">
+                <label for="anarchist">Scandinavian</label>
+            </div>
 
-        <div class="slider-div">
-            <input type="range" id="queer" name="queer"
-                   min="0" max="1" value="0" step="0.1" data-input-type="unipolar">
-            <label for="queer">Queer</label>
-        </div>
+            <div class="slider-div">
+                <input type="range" id="slavic" name="slavic"
+                       min="0" max="1" value="0" step="0.1" data-input-type="unipolar">
+                <label for="slavic">Antivax</label>
+            </div>
 
-        <div class="slider-div">
-            <input type="range" id="corporate" name="corporate"
-                   min="0" max="1" value="0" step="0.1" data-input-type="unipolar">
-            <label for="corporate">Corporate</label>
+            <div class="slider-div">
+                <input type="range" id="corporate" name="corporate"
+                       min="0" max="1" value="0" step="0.1" data-input-type="unipolar">
+                <label for="corporate">Pirate</label>
+            </div>
+
+            <div class="slider-div">
+                <input type="range" id="corporate" name="corporate"
+                       min="0" max="1" value="0" step="0.1" data-input-type="unipolar">
+                <label for="corporate">Arab</label>
+            </div>
+
+            <div class="slider-div">
+                <input type="range" id="slavic" name="slavic"
+                       min="0" max="1" value="0" step="0.1" data-input-type="unipolar">
+                <label for="slavic">Libertarian</label>
+            </div>
+
+            <div class="slider-div">
+                <input type="range" id="queer" name="queer"
+                       min="0" max="1" value="0" step="0.1" data-input-type="unipolar">
+                <label for="queer">Incel</label>
+            </div>
+
+            <div class="slider-div">
+                <input type="range" id="corporate" name="corporate"
+                       min="0" max="1" value="0" step="0.1" data-input-type="unipolar">
+                <label for="corporate">Hindu</label>
+            </div>
+
+            <div class="slider-div">
+                <input type="range" id="corporate" name="corporate"
+                       min="0" max="1" value="0" step="0.1" data-input-type="unipolar">
+                <label for="corporate">East Asian</label>
+            </div>
+
+            <div class="slider-div">
+                <input type="range" id="corporate" name="corporate"
+                       min="0" max="1" value="0" step="0.1" data-input-type="unipolar">
+                <label for="corporate">Yugoslav</label>
+            </div>
+
+            <div class="slider-div">
+                <input type="range" id="corporate" name="corporate"
+                       min="0" max="1" value="0" step="0.1" data-input-type="unipolar">
+                <label for="corporate">Eco</label>
+            </div>
+
+            <div>
+                <button type="button" id="go">Generate</button>
+            </div>
+
         </div>
 
     </div>
-
-    <button type="button" id="go">Generate</button>
 
 </main>
 

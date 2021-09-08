@@ -12,6 +12,85 @@
     }
   },
 
+  "monochrome": {
+    "colors": {
+      "black": 1,
+      "white": 1,
+      "red": -1,
+      "orange": -1,
+      "yellow": -1,
+      "pink": -1,
+      "blue": -1,
+      "green": -1,
+      "purple": -1
+    }
+  },
+
+  "light": {
+    "colors": {
+      "white": 1,
+      "yellow": 1,
+      "pink": 0.5,
+      "orange": 0.2,
+      "purple": -0.2,
+      "brown": -1,
+      "black": -1
+    },
+    "particular_colors": {
+      "deep_carmine_pink": 1,
+      "blue_gray": 1,
+      "cornflower_blue": 1,
+      "aero": 1,
+      "cameo_pink": 1,
+      "cerise_pink": 1,
+      "persian_rose": 1,
+      "deep_saffron": 1,
+      "primary_orange": 1,
+      "vivid_gamboge": 1,
+      "celestial_blue": 1,
+      "white": 1,
+      "gainsboro": 1,
+      "silver": 1,
+      "tangerine_yellow": 1,
+      "aztec_gold": 1,
+      "mikado_yellow": 1,
+      "sizzling_sunrise": 1,
+      "lemon_yellow": 1,
+      "blood_orange": -1,
+      "japanese_carmine": -1,
+      "vivid_auburn": -1,
+      "puce_red": -1,
+      "crimson_red": -1,
+      "dark_powder_blue": -1,
+      "dark_midnight_blue": -1,
+      "dark_blue": -1,
+      "sea_blue": -1,
+      "dark_cornflower_blue": -1,
+      "st_patricks_blue": -1,
+      "philippine_blue": -1,
+      "cadmium_blue": -1,
+      "medium_persian_blue": -1,
+      "cobalt_blue": -1,
+      "sea_green": -1,
+      "green_cyan": -1,
+      "bangladesh_green": -1,
+      "la_salle_green": -1,
+      "pakistan_green": -1,
+      "mughal_green": -1,
+      "philippine_green": -1,
+      "patriarch": -1,
+      "spanish_purple": -1,
+      "midnight": -1,
+      "grape": -1,
+      "pink_raspberry": -1,
+      "liver": -1,
+      "russet": -1,
+      "saddle_brown": -1,
+      "black": -1,
+      "raisin_black": -1
+    }
+  },
+
   "complex": {
     "direct_rules": {
       "complexity": 1,

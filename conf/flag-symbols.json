@@ -39,7 +39,8 @@
     { "name": "gay", "weight": 1, "file_name": "gay" },
     { "name": "maasai_shield", "weight": 1, "file_name": "maasai_shield" },
     { "name": "bitcoin", "weight": 1, "file_name": "bitcoin" },
-    { "name": "kolovrat", "weight": 1, "file_name": "kolovrat" }
+    { "name": "kolovrat", "weight": 1, "file_name": "kolovrat" },
+    { "name": "olympic", "weight": 1, "file_name": "olympic" }
   ]
 
 }
