@@ -380,7 +380,7 @@ class FlagLayout:
         wid = uniform(self.h / 16, self.h / 6)
         space = wid * 2
         m = wid / 2
-        fly = True if random() > 0.1 else False
+        fly = True if random() > 0.8 else False
         left = m if not fly else -m
         right = self.w - 2 * m if not fly else self.w
         if random() < self.complex_factor:

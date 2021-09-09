@@ -13,6 +13,8 @@ class FlagSymbol:
         self.w = flag.w
         self.h = flag.h
         self.origin_h = origin.h
+        self.complexity = origin.complexity
+        self.complex_factor = math.pow(self.complexity, 3)
 
         self.rules = flag.rules
         self.used_colors = flag.used_colors
@@ -63,10 +65,16 @@ class FlagSymbol:
         x, y = position
         anchor_x, anchor_y = anchor_position
         t = f"translate({x}, {y}) scale({scale}) rotate({rotation_angle}, {anchor_x}, {anchor_y})"
-        c = self.choose_different_color()
+        f = self.choose_different_color()
+        s = self.choose_different_color() if random() < self.complex_factor else 'none'
+        sw = self.h * 0.01 * randrange(2, 4)
         group = self.fc.g(transform=t)
         for path in self.symbol['paths']:
-            svg_path = self.fc.path(d=path['d'], fill=c, stroke='none')
+            if 'fill' in path:
+                f = path['fill']
+            if 'stroke' in path:
+                s = path['stroke']
+            svg_path = self.fc.path(d=path['d'], fill=f, stroke=s, stroke_width=sw)
             group.add(svg_path)
         return group
 

@@ -132,7 +132,9 @@
       "anarchism_rough": 1,
       "fist": 1,
       "pentagram": 0.2,
-      "bitcoin": 0.2
+      "bitcoin": 0.2,
+      "rattlesnake": 0.2,
+      "porcupine": 0.1
     }
   },
 
@@ -243,7 +245,9 @@
       "fist": 1,
       "socialism_star_hammer": 1,
       "socialism_rose": 1,
-      "china_stars": 0.8
+      "china_stars": 0.8,
+      "pentagram_skj": 1,
+      "yugoslavia_emblem": 0.7
     }
   },
 
@@ -295,7 +299,11 @@
       "quran": 1,
       "rub_el_hizb": 1,
       "crescent_star": 1,
-      "crescent_star_up": 1
+      "crescent_star_up": 1,
+      "egypt_eagle": 0.5,
+      "arab_league": 1,
+      "saudi": 1,
+      "saudi_emblem": 1
     }
   },
 
@@ -384,6 +392,7 @@
       "black": 0.5
     },
     "symbols": {
+      "ring": 1,
       "vevigsir": 1,
       "swedish_crowns": 1,
       "swedish_crowns2": 1,
@@ -393,6 +402,229 @@
       "norway_wyvern2": 1,
       "denmark_lions": 1,
       "hannunvaakuna": 1
+    }
+  },
+
+  "antivax": {
+    "symbols": {
+      "antivax": 1,
+      "antivax2": 1,
+      "antivax3": 1,
+      "antivax4": 1,
+      "covid": 1,
+      "covid2": 1,
+      "covid3": 1,
+      "covid_hands": 1,
+      "saltire_cross": 1
+    },
+    "direct_rules": {
+      "symbol_chance": 1
+    }
+  },
+
+  "pirate": {
+    "colors": {
+      "black": 1,
+      "white": 1,
+      "red": -1,
+      "orange": -1,
+      "yellow": -1,
+      "pink": -1,
+      "blue": -1,
+      "green": -1,
+      "purple": -1
+    },
+    "layout": {
+      "unicolor": 1
+    },
+    "symbols": {
+      "pirate": 1,
+      "pirate2": 1,
+      "pirate3": 1,
+      "pirate4": 1,
+      "pirate5": 1,
+      "pirate6": 1,
+      "pirate7": 1,
+      "pirate8": 1,
+      "pirate_party": 1,
+      "pirate_party_circle": 1
+    },
+    "direct_rules": {
+      "symbol_chance": 1
+    }
+  },
+
+  "arab": {
+    "colors": {
+      "green": 1,
+      "white": 1,
+      "red": 1,
+      "black": 1
+    },
+    "layout": {
+      "unicolor": 1,
+      "chevron": 1,
+      "tricolor_horizontal": 1
+    },
+    "symbols": {
+      "islam": 1,
+      "quran": 0.5,
+      "rub_el_hizb": 0.5,
+      "crescent_star": 1,
+      "crescent_star_up": 1,
+      "egypt_eagle": 1,
+      "arab_league": 1,
+      "saudi": 1,
+      "saudi_emblem": 1
+    }
+  },
+
+  "eco": {
+    "layout": {
+      "unicolor": 0.6
+    },
+    "colors": {
+      "green": 1,
+      "yellow": 0.5
+    },
+    "symbols": {
+      "green_hand": 1,
+      "recycle": 1,
+      "eu_greens": 1,
+      "eu_greens_sunflower": 1
+    }
+  },
+
+  "yugoslav": {
+    "layout": {
+      "unicolor": 0.8,
+      "sunburst": 0.2,
+      "tricolor_horizontal": 1
+    },
+    "colors": {
+      "red": 1,
+      "blue": 1,
+      "white": 1,
+      "yellow": 0.2
+    },
+    "symbols": {
+      "pentagram": 1,
+      "hammer_sickle": 0.8,
+      "fist": 0.8,
+      "pentagram_skj": 1,
+      "yugoslavia_emblem": 1
+    }
+  },
+
+  "hindu": {
+    "layout": {
+      "unicolor": 0.5,
+      "tricolor_horizontal": 0.5
+    },
+    "colors": {
+      "orange": 1,
+      "red": 0.5,
+      "yellow": 1,
+      "white": 0.3
+    },
+    "symbols": {
+      "ashoka_chakra": 1,
+      "om": 1,
+      "hindu_swastika": 1,
+      "circle": 0.5,
+      "ring": 0.5
+    }
+  },
+
+  "east_asian": {
+    "layout": {
+      "unicolor": 0.5,
+      "sunburst": 0.5
+    },
+    "colors": {
+      "orange": 1,
+      "red": 1,
+      "white": 1,
+      "black": 0.3,
+      "blue": 0.9
+    },
+    "symbols": {
+      "ashoka_chakra": 0.8,
+      "yin_yang": 1,
+      "yin_yang2": 1,
+      "mongolia_emblem": 1,
+      "hong_kong": 1,
+      "china_stars": 1,
+      "kuomintang": 1,
+      "circle": 1,
+      "ring": 1,
+      "random_star": 1
+    }
+  },
+
+  "libertarian": {
+    "layout": {
+      "unicolor": 1,
+      "bicolor_diagonal_left": 1,
+      "bicolor_diagonal_right": 1,
+      "bend_left": 0.2,
+      "bend_right": 0.2
+    },
+    "colors": {
+      "yellow": 1,
+      "black": 1
+    },
+    "symbols": {
+      "anarchism": 0.3,
+      "anarchism_rough": 0.3,
+      "bitcoin": 1,
+      "rattlesnake": 1,
+      "porcupine": 1,
+      "dollar": 1,
+      "pirate": 0.3,
+      "pirate2": 0.3,
+      "pirate3": 0.3,
+      "pirate4": 0.3,
+      "pirate5": 0.3,
+      "pirate6": 0.3,
+      "pirate7": 0.3,
+      "pirate8": 0.3,
+      "pirate_party": 0.3,
+      "pirate_party_circle": 0.3
+    },
+     "direct_rules": {
+      "symbol_chance": 0.75
+    }
+  },
+
+  "incel": {
+    "colors": {
+      "black": 1,
+      "white": 1,
+      "gray": 1,
+      "red": -1,
+      "orange": -1,
+      "yellow": -1,
+      "pink": -1,
+      "blue": -1,
+      "green": -1,
+      "purple": -1
+    },
+    "layout": {
+      "unicolor": 1,
+      "stripes_vertical": 0.9,
+      "tricolor_vertical": 1,
+      "stripes_horizontal": 0.3
+    },
+    "symbols": {
+      "incel": 1,
+      "incel_meme": 1,
+      "male": 1,
+      "trollface": 1
+    },
+    "direct_rules": {
+      "symbol_chance": 1,
+      "alternating_colors_chance": 0.1
     }
   }
 }

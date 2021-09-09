@@ -176,6 +176,16 @@
         { "name": "raisin_black", "value": "#212121", "weight": 0.5 },
         { "name": "slategray", "value": "#708090", "weight": 0.5 }
       ]
+    },
+    {
+      "name": "gray",
+      "weight": 0.2,
+      "variations": [
+        { "name": "regular_gray", "value": "#808080", "weight": 1 },
+        { "name": "dark_gray", "value": "#A9A9A9", "weight": 1 },
+        { "name": "smoke", "value": "#848884", "weight": 1 },
+        { "name": "pewter", "value": "#899499", "weight": 1 }
+      ]
     }
 
   ]
