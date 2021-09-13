@@ -1,0 +1,20 @@
+html, body {
+    background: gainsboro;
+    font-family: "apercu-mono-regular", monospace;
+}
+
+body {
+    padding: 4em 8em 4em 8em;
+    display: grid;
+    /*grid-template-columns: 2fr 3fr;*/
+    /*grid-gap: 5em;*/
+}
+
+svg {
+    /*padding: 1em 0.5em;*/
+    padding: 0.5em 0.3em;
+}
+
+aside {
+    padding: 0.3em 0 0 0;
+}

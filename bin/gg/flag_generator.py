@@ -1,5 +1,7 @@
 import json
 import svgwrite
+from svglib.svglib import svg2rlg
+from reportlab.graphics import renderPM
 import time
 from random import choices, random, randint, uniform, randrange
 from colour import Color
@@ -20,10 +22,11 @@ class GenFlag:
                  symbols_path='conf/flag-symbols.json'):
 
         # Set the output directory
-        out_dir = 'media/svgwrite-output/'
+        # out_dir = 'media/svgwrite-output/'
+        out_dir = 'media/selected_flags/'
         time_stamp = time.strftime("%Y%m%d-%H%M%S") + "-" + str(time.time() * 1000)
         time_stamp = time_stamp + '-' + str(randint(100, 1000))
-        file_name = out_dir + time_stamp + '.svg'
+        self.file_name = out_dir + time_stamp + '.svg'
         self.symbols_typical_dir = 'media/svg-flag-symbols/typical/'
         self.symbols_other_dir = 'media/svg-flag-symbols/other/'
         ponders_path = 'conf/input-ponders.json'
@@ -34,7 +37,7 @@ class GenFlag:
         self.h = height
 
         # Set the empty SVG canvas
-        flag_canvas = svgwrite.Drawing(file_name, size=(f'{self.w}px', f'{self.h}px'))
+        flag_canvas = svgwrite.Drawing(self.file_name, size=(f'{self.w}px', f'{self.h}px'))
 
         # Load rules, layouts, colors, and symbols
         self.rules = json.load(open(rules_path))
@@ -66,6 +69,15 @@ class GenFlag:
     def save(self):
         self.flag.save()
 
+    def save_svg_and_png(self):
+        self.flag.save()
+        png_file_name = self.file_name[:-3] + "png"
+        
+        # cairosvg.svg2png(url=self.file_name, write_to=png_file_name)
+        # flag_img = pyvips.Image.new_from_file(self.file_name, dpi=300)
+        # flag_img.write_to_file(png_file_name)
+        # flag_img = svg2rlg(self.file_name)
+        # renderPM.drawToFile(flag_img, png_file_name, fmt="PNG")
 
 # _________________________
 # Single Flag
@@ -196,7 +208,5 @@ class Flag:
 
 
 if __name__ == '__main__':
-    GenFlag.process_raw_input()
-    # for i in range(10):
-    #     gf = GenFlag()
-    #     gf.save()
+    gf = GenFlag()
+    flag = gf.flag_canvas

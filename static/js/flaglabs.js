@@ -1,7 +1,31 @@
 $(document).ready(function () {
 
-    let flagGenAPI = "_generate";
-    let url = $SCRIPT_ROOT + flagGenAPI;
+    let flagGenAPI = "_generate",
+        saveAPI = "_save",
+        urlGen = $SCRIPT_ROOT + flagGenAPI,
+        urlSave = $SCRIPT_ROOT + saveAPI,
+        svgCount = 0;
+
+    let setSvgEvents = function () {
+        for (let i = 0; i < svgCount; i++) {
+
+            d3.select("#flag" + i).on("click", () => {
+
+                let saveParams = {vector: i};
+                $.getJSON(urlSave, saveParams).done(() => {
+                    console.log("flag saved.");
+                });
+
+                // $.getJSON(urlSave, saveParams, (result) => {
+                //     console.log("saving...")
+                // }).done(() => {
+                //     console.log("flag saved");
+                // });
+
+            });
+
+        }
+    };
 
     $("#go").click(() => {
 
@@ -9,7 +33,7 @@ $(document).ready(function () {
         flags.empty();
 
         let data = [];
-        $("input").each(function(){
+        $("input").each(function () {
             let input = $(this);
             let d = {
                 "value": +input.val(),
@@ -19,13 +43,15 @@ $(document).ready(function () {
             data.push(d);
         });
 
-        let dataOut = { vector: JSON.stringify(data) };
-        $.getJSON(url, dataOut, (result) => {
+        let params = {vector: JSON.stringify(data)};
+        $.getJSON(urlGen, params, (result) => {
             flags.empty();
             result.forEach((i) => {
                 flags.append(i);
             });
+            svgCount = result.length;
         }).done(() => {
+            setSvgEvents();
             console.log("flags received from backend, baby");
         });
 

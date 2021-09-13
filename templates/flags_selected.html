@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <style>
+
+        @font-face {
+            font-family: "noe-display-bold";
+            src: url({{ url_for('static', filename='fonts/noe-display-bold.woff') }}) format("woff");
+        }
+
+        @font-face {
+            font-family: "apercu-mono-regular";
+            src: url({{ url_for('static', filename='fonts/apercu-mono-regular-pro.woff') }}) format("woff");
+        }
+
+    </style>
+
+    <link rel="shortcut icon" href="#">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/flaglabs_selected.css') }}">
+
+    <script type=text/javascript>
+        $SCRIPT_ROOT = {{ request.script_root|tojson|safe }};
+    </script>
+
+    <script type="text/javascript" src="{{ url_for('static', filename='js/lib/jquery.min.js') }}"></script>
+    <script type="text/javascript" src="{{ url_for('static', filename='js/lib/d3.min.js') }}"></script>
+    <script type="text/javascript" src="{{ url_for('static', filename='js/flaglabs_selected.js') }}"></script>
+
+    <title>Selected Flags: Atlas of Fractal Nations</title>
+
+</head>
+<body>
+
+<aside>
+    <div id="flags"></div>
+</aside>
+
+</body>
+</html>

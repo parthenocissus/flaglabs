@@ -1,0 +1,72 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <style>
+
+        @font-face {
+            font-family: "noe-display-bold";
+            src: url({{ url_for('static', filename='fonts/noe-display-bold.woff') }}) format("woff");
+        }
+
+        @font-face {
+            font-family: "apercu-mono-regular";
+            src: url({{ url_for('static', filename='fonts/apercu-mono-regular-pro.woff') }}) format("woff");
+        }
+
+        @font-face {
+            font-family: "apercu-mono-medium";
+            src: url({{ url_for('static', filename='fonts/apercu-mono-medium-pro.woff') }}) format("woff");
+        }
+
+    </style>
+
+    <link rel="shortcut icon" href="#">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/fractals.css') }}">
+
+    <script type=text/javascript>
+        $SCRIPT_ROOT = {{ request.script_root|tojson|safe }};
+    </script>
+
+    <script type="text/javascript" src="{{ url_for('static', filename='js/lib/jquery.min.js') }}"></script>
+    <script type="text/javascript" src="{{ url_for('static', filename='js/lib/d3.min.js') }}"></script>
+    <script type="text/javascript" src="{{ url_for('static', filename='js/fractals.js') }}"></script>
+
+    <title>Fractal Multiplication of Memetic Identities</title>
+
+</head>
+<body>
+
+<header>
+
+    <label for="check">
+        <input type="checkbox" id="check"/>
+        <span></span>
+        <span></span>
+        <span></span>
+    </label>
+{#    <h1>Fractal Multiplication of Memetic Identities</h1>#}
+    <h1>Fractal Nations: The Multiplicator of Memetic Identities</h1>
+</header>
+
+<div id="whitespace"></div>
+
+<main>
+    <svg id="total-flag"></svg>
+</main>
+
+<footer>
+    <div id="instructions">Click: multiply a flag. Right click: change it.</div>
+    <div id="buttons">
+        <button type="button" id="generate">Generate Again</button>
+        <button type="button" id="save">Save Flag</button>
+    </div>
+    <div id="signature">Uroš Krčadinac, 2021.</div>
+</footer>
+
+</body>
+</html>
