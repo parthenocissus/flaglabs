@@ -63,8 +63,8 @@ def get_selected():
     return json.dumps(svg_data)
 
 
-@app.route('/_get_random')
-def get_random():
+@app.route('/_get_random_selected')
+def get_random_selected():
     request.args.get('vector')
     svg_data = []
 
@@ -77,6 +77,19 @@ def get_random():
     for f in files:
         # file = open(f, "r")
         svg_data.append(open(f, "r").read())
+    return json.dumps(svg_data)
+
+
+@app.route('/_get_random')
+def get_random():
+    data_txt = request.args.get('vector')
+    n = int(json.loads(data_txt))
+    svg_data = []
+    for i in range(n):
+        gf = GenFlag()
+        svg = gf.svg_string()
+        # svg = f'{svg[:4]} id="flag{i}" {svg[5:]}'
+        svg_data.append(svg)
     return json.dumps(svg_data)
 
 

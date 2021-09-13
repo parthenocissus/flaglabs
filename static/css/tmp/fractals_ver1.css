@@ -1,0 +1,159 @@
+body {
+    height: 100vh;
+    background-color: white;
+    /*background-color: gainsboro;*/
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden;
+    box-sizing: border-box;
+
+    display: grid;
+    grid-template-rows: 56px 4px calc(100vh - 115px) 50px;
+}
+
+/* Header */
+
+header {
+    display: grid;
+    grid-template-columns: 70px 1fr;
+    background-color: white;
+    margin: 0;
+    padding: 0.6em 20px 0.6em 20px;
+    border-bottom: darkgray 1px solid;
+    box-sizing: border-box;
+}
+
+h1 {
+    font-family: "noe-display-bold", sans-serif;
+    font-size: 1.6em;
+    padding: 0;
+    margin: 0;
+}
+
+#whitespace {
+    box-sizing: border-box;
+    margin: 0;
+    border: 0;
+}
+
+/* SVG */
+
+main {
+    box-sizing: border-box;
+    background-color: gainsboro;
+    width: 100vw;
+    display: flex;
+    text-align: center;
+    justify-content: center;
+}
+
+#total-flag {
+    box-sizing: border-box;
+    margin: 1.7em;
+}
+
+/* Footer */
+
+footer {
+    box-sizing: border-box;
+    font-family: "apercu-mono-medium", monospace;
+    font-size: 0.8em;
+    line-height: 1.5em;
+    background-color: black;
+    margin: 0;
+    padding: 0.6em 20px 0.6em 20px;
+    box-sizing: border-box;
+    display: grid;
+    grid-template-columns: 3fr 350px 3fr;
+    text-align: center;
+    align-self: center;
+}
+
+/* Buttons */
+
+#buttons {
+    align-self: center;
+}
+
+footer button {
+    font-family: "apercu-mono-medium", monospace;
+    font-size: 1em;
+    margin: 0.4em 0.1em;
+    width: 150px;
+    background-color: #303030;
+    color: gainsboro;
+    display: inline-block;
+    cursor: pointer;
+    padding: 0.8em 1.1em;
+    text-decoration: none;
+    border: 0;
+    border-radius: 3px;
+}
+
+footer button:hover {
+    background-color: #545454;
+    color: white;
+}
+
+#instructions {
+    color: gainsboro;
+    align-self: center;
+    text-align: left;
+}
+
+#signature {
+    color: gainsboro;
+    align-self: center;
+    text-align: right;
+    margin: 0 20px 0 0;
+}
+
+/* Hamburger */
+
+label {
+    display: flex;
+    flex-direction: column;
+    padding: 0.5em 0 0 0;
+    width: 30px;
+    cursor: pointer;
+}
+
+label span {
+    background: black;
+    border-radius: 1px;
+    height: 2px;
+    margin: 2px 0;
+    transition: .1s cubic-bezier(0.65, 0, 0.35, 1);
+}
+
+span:nth-of-type(1) {
+    width: 50%;
+}
+
+span:nth-of-type(2) {
+    width: 100%;
+}
+
+span:nth-of-type(3) {
+    width: 75%;
+}
+
+input[type="checkbox"] {
+    display: none;
+}
+
+input[type="checkbox"]:checked ~ span:nth-of-type(1) {
+    transform-origin: bottom;
+    transform: rotatez(45deg) translate(2px, -1px)
+}
+
+input[type="checkbox"]:checked ~ span:nth-of-type(2) {
+    transform-origin: top;
+    transform: rotatez(-45deg)
+}
+
+input[type="checkbox"]:checked ~ span:nth-of-type(3) {
+    transform-origin: bottom;
+    width: 50%;
+    transform: translate(13px, -1px) rotatez(45deg);
+}
