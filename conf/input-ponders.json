@@ -1,5 +1,6 @@
 {
   "warm": {
+    "meta_data": {"label": "Cold/warm", "type": "bipolar"},
     "colors": {
       "red": 1,
       "orange": 1,
@@ -13,6 +14,7 @@
   },
 
   "monochrome": {
+    "meta_data": {"label": "Color/BW", "type": "bipolar"},
     "colors": {
       "black": 1,
       "white": 1,
@@ -27,6 +29,7 @@
   },
 
   "light": {
+    "meta_data": {"label": "Dark/light", "type": "bipolar"},
     "colors": {
       "white": 1,
       "yellow": 1,
@@ -92,6 +95,7 @@
   },
 
   "complex": {
+    "meta_data": {"label": "Simple/complex", "type": "bipolar"},
     "direct_rules": {
       "complexity": 1,
       "symbol_chance": 1
@@ -117,6 +121,7 @@
   },
 
   "anarchist": {
+    "meta_data": {"label": "Anarchist", "type": "bipolar"},
     "layout": {
       "bicolor_diagonal_left": 1,
       "bicolor_diagonal_right": 1,
@@ -139,6 +144,7 @@
   },
 
   "african": {
+    "meta_data": {"label": "African", "type": "unipolar"},
     "layout": {
       "tricolor_vertical": 0.1,
       "tricolor_horizontal": 0.1,
@@ -160,6 +166,7 @@
   },
 
   "slavic": {
+    "meta_data": {"label": "Slavic", "type": "unipolar"},
     "layout": {
       "tricolor_vertical": 0.2,
       "tricolor_horizontal": 1,
@@ -184,6 +191,7 @@
   },
 
   "queer": {
+    "meta_data": {"label": "Queer", "type": "unipolar"},
     "colors": {
       "purple": 1,
       "pink": 1,
@@ -214,6 +222,7 @@
   },
 
   "corporate": {
+    "meta_data": {"label": "Corporate", "type": "unipolar"},
     "symbols": {
       "dollar": 1,
       "apple_logo": 1,
@@ -225,6 +234,7 @@
   },
 
   "socialist": {
+    "meta_data": {"label": "Socialist", "type": "unipolar"},
     "layout": {
       "unicolor": 0.7,
       "bicolor_diagonal_left": 0.1,
@@ -252,6 +262,7 @@
   },
 
   "christian": {
+    "meta_data": {"label": "Christian", "type": "unipolar"},
     "layout": {
       "unicolor": 1,
       "canton": 0.5,
@@ -279,6 +290,7 @@
   },
 
   "islamic": {
+    "meta_data": {"label": "Islamic", "type": "unipolar"},
     "layout": {
       "unicolor": 1,
       "tricolor_horizontal": 0.5,
@@ -308,6 +320,7 @@
   },
 
   "serbian": {
+    "meta_data": {"label": "Serbian", "type": "unipolar"},
     "layout": {
       "tricolor_horizontal": 1,
       "bicolor_horizontal": 0.3
@@ -329,6 +342,7 @@
   },
 
   "croatian": {
+    "meta_data": {"label": "Croatian", "type": "unipolar"},
     "layout": {
       "tricolor_horizontal": 1,
       "bicolor_horizontal": 0.3,
@@ -346,6 +360,7 @@
   },
 
   "south_american": {
+    "meta_data": {"label": "South American", "type": "unipolar"},
     "layout": {
       "tricolor_horizontal": 0.9,
       "diamond": 0.9,
@@ -371,12 +386,14 @@
   },
 
   "symbolic": {
+    "meta_data": {"label": "Symbolic", "type": "bipolar"},
     "direct_rules": {
       "symbol_chance": 1
     }
   },
 
   "scandinavian": {
+    "meta_data": {"label": "Nordic", "type": "unipolar"},
     "layout": {
       "nordic_cross": 1,
       "cross": 0.5,
@@ -406,6 +423,7 @@
   },
 
   "antivax": {
+    "meta_data": {"label": "Antivax", "type": "unipolar"},
     "symbols": {
       "antivax": 1,
       "antivax2": 1,
@@ -423,6 +441,7 @@
   },
 
   "pirate": {
+    "meta_data": {"label": "Pirate", "type": "unipolar"},
     "colors": {
       "black": 1,
       "white": 1,
@@ -455,6 +474,7 @@
   },
 
   "arab": {
+    "meta_data": {"label": "Arab", "type": "unipolar"},
     "colors": {
       "green": 1,
       "white": 1,
@@ -480,6 +500,7 @@
   },
 
   "eco": {
+    "meta_data": {"label": "Eco", "type": "unipolar"},
     "layout": {
       "unicolor": 0.6
     },
@@ -496,6 +517,7 @@
   },
 
   "yugoslav": {
+    "meta_data": {"label": "Yugoslav", "type": "unipolar"},
     "layout": {
       "unicolor": 0.8,
       "sunburst": 0.2,
@@ -517,6 +539,7 @@
   },
 
   "hindu": {
+    "meta_data": {"label": "Hindu", "type": "unipolar"},
     "layout": {
       "unicolor": 0.5,
       "tricolor_horizontal": 0.5
@@ -537,6 +560,7 @@
   },
 
   "east_asian": {
+    "meta_data": {"label": "East Asian", "type": "unipolar"},
     "layout": {
       "unicolor": 0.5,
       "sunburst": 0.5
@@ -563,6 +587,7 @@
   },
 
   "libertarian": {
+    "meta_data": {"label": "Libertarian", "type": "unipolar"},
     "layout": {
       "unicolor": 1,
       "bicolor_diagonal_left": 1,
@@ -598,6 +623,7 @@
   },
 
   "incel": {
+    "meta_data": {"label": "Incel", "type": "unipolar"},
     "colors": {
       "black": 1,
       "white": 1,

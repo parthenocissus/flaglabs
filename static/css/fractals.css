@@ -1,31 +1,42 @@
 body {
     height: 100vh;
-    background-color: white;
-    /*background-color: gainsboro;*/
+    background-color: #f5f5f5; /* gainsboro;  white; */
     margin: 0;
     padding: 0;
-    overflow-x: hidden;
+    overflow: hidden;
     box-sizing: border-box;
-
     display: grid;
-    grid-template-rows: 56px 4px calc(100vh - 115px) 50px;
+    /*grid-template-rows: 42px 4px calc(100vh - 80px) 34px;*/
+    grid-template-rows: 48px calc(100vh - 74px) 36px;
+}
+
+
+main {
+    box-sizing: border-box;
+    height: calc(100vh - 74px);
+    /*display: flex;*/
+    /*justify-content: left;*/
+    display: grid;
+    /*grid-template-columns: 200px calc((100vh - 74px) * 1.5) 1fr;*/
+    grid-template-columns: 2fr calc((100vh - 74px) * 1.5) 3fr;
 }
 
 /* Header */
 
 header {
     display: grid;
-    grid-template-columns: 70px 1fr;
+    grid-template-columns: 50px 1fr;
     background-color: white;
+    color: black;
     margin: 0;
-    padding: 0.6em 20px 0.6em 20px;
-    border-bottom: darkgray 1px solid;
+    padding: 10px 20px 10px 30px;
+    border-bottom: gainsboro 1px solid;
     box-sizing: border-box;
 }
 
 h1 {
     font-family: "noe-display-bold", sans-serif;
-    font-size: 1.6em;
+    font-size: 1.3em;
     padding: 0;
     margin: 0;
 }
@@ -38,87 +49,127 @@ h1 {
 
 /* SVG */
 
-main {
+.interface-column {
     box-sizing: border-box;
-    background-color: gainsboro;
-    width: 100vw;
+    padding: 0 0 0 0;
+    margin: 30px 30px 20px 30px;
+    /*width: 190px;*/
+    font-family: "apercu-mono-regular", monospace;
+    /*font-family: "apercu-mono-medium", monospace;*/
+    font-size: 0.8em;
+    line-height: 1.5em;
     display: flex;
-    text-align: center;
-    justify-content: center;
+    flex-direction: column;
+    justify-content: space-between;
+    /*border-right: 1px gray solid;*/
 }
+
+#instructions {
+    padding-bottom: 30px;
+    /*justify-self: start;*/
+}
+
+/* Buttons */
+
+#buttons {
+    /*align-self: flex-end;*/
+    /*align-self: end;*/
+    /*justify-self: end;*/
+}
+
+button {
+    font-family: "apercu-mono-regular", monospace;
+    font-size: 1em;
+    margin: 0;
+    width: 100%;
+    background-color: white;
+    color: black;
+    display: inline-block;
+    cursor: pointer;
+    padding: 0.8em 1.1em;
+    text-decoration: none;
+    border: 1px lightgray solid;
+    border-radius: 3px;
+}
+
+button:hover {
+    background-color: #C0C0C0;
+    /*color: white;*/
+}
+
+/* Fractal Flag */
 
 #total-flag {
     box-sizing: border-box;
-    margin: 1.7em;
+    margin: 0;
+    padding: 0;
+    border-right: 1px solid gainsboro;
+    border-left: 1px solid gainsboro;
+}
+
+/* Filters */
+
+#left {
+    /*width: 200px;*/
+    box-sizing: border-box;
+}
+
+#config {
+    width: 100%;
+}
+
+#filters {
+    width: 100%;
+}
+
+.chosen-container-multi {
+    margin: 10px 0 !important;
+    width: 100% !important;
+    box-sizing: border-box !important;
+}
+
+#slider-header {
+    padding: 15px 0 10px 0;
+    visibility: hidden;
 }
 
 /* Footer */
 
 footer {
     box-sizing: border-box;
-    font-family: "apercu-mono-medium", monospace;
-    font-size: 0.8em;
+    font-family: "apercu-mono-regular", monospace;
+    /*font-family: "noe-display-bold", sans-serif;*/
+    /*font-weight: bold;*/
+    height: 36px;
+    font-size: 0.7em;
     line-height: 1.5em;
-    background-color: black;
+    background-color: white;
+    color: gray;
     margin: 0;
-    padding: 0.6em 20px 0.6em 20px;
-    box-sizing: border-box;
-    display: grid;
-    grid-template-columns: 3fr 350px 3fr;
-    text-align: center;
+    padding: 5px 30px 2px 30px;
+    border-top: 1px lightgray solid;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
     align-self: center;
-}
-
-/* Buttons */
-
-#buttons {
-    align-self: center;
-}
-
-footer button {
-    font-family: "apercu-mono-medium", monospace;
-    font-size: 1em;
-    margin: 0.4em 0.1em;
-    width: 150px;
-    background-color: #303030;
-    color: gainsboro;
-    display: inline-block;
-    cursor: pointer;
-    padding: 0.8em 1.1em;
-    text-decoration: none;
-    border: 0;
-    border-radius: 3px;
-}
-
-footer button:hover {
-    background-color: #545454;
-    color: white;
-}
-
-#instructions {
-    color: gainsboro;
-    align-self: center;
-    text-align: left;
 }
 
 #signature {
-    color: gainsboro;
-    align-self: center;
     text-align: right;
-    margin: 0 20px 0 0;
+    /*margin: 0 20px 0 0;*/
 }
 
 /* Hamburger */
 
-label {
+header label {
     display: flex;
     flex-direction: column;
-    padding: 0.5em 0 0 0;
+    padding: 5px 0 0 0;
     width: 30px;
     cursor: pointer;
 }
 
-label span {
+header label span {
     background: black;
     border-radius: 1px;
     height: 2px;
@@ -126,34 +177,224 @@ label span {
     transition: .1s cubic-bezier(0.65, 0, 0.35, 1);
 }
 
-span:nth-of-type(1) {
+header span:nth-of-type(1) {
     width: 50%;
 }
 
-span:nth-of-type(2) {
+header span:nth-of-type(2) {
     width: 100%;
 }
 
-span:nth-of-type(3) {
+header span:nth-of-type(3) {
     width: 75%;
 }
 
-input[type="checkbox"] {
+header input[type="checkbox"] {
     display: none;
 }
 
-input[type="checkbox"]:checked ~ span:nth-of-type(1) {
+header input[type="checkbox"]:checked ~ span:nth-of-type(1) {
     transform-origin: bottom;
     transform: rotatez(45deg) translate(2px, -1px)
 }
 
-input[type="checkbox"]:checked ~ span:nth-of-type(2) {
+header input[type="checkbox"]:checked ~ span:nth-of-type(2) {
     transform-origin: top;
     transform: rotatez(-45deg)
 }
 
-input[type="checkbox"]:checked ~ span:nth-of-type(3) {
+header input[type="checkbox"]:checked ~ span:nth-of-type(3) {
     transform-origin: bottom;
     width: 50%;
     transform: translate(13px, -1px) rotatez(45deg);
+}
+
+/* Radio buttons */
+
+#radio-buttons {
+    padding-bottom: 10px;
+}
+
+#radio-buttons p {
+    margin: 0 0 8px 0;
+}
+
+.container {
+    display: block;
+    position: relative;
+    padding-left: 35px;
+    margin-bottom: 5px;
+    cursor: pointer;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+/* Hide the browser's default radio button */
+.container input {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+}
+
+/* Create a custom radio button */
+.checkmark {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 16px;
+    width: 16px;
+    background-color: white;
+    border-radius: 50%;
+    border: 1px lightgray solid;
+}
+
+/* On mouse-over, add a grey background color */
+.container:hover input ~ .checkmark {
+    background-color: gainsboro;
+}
+
+/* When the radio button is checked, add a blue background */
+.container input:checked ~ .checkmark {
+    background-color: darkgray;
+}
+
+/* Create the indicator (the dot/circle - hidden when not checked) */
+.checkmark:after {
+    content: "";
+    position: absolute;
+    display: none;
+}
+
+/* Show the indicator (dot/circle) when checked */
+.container input:checked ~ .checkmark:after {
+    display: block;
+}
+
+/* Style the indicator (dot/circle) */
+.container .checkmark:after {
+    top: 3px;
+    left: 3px;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: white;
+}
+
+/* Slider styles */
+
+#slider-group {
+    padding: 0;
+    display: grid;
+    width: 100%;
+}
+
+#slider-group label {
+    position: relative;
+    bottom: 7px;
+    padding-left: 15px;
+}
+
+.slider-div {
+    padding: 0 10px 0 0;
+}
+
+.slider-div input[type=range] {
+    height: 23px;
+    -webkit-appearance: none;
+    margin: 0 0;
+    width: 33%;
+    background-color: #f5f5f5;
+}
+
+.slider-div input[type=range]:focus {
+    outline: none;
+}
+
+.slider-div input[type=range]::-webkit-slider-runnable-track {
+    width: 50%;
+    height: 1px;
+    cursor: pointer;
+    background: darkgray;
+}
+
+.slider-div input[type=range]::-webkit-slider-thumb {
+    box-shadow: 0px 0px 0px #000000;
+    border: 1px solid #D9D9D9;
+    height: 16px;
+    width: 16px;
+    border-radius: 16px;
+    background: #FFFFFF;
+    cursor: pointer;
+    -webkit-appearance: none;
+    margin-top: -8px;
+}
+
+.slider-div input[type=range]:focus::-webkit-slider-runnable-track {
+    background: #D6D6D6;
+}
+
+.slider-div input[type=range]::-moz-range-track {
+    width: 50%;
+    height: 1px;
+    cursor: pointer;
+    animate: 0.2s;
+    box-shadow: 0px 0px 0px #000000;
+    background: #D6D6D6;
+    border-radius: 0px;
+    border: 0px solid #000000;
+}
+
+.slider-div input[type=range]::-moz-range-thumb {
+    box-shadow: 0px 0px 0px #000000;
+    border: 1px solid #D9D9D9;
+    height: 16px;
+    width: 16px;
+    border-radius: 16px;
+    /*background: #FFFFFF;*/
+    cursor: pointer;
+}
+
+.slider-div input[type=range]::-ms-track {
+    width: 50%;
+    height: 1px;
+    cursor: pointer;
+    animate: 0.2s;
+    background: transparent;
+    border-color: transparent;
+    color: transparent;
+}
+
+.slider-div input[type=range]::-ms-fill-lower {
+    background: #D6D6D6;
+    border: 0px solid #000000;
+    border-radius: 0px;
+    box-shadow: 0px 0px 0px #000000;
+}
+
+.slider-div input[type=range]::-ms-fill-upper {
+    background: #D6D6D6;
+    border: 0px solid #000000;
+    border-radius: 0px;
+    box-shadow: 0px 0px 0px #000000;
+}
+
+.slider-div input[type=range]::-ms-thumb {
+    margin-top: 1px;
+    box-shadow: 0px 0px 0px #000000;
+    border: 1px solid #D9D9D9;
+    height: 16px;
+    width: 16px;
+    border-radius: 16px;
+    background: #FFFFFF;
+    cursor: pointer;
+}
+
+.slider-div input[type=range]:focus::-ms-fill-lower {
+    background: #D6D6D6;
+}
+
+.slider-div input[type=range]:focus::-ms-fill-upper {
+    background: #D6D6D6;
 }

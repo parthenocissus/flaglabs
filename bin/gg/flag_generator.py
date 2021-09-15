@@ -23,7 +23,7 @@ class GenFlag:
 
         # Set the output directory
         # out_dir = 'media/svgwrite-output/'
-        out_dir = 'media/selected_flags/'
+        out_dir = 'media/selected_flags/single/'
         time_stamp = time.strftime("%Y%m%d-%H%M%S") + "-" + str(time.time() * 1000)
         time_stamp = time_stamp + '-' + str(randint(100, 1000))
         self.file_name = out_dir + time_stamp + '.svg'

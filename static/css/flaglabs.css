@@ -22,12 +22,12 @@ h1 {
     font-family: "noe-display-bold", sans-serif;
     font-size: 4.5em;
     padding-right: 0;
-    margin: 0 0 0.5em 0;
+    margin: 0 0 0.2em 0;
 }
 
 #subtitle {
     font-size: 1.3em;
-    padding: 0 1em 1em 0;
+    padding: 0 1em 1.3em 0;
 }
 
 /* Sliders */

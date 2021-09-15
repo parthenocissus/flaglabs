@@ -72,7 +72,8 @@ class InputDataUtil:
     def process_raw_input(self):
         for r in self.raw_input:
             ponders = self.input_ponders[r['key']]
-            for pk in ponders.keys():
+            ponder_keys = [k for k in ponders.keys() if k != "meta_data"]
+            for pk in ponder_keys:
                 for name in ponders[pk].keys():
                     v = self.check_value(r['value'], ponders[pk][name])
                     p = abs(ponders[pk][name])

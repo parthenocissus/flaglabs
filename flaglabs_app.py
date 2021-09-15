@@ -3,6 +3,10 @@
 
 import json
 import glob
+import time
+import random
+from os import listdir
+from os.path import isfile, join
 from flask import Flask, render_template, request
 from bin.gg.flag_generator import GenFlag
 
@@ -56,41 +60,71 @@ def save():
 def get_selected():
     request.args.get('vector')
     svg_data = []
-    for file_name in glob.iglob("media/selected_flags/*"):
+    for file_name in glob.iglob("media/selected_flags/single/*"):
         file = open(file_name, "r")
         svg = file.read()
         svg_data.append(svg)
     return json.dumps(svg_data)
 
 
-@app.route('/_get_random_selected')
-def get_random_selected():
-    request.args.get('vector')
-    svg_data = []
+@app.route('/_save_svg_string')
+def save_svg_string():
+    svg_text = json.loads(request.args.get('svg'))
+    path = "media/selected_flags/fractal_composite"
+    time_stamp = time.strftime("%Y%m%d-%H%M%S") + "-" + str(time.time() * 1000)
+    file_name = f"{path}/{time_stamp}.svg"
+    with open(file_name, 'w') as f:
+        f.write(svg_text)
+    return json.dumps({"info": "success"})
 
-    files = [
-        "media/selected_flags/001.svg",
-        "media/selected_flags/002.svg",
-        "media/selected_flags/003.svg",
-        "media/selected_flags/004.svg"
-    ]
-    for f in files:
-        # file = open(f, "r")
-        svg_data.append(open(f, "r").read())
+
+@app.route('/_get_from_database')
+def get_from_database():
+    n = int(json.loads(request.args.get('n')))
+    svg_data = []
+    path = "media/selected_flags/single"
+    files = [f for f in listdir(path) if isfile(join(path, f))]
+    for _ in range(n):
+        file_name = random.choice(files)
+        full_name = f"{path}/{file_name}"
+        svg = open(full_name, "r").read()
+        svg_data.append(svg)
     return json.dumps(svg_data)
 
 
 @app.route('/_get_random')
 def get_random():
-    data_txt = request.args.get('vector')
-    n = int(json.loads(data_txt))
+    raw_input = json.loads(request.args.get('raw'))
+    n = int(json.loads(request.args.get('n')))
     svg_data = []
-    for i in range(n):
-        gf = GenFlag()
+    for _ in range(n):
+        gf = GenFlag(raw_input=raw_input, raw=True)
         svg = gf.svg_string()
         # svg = f'{svg[:4]} id="flag{i}" {svg[5:]}'
         svg_data.append(svg)
     return json.dumps(svg_data)
+
+
+@app.route('/_get_mappings')
+def get_mappings():
+    data_txt = request.args.get('vector')
+    input_ponders_path = 'conf/input-ponders.json'
+    input_ponders = json.load(open(input_ponders_path))
+    mappings = {}
+
+    def data_for_type(t):
+        if t == "unipolar":
+            return {"min": 0, "max": 1, "step": 0.1, "value": 0}
+        else:
+            return {"min": -1, "max": 1, "step": 0.2, "value": 0}
+    for p in input_ponders:
+        md = input_ponders[p]['meta_data']
+        mappings[p] = {
+            "label": md['label'],
+            "type": md['type'],
+            "data": data_for_type(md['type'])
+        }
+    return json.dumps(mappings)
 
 
 if __name__ == "__main__":

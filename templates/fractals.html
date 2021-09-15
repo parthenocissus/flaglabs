@@ -23,9 +23,15 @@
             src: url({{ url_for('static', filename='fonts/apercu-mono-medium-pro.woff') }}) format("woff");
         }
 
+        .chosen-container-multi .chosen-choices li.search-choice .search-choice-close {
+            background: url({{ url_for('static', filename='css/lib/chosen-sprite.png') }}) -42px 1px no-repeat;
+        }
+
+
     </style>
 
     <link rel="shortcut icon" href="#">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/lib/chosen.min.css') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/fractals.css') }}">
 
     <script type=text/javascript>
@@ -34,6 +40,8 @@
 
     <script type="text/javascript" src="{{ url_for('static', filename='js/lib/jquery.min.js') }}"></script>
     <script type="text/javascript" src="{{ url_for('static', filename='js/lib/d3.min.js') }}"></script>
+    <script type="text/javascript" src="{{ url_for('static', filename='js/lib/chosen.jquery.min.js') }}"></script>
+    <script type="text/javascript" src="{{ url_for('static', filename='js/lib/chosen.proto.min.js') }}"></script>
     <script type="text/javascript" src="{{ url_for('static', filename='js/fractals.js') }}"></script>
 
     <title>Fractal Multiplication of Memetic Identities</title>
@@ -49,22 +57,60 @@
         <span></span>
         <span></span>
     </label>
-{#    <h1>Fractal Multiplication of Memetic Identities</h1>#}
     <h1>Fractal Folklores: The Multiplicator of Memetic Identities</h1>
 </header>
 
-<div id="whitespace"></div>
+{#<div id="whitespace"></div>#}
 
 <main>
+
+    <div id="left" class="interface-column">
+        <div id="instructions">
+            <em>Fractal Folklores</em><br>is an AI toolkit for infinite nation building.</em><br><br>
+            The fractal flag on the right can be divided ad infinitum. <em>Click</em> on a flag segment to multiply it. <em>Right click</em>, to replace it.
+        </div>
+
+        <div>
+            <div id="radio-buttons">
+                <p>Generate flags from:</p>
+                <label class="container">scratch
+                    <input id="radio-generate" type="radio" name="radio">
+                    <span class="checkmark"></span>
+                </label>
+                <label class="container">database
+                    <input id="radio-database" type="radio" checked="checked" name="radio">
+                    <span class="checkmark"></span>
+                </label>
+            </div>
+            <div>
+                <button type="button" id="generate">Start Again</button>
+            </div>
+        </div>
+    </div>
+
     <svg id="total-flag"></svg>
+
+    <div id="confing" class="interface-column">
+        <div id="filters">
+            <div>Choose parameters for flag generation:</div>
+            <select id="choose-params" class="chosen" multiple="true" name="faculty"></select>
+            <div id="slider-header">Set parameter values:</div>
+            <div id="slider-group"></div>
+        </div>
+        <div id="buttons">
+            <button type="button" id="save">Save Flag</button>
+        </div>
+    </div>
+
 </main>
 
 <footer>
-    <div id="instructions">Click: multiply a flag. Right click: change it.</div>
-    <div id="buttons">
-        <button type="button" id="generate">Generate Again</button>
-        <button type="button" id="save">Save Flag</button>
-    </div>
+    {#    <div id="instructions">Click: multiply a flag. Right click: change it.</div>#}
+    {#    <div id="buttons">#}
+    {#        <button type="button" id="generate">Generate Again</button>#}
+    {#        <button type="button" id="save">Save Flag</button>#}
+    {#    </div>#}
+    <div id="centre">Centre for Digital Curiosity</div>
     <div id="signature">Uroš Krčadinac, 2021.</div>
 </footer>
 
