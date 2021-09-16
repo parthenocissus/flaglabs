@@ -1,2 +1,21 @@
 <?xml version="1.0" encoding="utf-8" ?>
-<svg baseProfile="full" height="100px" version="1.1" width="150px" xmlns="http://www.w3.org/2000/svg" xmlns:ev="http://www.w3.org/2001/xml-events" xmlns:xlink="http://www.w3.org/1999/xlink"><defs><clipPath id="mask0"><rect height="100" width="150" x="0" y="0" /></clipPath></defs><g clip-path="url(#mask0)"><rect fill="#ffffff" height="16.666666666666668" stroke="none" width="150" x="0" y="0.0" /><rect fill="#6699cc" height="16.666666666666668" stroke="none" width="150" x="0" y="16.666666666666668" /><rect fill="#ffffff" height="16.666666666666668" stroke="none" width="150" x="0" y="33.333333333333336" /><rect fill="#6699cc" height="16.666666666666668" stroke="none" width="150" x="0" y="50.0" /><rect fill="#ffffff" height="16.666666666666668" stroke="none" width="150" x="0" y="66.66666666666667" /><rect fill="#6699cc" height="16.666666666666668" stroke="none" width="150" x="0" y="83.33333333333333" /></g><g transform="translate(38.194987264631024, 29.539320864792774) scale(0.40921358270414454) rotate(0, 50.0, 50.0)"><path d="M 66.7,33.3 L 100.0,33.3 L 100.0,66.6 L 66.7,66.6 L 66.7,99.89999999999999 L 33.400000000000006,99.89999999999999 L 33.400000000000006,66.6 L 0.0,66.6 L 0.0,33.3 L 33.3,33.3 L 33.3,0.0 L 66.6,0.0 L 66.7,33.3" fill="#ff0032" stroke="none" stroke-width="3.0" /></g></svg>
+<svg baseProfile="full" height="100px" version="1.1" width="150px" xmlns="http://www.w3.org/2000/svg"
+     xmlns:ev="http://www.w3.org/2001/xml-events" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <defs>
+        <clipPath id="mask0">
+            <rect height="100" width="150" x="0" y="0"/>
+        </clipPath>
+    </defs>
+    <g clip-path="url(#mask0)">
+        <rect fill="#ffffff" height="16.666666666666668" stroke="none" width="150" x="0" y="0.0"/>
+        <rect fill="#6699cc" height="16.666666666666668" stroke="none" width="150" x="0" y="16.666666666666668"/>
+        <rect fill="#ffffff" height="16.666666666666668" stroke="none" width="150" x="0" y="33.333333333333336"/>
+        <rect fill="#6699cc" height="16.666666666666668" stroke="none" width="150" x="0" y="50.0"/>
+        <rect fill="#ffffff" height="16.666666666666668" stroke="none" width="150" x="0" y="66.66666666666667"/>
+        <rect fill="#6699cc" height="16.666666666666668" stroke="none" width="150" x="0" y="83.33333333333333"/>
+    </g>
+    <g transform="translate(38, 33.3) scale(0.335) rotate(0, 50.0, 50.0)">
+        <path d="M 66.7,33.3 L 100.0,33.3 L 100.0,66.6 L 66.7,66.6 L 66.7,99.89999999999999 L 33.400000000000006,99.89999999999999 L 33.400000000000006,66.6 L 0.0,66.6 L 0.0,33.3 L 33.3,33.3 L 33.3,0.0 L 66.6,0.0 L 66.7,33.3"
+              fill="#ff0032" stroke="none" stroke-width="3.0"/>
+    </g>
+</svg>
