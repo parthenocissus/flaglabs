@@ -2,7 +2,36 @@
 
 *please add each week's tasks to the top of this document*
 
-## August 27th - September 3rd
+## September 11th - September 17th
+
+**Jacques Laroche**:
+
+ - [ ] Finish Growing the Anthems Dataset <br>
+Here is what needs to be done to complete the pipeline:
+	- [x] 1) Scrape the following pages:
+https://musescore.com/sheetmusic/soundtrack?page=1 thru /soundtrack?page=100
+	- [x] 2) From the Pages in Step 1 save all URLs with the following construction:
+https://musescore.com/user/XXXXXX
+Example: https://musescore.com/user/16006641/scores/4197961
+**NOTE:** Save all these URLs in a TXT or CSV file
+	- [x] 3) Write a Python script to go through the file created in Step 2 and extract all the ID numbers (which are the last set of numbers in each URL). Save all these ID numbers to a TXT or CSV file.
+	- [ ] 4) Write a Python script to go through the file created in Step 3. The script should iterate through each ID number, find the corresponding MSCZ file within the subdirectories of the Bulk MSCZ download, and finally, copy each of these found files placing them in one spot -- preferably a Directory called "Soundtrack".
+	- [ ] 5) Convert all MSCZ files from the "Soundtrack" directory created in Step 5 into MIDI files. **NOTE:
+	** Please see https://musescore.org/en/project/batch-convert for details
+
+
+ 
+ - [ ] Build / Find a dataset of pictograms / icons
+
+- [ ] Assist with "National Mottos" dataset task 
+	NOTE: https://en.wikipedia.org/wiki/List_of_national_mottos
+
+
+- [x] Add more SVG Symbols that can be used for Flags
+
+___
+
+## August 28th - September 3rd
 
 **Miloš Rančić**:
 
@@ -38,7 +67,7 @@ NOTE: Save all these URLs in a TXT or CSV file
 
 	1. Write a Python script to go through the file created in Step 2 and extract all the ID numbers (which are the last set of numbers in each URL). Save all these ID numbers to a TXT or CSV file.
 
-	1. Write a Python script to go through the file created in Step 4. The script should iterate through each ID number, find the corresponding MSCZ file within the subdirectories of the Bulk MSCZ download, and finally, copy each of these found files placing them in one spot -- preferably a Directory called "Soundtrack".
+	1. Write a Python script to go through the file created in Step 3. The script should iterate through each ID number, find the corresponding MSCZ file within the subdirectories of the Bulk MSCZ download, and finally, copy each of these found files placing them in one spot -- preferably a Directory called "Soundtrack".
 
 	1. Convert all MSCZ files from the "Soundtrack" directory created in Step 5 into MIDI files. NOTE: Please see https://musescore.org/en/project/batch-convert for details
 
@@ -52,6 +81,7 @@ NOTE: Save all these URLs in a TXT or CSV file
 - [ ] Assist team with "National Mottos" task (growing dataset, etc.) 	
 	NOTE: https://en.wikipedia.org/wiki/List_of_national_mottos
 
+___
 
 ## August 14th - August 27th
 
