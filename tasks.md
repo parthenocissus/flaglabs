@@ -2,25 +2,63 @@
 
 *please add each week's tasks to the top of this document*
 
+## September 18th - September 24th
+
+**Jacques Laroche**:
+
+ - [ ] Finish Growing the Anthems Dataset <br>
+	Here is what needs to be done to complete the pipeline:
+	- [x] 1) Scrape the following pages:
+	https://musescore.com/sheetmusic/soundtrack?page=1 thru /soundtrack?page=100
+	- [x] 2) From the Pages in Step 1 save all URLs with the following construction:
+	https://musescore.com/user/XXXXXX
+	Example: https://musescore.com/user/16006641/scores/4197961
+	**NOTE:** Save all these URLs in a TXT or CSV file
+	- [x] 3) Write a Python script to go through the file created in Step 2 and extract all the ID numbers (which are the last set of numbers in each URL). Save all these ID numbers to a TXT or CSV file.
+	- [ ] 4) Write a Python script to correlate ID numbers from the file created in Step 3 to the IPFS hash info within the mscz-files.csv spreadsheet (available at https://musescore-dataset.xmader.com/mscz-files.csv). After finding the IPFS hash for the ID number the script should download the corresponding MSCZ file within a subdirectory named "Soundtrack".
+	- [ ] 5) Convert all MSCZ files from the "Soundtrack" directory created in Step 5 into MIDI files. **NOTE:
+	** Please see https://musescore.org/en/project/batch-convert for details
+
+
+- [ ] Assist with "National Mottos" dataset task 
+	NOTE: https://en.wikipedia.org/wiki/List_of_national_mottos
+
+- [ ] Connect Lab with Igor Popvić (who has an ML research company in Japan)
+
+- [ ] Push current code for growing the Anthems audio dataset to our Github repo
+
+**Miloš Rančić**:
+
+- [ ] Resize all SVGs provided by Jacques to 100x100 pixels. For images that are not square reduce the larger side to 100px. NOTE: Images with instructions will be sent by Jacques via email
+
+**Antonije Petrović**:
+
+- [ ] add item(s)
+
+**Uroš Krčadinac**:
+
+- [ ] add item(s)
+___
+
 ## September 11th - September 17th
 
 **Jacques Laroche**:
 
  - [ ] Finish Growing the Anthems Dataset <br>
-Here is what needs to be done to complete the pipeline:
+	Here is what needs to be done to complete the pipeline:
 	- [x] 1) Scrape the following pages:
-https://musescore.com/sheetmusic/soundtrack?page=1 thru /soundtrack?page=100
+	https://musescore.com/sheetmusic/soundtrack?page=1 thru /soundtrack?page=100
 	- [x] 2) From the Pages in Step 1 save all URLs with the following construction:
-https://musescore.com/user/XXXXXX
-Example: https://musescore.com/user/16006641/scores/4197961
-**NOTE:** Save all these URLs in a TXT or CSV file
+	https://musescore.com/user/XXXXXX
+	Example: https://musescore.com/user/16006641/scores/4197961
+	**NOTE:** Save all these URLs in a TXT or CSV file
 	- [x] 3) Write a Python script to go through the file created in Step 2 and extract all the ID numbers (which are the last set of numbers in each URL). Save all these ID numbers to a TXT or CSV file.
-	- [ ] 4) Write a Python script to go through the file created in Step 3. The script should iterate through each ID number, find the corresponding MSCZ file within the subdirectories of the Bulk MSCZ download, and finally, copy each of these found files placing them in one spot -- preferably a Directory called "Soundtrack".
+	- [ ] 4) Write a Python script to correlate ID numbers from the file created in Step 3 to the IPFS hash info within the mscz-files.csv spreadsheet (available at https://musescore-dataset.xmader.com/mscz-files.csv). After finding the IPFS hash for the ID number the script should download the corresponding MSCZ file within a subdirectory named "Soundtrack".
 	- [ ] 5) Convert all MSCZ files from the "Soundtrack" directory created in Step 5 into MIDI files. **NOTE:
 	** Please see https://musescore.org/en/project/batch-convert for details
 
 
- 
+
  - [ ] Build / Find a dataset of pictograms / icons
 
 - [ ] Assist with "National Mottos" dataset task 
