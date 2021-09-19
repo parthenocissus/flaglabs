@@ -14,23 +14,52 @@ DEBUG = True
 app = Flask(__name__)
 app.config.from_object(__name__)
 flag_set = []
-n_flags = 36  # 1
+n_flags = 30  # 1
 
+
+def flag_mappings():
+    input_ponders_path = 'conf/input-ponders.json'
+    input_ponders = json.load(open(input_ponders_path))
+    mappings = {}
+
+    def data_for_type(t):
+        if t == "unipolar":
+            return {"min": 0, "max": 1, "step": 0.1, "value": 0}
+        else:
+            return {"min": -1, "max": 1, "step": 0.2, "value": 0}
+
+    for p in input_ponders:
+        md = input_ponders[p]['meta_data']
+        mappings[p] = {
+            "label": md['label'],
+            "type": md['type'],
+            "data": data_for_type(md['type'])
+        }
+    return json.dumps(mappings)
+
+
+# URL Routes and Pages
 
 @app.route("/")
 def home():
-    return render_template('flaglabs_home.html', params=[])
+    return render_template('flaglabs_home.html', params=flag_mappings())
 
 
 @app.route("/fractals")
 def fractals():
-    return render_template('fractals.html', params=[])
+    return render_template('fractals.html', params=flag_mappings())
 
 
 @app.route("/selected")
 def selected():
-    return render_template('flags_selected.html', params=[])
+    svg_data = []
+    for file_name in glob.iglob("media/selected_flags/single/*"):
+        svg = open(file_name, "r").read()
+        svg_data.append(svg)
+    return render_template('flags_selected.html', params=json.dumps(svg_data))
 
+
+# API Services
 
 @app.route('/_generate')
 def generate():
@@ -54,17 +83,6 @@ def save():
     flag_set[index].save()
     # flag_set[index].save_svg_and_png()
     return json.dumps({"info": "success"})
-
-
-@app.route('/_get_selected')
-def get_selected():
-    request.args.get('vector')
-    svg_data = []
-    for file_name in glob.iglob("media/selected_flags/single/*"):
-        file = open(file_name, "r")
-        svg = file.read()
-        svg_data.append(svg)
-    return json.dumps(svg_data)
 
 
 @app.route('/_save_svg_string')
@@ -105,28 +123,27 @@ def get_random():
     return json.dumps(svg_data)
 
 
-@app.route('/_get_mappings')
-def get_mappings():
-    data_txt = request.args.get('vector')
-    input_ponders_path = 'conf/input-ponders.json'
-    input_ponders = json.load(open(input_ponders_path))
-    mappings = {}
-
-    def data_for_type(t):
-        if t == "unipolar":
-            return {"min": 0, "max": 1, "step": 0.1, "value": 0}
-        else:
-            return {"min": -1, "max": 1, "step": 0.2, "value": 0}
-    for p in input_ponders:
-        md = input_ponders[p]['meta_data']
-        mappings[p] = {
-            "label": md['label'],
-            "type": md['type'],
-            "data": data_for_type(md['type'])
-        }
-    return json.dumps(mappings)
+# @app.route('/_get_mappings')
+# def get_mappings():
+#     data_txt = request.args.get('vector')
+#     input_ponders_path = 'conf/input-ponders.json'
+#     input_ponders = json.load(open(input_ponders_path))
+#     mappings = {}
+#
+#     def data_for_type(t):
+#         if t == "unipolar":
+#             return {"min": 0, "max": 1, "step": 0.1, "value": 0}
+#         else:
+#             return {"min": -1, "max": 1, "step": 0.2, "value": 0}
+#     for p in input_ponders:
+#         md = input_ponders[p]['meta_data']
+#         mappings[p] = {
+#             "label": md['label'],
+#             "type": md['type'],
+#             "data": data_for_type(md['type'])
+#         }
+#     return json.dumps(mappings)
 
 
 if __name__ == "__main__":
-    # app.run(host='0.0.0.0')
     app.run(host='127.0.0.1', debug=True)

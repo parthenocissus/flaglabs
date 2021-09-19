@@ -32,16 +32,18 @@
 
     <link rel="shortcut icon" href="#">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/lib/chosen.min.css') }}">
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/fractals.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/flags.css') }}">
 
     <script type=text/javascript>
         $SCRIPT_ROOT = {{ request.script_root|tojson|safe }};
+        let flagMappings = JSON.parse({{ params|tojson }});
     </script>
 
     <script type="text/javascript" src="{{ url_for('static', filename='js/lib/jquery.min.js') }}"></script>
     <script type="text/javascript" src="{{ url_for('static', filename='js/lib/d3.min.js') }}"></script>
     <script type="text/javascript" src="{{ url_for('static', filename='js/lib/chosen.jquery.min.js') }}"></script>
     <script type="text/javascript" src="{{ url_for('static', filename='js/lib/chosen.proto.min.js') }}"></script>
+    <script type="text/javascript" src="{{ url_for('static', filename='js/interface.js') }}"></script>
     <script type="text/javascript" src="{{ url_for('static', filename='js/fractals.js') }}"></script>
 
     <title>Fractal Multiplication of Memetic Identities</title>
@@ -50,7 +52,6 @@
 <body>
 
 <header>
-
     <label for="check">
         <input type="checkbox" id="check"/>
         <span></span>
@@ -60,14 +61,13 @@
     <h1>Fractal Folklores: The Multiplicator of Memetic Identities</h1>
 </header>
 
-{#<div id="whitespace"></div>#}
-
-<main>
+<main id="main-fractals">
 
     <div id="left" class="interface-column">
         <div id="instructions">
             <em>Fractal Folklores</em><br>is an AI toolkit for infinite nation building.</em><br><br>
-            The fractal flag on the right can be divided ad infinitum. <em>Click</em> on a flag segment to multiply it. <em>Right click</em>, to replace it.
+            The fractal flag on the right can be divided ad infinitum. <em>Click</em> on a flag segment to multiply it.
+            <em>Right click</em>, to replace it.
         </div>
 
         <div>
@@ -105,14 +105,13 @@
 </main>
 
 <footer>
-    {#    <div id="instructions">Click: multiply a flag. Right click: change it.</div>#}
-    {#    <div id="buttons">#}
-    {#        <button type="button" id="generate">Generate Again</button>#}
-    {#        <button type="button" id="save">Save Flag</button>#}
-    {#    </div>#}
     <div id="centre">Centre for Digital Curiosity</div>
     <div id="signature">Uroš Krčadinac, 2021.</div>
 </footer>
+
+{#<script>#}
+{#    let flagMappings = {{ params|tojson }};#}
+{#</script>#}
 
 </body>
 </html>

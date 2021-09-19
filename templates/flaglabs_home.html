@@ -21,14 +21,20 @@
     </style>
 
     <link rel="shortcut icon" href="#">
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/flaglabs.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/lib/chosen.min.css') }}">
+{#    <link rel="stylesheet" href="{{ url_for('static', filename='css/flaglabs.css') }}">#}
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/flags.css') }}">
 
     <script type=text/javascript>
         $SCRIPT_ROOT = {{ request.script_root|tojson|safe }};
+        let flagMappings = JSON.parse({{ params|tojson }});
     </script>
 
     <script type="text/javascript" src="{{ url_for('static', filename='js/lib/jquery.min.js') }}"></script>
     <script type="text/javascript" src="{{ url_for('static', filename='js/lib/d3.min.js') }}"></script>
+    <script type="text/javascript" src="{{ url_for('static', filename='js/lib/chosen.jquery.min.js') }}"></script>
+    <script type="text/javascript" src="{{ url_for('static', filename='js/lib/chosen.proto.min.js') }}"></script>
+    <script type="text/javascript" src="{{ url_for('static', filename='js/interface.js') }}"></script>
     <script type="text/javascript" src="{{ url_for('static', filename='js/flaglabs.js') }}"></script>
 
     <title>Atlas of Fractal Nations</title>
@@ -36,189 +42,48 @@
 </head>
 <body>
 
-<main>
+<header>
+    <label for="check">
+        <input type="checkbox" id="check"/>
+        <span></span>
+        <span></span>
+        <span></span>
+    </label>
+    <h1>Fractal Folklores</h1>
+</header>
 
-    <h1 id="title">Fractal Nations</h1>
+<main id="main-home">
 
-    <div id="subtitle">AI toolkit for nation building. Need a flag?</div>
-
-    <div id="slider-group">
-
-        <div id="left">
-
-            <div class="slider-div">
-                <input type="range" id="warm" name="warm"
-                       min="-1" max="1" value="0" step="0.2" data-input-type="bipolar">
-                <label for="warm">Cold/warm</label>
+    <div id="left" class="interface-column">
+        <div>
+            <div id="instructions">
+                <em>Fractal Folklores</em><br>is an AI toolkit for infinite nation building.</em>
             </div>
-
-            <div class="slider-div">
-                <input type="range" id="light" name="light"
-                       min="-1" max="1" value="0" step="0.2" data-input-type="bipolar">
-                <label for="light">Dark/light</label>
+            <div id="filters">
+                <div>Choose parameters for flag generation:</div>
+                <select id="choose-params" class="chosen" multiple="true" name="faculty"></select>
+                <div id="slider-header">Set parameter values:</div>
+                <div id="slider-group"></div>
             </div>
-
-            <div class="slider-div">
-                <input type="range" id="complex" name="complex"
-                       min="-1" max="1" value="0" step="0.2" data-input-type="bipolar">
-                <label for="complex">Simple/complex</label>
-            </div>
-
-            <div class="slider-div">
-                <input type="range" id="anarchist" name="anarchist"
-                       min="0" max="1" value="0" step="0.1" data-input-type="unipolar">
-                <label for="anarchist">Anarchist</label>
-            </div>
-
-            <div class="slider-div">
-                <input type="range" id="african" name="african"
-                       min="0" max="1" value="0" step="0.1" data-input-type="unipolar">
-                <label for="african">African</label>
-            </div>
-
-            <div class="slider-div">
-                <input type="range" id="slavic" name="slavic"
-                       min="0" max="1" value="0" step="0.1" data-input-type="unipolar">
-                <label for="slavic">Slavic</label>
-            </div>
-
-            <div class="slider-div">
-                <input type="range" id="queer" name="queer"
-                       min="0" max="1" value="0" step="0.1" data-input-type="unipolar">
-                <label for="queer">Queer</label>
-            </div>
-
-            <div class="slider-div">
-                <input type="range" id="corporate" name="corporate"
-                       min="0" max="1" value="0" step="0.1" data-input-type="unipolar">
-                <label for="corporate">Corporate</label>
-            </div>
-
-            <div class="slider-div">
-                <input type="range" id="socialist" name="socialist"
-                       min="0" max="1" value="0" step="0.1" data-input-type="unipolar">
-                <label for="socialist">Socialist</label>
-            </div>
-
-            <div class="slider-div">
-                <input type="range" id="christian" name="christian"
-                       min="0" max="1" value="0" step="0.1" data-input-type="unipolar">
-                <label for="christian">Christian</label>
-            </div>
-
-            <div class="slider-div">
-                <input type="range" id="islamic" name="islamic"
-                       min="0" max="1" value="0" step="0.1" data-input-type="unipolar">
-                <label for="islamic">Islamic</label>
-            </div>
-
-            <div class="slider-div">
-                <input type="range" id="serbian" name="serbian"
-                       min="0" max="1" value="0" step="0.1" data-input-type="unipolar">
-                <label for="serbian">Serbian</label>
-            </div>
-
-            <div class="slider-div">
-                <input type="range" id="croatian" name="croatian"
-                       min="0" max="1" value="0" step="0.1" data-input-type="unipolar">
-                <label for="croatian">Croatian</label>
-            </div>
-
-            <div class="slider-div">
-                <input type="range" id="south_american" name="south_american"
-                       min="0" max="1" value="0" step="0.1" data-input-type="unipolar">
-                <label for="south_american">South American</label>
-            </div>
-
         </div>
 
-        <div id="right">
-
-            <div class="slider-div">
-                <input type="range" id="symbolic" name="symbolic"
-                       min="-1" max="1" value="0" step="0.2" data-input-type="bipolar">
-                <label for="symbolic">Symbolic</label>
-            </div>
-
-            <div class="slider-div">
-                <input type="range" id="monochrome" name="monochrome"
-                       min="-1" max="1" value="0" step="0.2" data-input-type="bipolar">
-                <label for="monochrome">Color/BW</label>
-            </div>
-
-            <div class="slider-div">
-                <input type="range" id="scandinavian" name="scandinavian"
-                       min="0" max="1" value="0" step="0.1" data-input-type="unipolar">
-                <label for="scandinavian">Scandinavian</label>
-            </div>
-
-            <div class="slider-div">
-                <input type="range" id="antivax" name="antivax"
-                       min="0" max="1" value="0" step="0.1" data-input-type="unipolar">
-                <label for="antivax">Antivax</label>
-            </div>
-
-            <div class="slider-div">
-                <input type="range" id="pirate" name="pirate"
-                       min="0" max="1" value="0" step="0.1" data-input-type="unipolar">
-                <label for="pirate">Pirate</label>
-            </div>
-
-            <div class="slider-div">
-                <input type="range" id="arab" name="arab"
-                       min="0" max="1" value="0" step="0.1" data-input-type="unipolar">
-                <label for="arab">Arab</label>
-            </div>
-
-            <div class="slider-div">
-                <input type="range" id="libertarian" name="libertarian"
-                       min="0" max="1" value="0" step="0.1" data-input-type="unipolar">
-                <label for="libertarian">Libertarian</label>
-            </div>
-
-            <div class="slider-div">
-                <input type="range" id="incel" name="incel"
-                       min="0" max="1" value="0" step="0.1" data-input-type="unipolar">
-                <label for="incel">Incel</label>
-            </div>
-
-            <div class="slider-div">
-                <input type="range" id="hindu" name="hindu"
-                       min="0" max="1" value="0" step="0.1" data-input-type="unipolar">
-                <label for="hindu">Hindu</label>
-            </div>
-
-            <div class="slider-div">
-                <input type="range" id="east_asian" name="east_asian"
-                       min="0" max="1" value="0" step="0.1" data-input-type="unipolar">
-                <label for="east_asian">East Asian</label>
-            </div>
-
-            <div class="slider-div">
-                <input type="range" id="yugoslav" name="yugoslav"
-                       min="0" max="1" value="0" step="0.1" data-input-type="unipolar">
-                <label for="yugoslav">Yugoslav</label>
-            </div>
-
-            <div class="slider-div">
-                <input type="range" id="eco" name="eco"
-                       min="0" max="1" value="0" step="0.1" data-input-type="unipolar">
-                <label for="eco">Eco</label>
-            </div>
-
+        <div>
             <div>
                 <button type="button" id="go">Generate</button>
             </div>
-
         </div>
+    </div>
 
+    <div id="home-flag-space">
+        <div id="flags"></div>
     </div>
 
 </main>
 
-<aside>
-    <div id="flags"></div>
-</aside>
+<footer>
+    <div id="centre">Centre for Digital Curiosity</div>
+    <div id="signature">Uroš Krčadinac, 2021.</div>
+</footer>
 
 </body>
 </html>

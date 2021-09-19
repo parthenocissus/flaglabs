@@ -91,7 +91,7 @@ class FlagLayout:
     def bicolor_vertical(self):
         for i in range(2):
             c = self.choose_different_color()
-            self.g.add(self.fc.rect((i * self.w / 2, 2), (self.w / 2, self.h), stroke='none', fill=c))
+            self.g.add(self.fc.rect((i * self.w / 2, 0), (self.w / 2, self.h), stroke='none', fill=c))
         self.fsc.center(scale_factor=uniform(0.4, 0.7))
         self.symbol_chance *= 1.4
 

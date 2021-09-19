@@ -6,24 +6,14 @@ $(document).ready(function () {
         urlSave = $SCRIPT_ROOT + saveAPI,
         svgCount = 0;
 
-    let setSvgEvents = function () {
+    let setSvgEvents = () => {
         for (let i = 0; i < svgCount; i++) {
-
             d3.select("#flag" + i).on("click", () => {
-
                 let saveParams = {vector: i};
                 $.getJSON(urlSave, saveParams).done(() => {
                     console.log("flag saved.");
                 });
-
-                // $.getJSON(urlSave, saveParams, (result) => {
-                //     console.log("saving...")
-                // }).done(() => {
-                //     console.log("flag saved");
-                // });
-
             });
-
         }
     };
 
@@ -33,7 +23,7 @@ $(document).ready(function () {
         flags.empty();
 
         let data = [];
-        $("input").each(function () {
+        $("input[type=range]").each(function () {
             let input = $(this);
             let d = {
                 "value": +input.val(),
@@ -42,6 +32,8 @@ $(document).ready(function () {
             };
             data.push(d);
         });
+
+        console.log(data);
 
         let params = {vector: JSON.stringify(data)};
         $.getJSON(urlGen, params, (result) => {
