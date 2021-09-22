@@ -15,7 +15,7 @@
 	Example: https://musescore.com/user/16006641/scores/4197961
 	**NOTE:** Save all these URLs in a TXT or CSV file
 	- [x] 3) Write a Python script to go through the file created in Step 2 and extract all the ID numbers (which are the last set of numbers in each URL). Save all these ID numbers to a TXT or CSV file.
-	- [ ] 4) Write a Python script to correlate ID numbers from the file created in Step 3 to the IPFS hash info within the mscz-files.csv spreadsheet (available at https://musescore-dataset.xmader.com/mscz-files.csv). After finding the IPFS hash for the ID number the script should download the corresponding MSCZ file within a subdirectory named "Soundtrack".
+	- [x] 4) Write a Python script to correlate ID numbers from the file created in Step 3 to the IPFS hash info within the mscz-files.csv spreadsheet (available at https://musescore-dataset.xmader.com/mscz-files.csv). After finding the IPFS hash for the ID number the script should download the corresponding MSCZ file within a subdirectory named "Soundtrack".
 	- [ ] 5) Convert all MSCZ files from the "Soundtrack" directory created in Step 5 into MIDI files. **NOTE:
 	** Please see https://musescore.org/en/project/batch-convert for details
 
