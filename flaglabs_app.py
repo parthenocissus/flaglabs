@@ -59,6 +59,12 @@ def selected():
     return render_template('flags_selected.html', params=json.dumps(svg_data))
 
 
+@app.route("/autofractals")
+def autofractals():
+    return render_template('fractals_auto.html', params=[])
+
+
+
 # API Services
 
 @app.route('/_generate')
