@@ -6,7 +6,7 @@
 
 **Jacques Laroche**:
 
- - [x] Finish Growing the Anthems Dataset <br>
+ - [x] Finish Growing the Anthems Audio Dataset <br>
 	Here is what needs to be done to complete the pipeline:
 	- [x] 1) Scrape the following pages:
 	https://musescore.com/sheetmusic/soundtrack?page=1 thru /soundtrack?page=100
