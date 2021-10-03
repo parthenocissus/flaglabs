@@ -6,7 +6,13 @@ from PIL import Image
 from matplotlib import pyplot as plt
 
 ##################################################################
-class FlaglabsColor:
+class PrimaryColor:
+    def __init__(self, name):
+        self.name = name
+        self.variations = []
+
+##################################################################
+class ColorVariation:
     def __init__(self, color, primary, name, hex_value):
         self.color = color
         self.primary = primary
@@ -69,13 +75,16 @@ class ColorDistributionsProcessor:
         # of type FlaglabsColor
         colors_vocab = {}
         for color_info in color_definitions:
-            primary = color_info["primary"]
+            primary_name = color_info["name"]
+            primary_color = PrimaryColor(primary_name)
+
             variations = color_info["variations"]
             for variation in variations:
                 hex_value = variation["value"]
                 name = variation["name"]
                 color = Color(hex_value)
-                flaglabs_color = FlaglabsColor(color, primary, name, hex_value)
+                flaglabs_color = ColorVariation(color, primary_color, name, hex_value)
+                primary_color.variations.append(flaglabs_color)
                 colors_vocab[name] = flaglabs_color
         return colors_vocab
 
@@ -105,11 +114,11 @@ class ColorDistributionsProcessor:
 
     def dump_histograms_to_files(self, list_of_histograms, total_histogram):
         print("Exporting list of histograms per flag...")
-        with open("conf/color-distributions-per-flag.json", "w") as f_per_flag:
+        with open("conf/color-distributions-per-flag-NEW.json", "w") as f_per_flag:
             json.dump(list_of_histograms, f_per_flag, indent=4)
 
         print("Exporting the histogram for the whole dataset...")
-        with open("conf/color-distributions-total.json", "w") as f_total:
+        with open("conf/color-distributions-total-NEW.json", "w") as f_total:
             json.dump(total_histogram, f_total, indent=4)
 
     def plot_histogram(self, histogram):
@@ -125,6 +134,22 @@ class ColorDistributionsProcessor:
         plt.tight_layout()
 
         plt.show()
+
+    def group_by_primary_color(self, histogram_of_percentages):
+        hist_grouped = {}
+        for key, value in histogram_of_percentages.items():
+            color = self.color_vocabulary[key]
+            primary_color_name = color.primary.name
+            
+            hist_of_primary = {}
+            if primary_color_name in hist_grouped:
+                hist_of_primary = hist_grouped[primary_color_name]
+            else:
+                hist_grouped[primary_color_name] = hist_of_primary
+
+            hist_of_primary[key] = value
+
+        return hist_grouped
 
     # main method
     def get_histograms(self):
@@ -142,22 +167,23 @@ class ColorDistributionsProcessor:
 
                 flag_full_path = os.path.join(subdir, file)
                 hist_per_flag, number_of_pixels = self.process_flag(flag_full_path)
+                total_histogram = self.add_to_total_histogram(total_histogram, hist_per_flag)
                 hist_per_flag, hist_percentages = self.get_histogram_of_percentages(hist_per_flag, number_of_pixels)
+                hist_percentages = self.group_by_primary_color(hist_percentages)
 
                 list_of_histograms.append({ 
                     'path': flag_full_path, 
-                    'colors_histogram': hist_per_flag, 
                     'colors_percentages' : hist_percentages
                 })
-
-                total_histogram = self.add_to_total_histogram(total_histogram, hist_per_flag)
 
         self.plot_histogram(total_histogram)
 
         print("Calculating the color percentages...")
         total_num_of_pixels_in_dataset = sum(total_histogram.values())
         total_histogram, total_histogram_percentages = self.get_histogram_of_percentages(total_histogram, total_num_of_pixels_in_dataset)
-        total_hist_for_json = { 'histogram_colors': total_histogram, 'histogram_percentages' : total_histogram_percentages }
+        print(total_histogram)
+        total_histogram_percentages = self.group_by_primary_color(total_histogram_percentages)
+        total_hist_for_json = { 'histogram_percentages' : total_histogram_percentages }
 
         return list_of_histograms, total_hist_for_json
 
@@ -206,7 +232,7 @@ class ColorDistributionsProcessor:
                    color_with_count[1][1] / 255.0, 
                    color_with_count[1][2] / 255.0, )
             color = Color(rgb=rgb)
-            flaglabs_color = FlaglabsColor(color, "", "", color.hex_l)
+            flaglabs_color = ColorVariation(color, "", "", color.hex_l)
 
             # try to find the most similar color in cash
             nearest_color = self.colors_cash.get(flaglabs_color.hex_value)
