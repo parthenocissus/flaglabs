@@ -1,6 +1,6 @@
 $(document).ready(function () {
 
-    let base = 3;
+    let base = 2;
     let size = {w: 150 * base, h: 100 * base};
 
     let flagSelectAPI = "_get_random",

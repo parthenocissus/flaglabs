@@ -14,7 +14,7 @@ DEBUG = True
 app = Flask(__name__)
 app.config.from_object(__name__)
 flag_set = []
-n_flags = 30  # 1
+n_flags = 35  # 1
 
 
 def flag_mappings():
