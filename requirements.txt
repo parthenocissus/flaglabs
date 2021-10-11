@@ -1,0 +1,9 @@
+svgpathtools~=1.4.2
+colour~=0.1.5
+svgwrite~=1.4.1
+svglib~=1.1.0
+reportlab~=3.6.1
+numpy~=1.21.2
+pillow~=8.3.2
+lxml~=4.6.3
+flask~=2.0.1
