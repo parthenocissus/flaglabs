@@ -38,6 +38,11 @@
 **Uroš Krčadinac**:
 
 - [ ] add item(s)
+
+**Dušan Pavlović**:
+
+- [ ] Look into the midi file structure.
+- [ ] Write the script for conversion of midi files to numpy array structure.
 ___
 
 ## September 11th - September 17th
