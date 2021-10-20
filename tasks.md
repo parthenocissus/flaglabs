@@ -1,6 +1,29 @@
-# Weekly To Do List
+# Current To Do List
 
-*please add each week's tasks to the top of this document*
+
+**Jacques Laroche**:
+
+- [ ] Create "National Mottos" dataset 
+	NOTE: create set from various web sources and combine this with real-life National Motto data (provided by Antonije's scraper)
+
+- [ ] Push current code for growing the Anthems audio dataset to our GitHub repo
+
+- [ ] Resize SVG symbols that were previously generated. Size needs to be 100x100 pixels. NOTE: For images that are not square reduce the larger side to 100px. 
+
+**Uroš Krčadinac**:
+
+- [ ] add item(s)
+
+**Dušan Pavlović**:
+
+- [ ] Investigate structure of MIDI files
+- [ ] Write the script for conversion of midi files to numpy array structure.
+
+
+___
+
+
+# Previous tasks (for Archive purposes)
 
 ## September 18th - September 24th
 
