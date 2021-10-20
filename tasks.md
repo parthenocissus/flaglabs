@@ -3,8 +3,11 @@
 
 **Jacques Laroche**:
 
-- [ ] Create "National Mottos" dataset 
-	NOTE: create set from various web sources and combine this with real-life National Motto data (provided by Antonije's scraper)
+- [x] Create "National Mottos" dataset 
+	NOTE: create set from various web sources and specify those sources
+
+- [ ] Add Real Mottos to "National Mottos" dataset
+	NOTE: Run Antonije's scraper to add real-life National Motto data in a separate file
 
 - [ ] Push current code for growing the Anthems audio dataset to our GitHub repo
 
