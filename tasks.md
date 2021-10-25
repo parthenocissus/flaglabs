@@ -3,14 +3,14 @@
 
 **Jacques Laroche**:
 
-- [x] Create "National Mottos" dataset 
-	NOTE: create set from various web sources and specify those sources
+- [x] Create "National Mottos" dataset<br/> 
+	**NOTE:** create set from various web sources and specify those sources
 
-- [x] Add Real Mottos to "National Mottos" dataset
-	NOTE: Run Antonije's scraper to add real-life National Motto data in a separate file
+- [x] Add Real Mottos to "National Mottos" dataset<br/>
+	**NOTE:** Didn't need to run Antonije's scraper because he already ran it and placed the data in a JSON file. That file needed to be cleaned up, so I did the necessary cleaning manually and with a Python script I wrote.
 	
-- [x] Study NLP and work on an implementation approach for the National Mottos Generator 
-	NOTE: the preliminary work on this has been done, but without direct assistance from someone with intimate NLP knowledge this is going to be an ongoing task for probably another two weekly cycles
+- [x] Study NLP and work on an implementation approach for the National Mottos Generator<br/> 
+	**NOTE:** the preliminary work on this has been done, but without direct assistance from someone with intimate NLP knowledge this is going to be an ongoing task for probably another two weekly cycles
 
 - [ ] Push current code for growing the Anthems audio dataset to our GitHub repo
 
