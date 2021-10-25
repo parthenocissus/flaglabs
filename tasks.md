@@ -6,8 +6,11 @@
 - [x] Create "National Mottos" dataset 
 	NOTE: create set from various web sources and specify those sources
 
-- [ ] Add Real Mottos to "National Mottos" dataset
+- [x] Add Real Mottos to "National Mottos" dataset
 	NOTE: Run Antonije's scraper to add real-life National Motto data in a separate file
+	
+- [x] Study NLP and work on an implementation approach for the National Mottos Generator 
+	NOTE: the preliminary work on this has been done, but without direct assistance from someone with intimate NLP knowledge this is going to be an ongoing task for probably another two weekly cycles
 
 - [ ] Push current code for growing the Anthems audio dataset to our GitHub repo
 
