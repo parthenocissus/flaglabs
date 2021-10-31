@@ -22,9 +22,11 @@
 
 **Dušan Pavlović**:
 
-- [ ] Investigate structure of MIDI files
-- [ ] Write the script for conversion of midi files to numpy array structure.
-
+- [x] Investigate structure of MIDI files
+- [x] Write the script for conversion of midi files to numpy array structure.
+- [ ] Write more functional code for conversion.
+- [ ] Add comments to the code for conversion of midi to csv.
+- [ ] Write Jupyter Notebook for the conversion with explanations about the midi file structure and the process of parsing and creating new csv dataset.
 
 ___
 
