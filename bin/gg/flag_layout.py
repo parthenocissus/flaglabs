@@ -233,6 +233,24 @@ class FlagLayout:
         self.fsc.center(scale_factor=uniform(0.4, 0.7))
         self.symbol_chance *= 1.4
 
+    # Rays (eg. ___ flag)
+    def sunburst(self):
+        self.flag.set_alternating_colors_chance(factor=4.5)
+        n = randrange(6, 20, 2)
+        theta = (2 * math.pi) / n
+        offset = 0 if random() < 0.75 else uniform(0, theta)
+        r = self.w
+        x1, y1 = r * math.sin(offset), r * math.cos(offset)
+        for i in range(1, n + 1):
+            c = self.choose_different_color()
+            x2, y2 = r * math.sin(i * theta + offset), r * math.cos(i * theta + offset)
+            d = f"M0,0 L{x1},{y1} L{x2},{y2} z"
+            t = f"translate({self.w / 2}, {self.h / 2})"
+            self.g.add(self.fc.path(d=d, stroke='none', fill=c, transform=t))
+            x1, y1 = x2, y2
+        self.fsc.center(scale_factor=uniform(0.4, 0.7))
+        self.symbol_chance *= 1.4
+
     # Diamond (eg. Brazilian flag)
     def diamond(self):
         self.unicolor()
@@ -254,12 +272,17 @@ class FlagLayout:
     def pale(self):
         self.unicolor()
         c = self.choose_different_color()
-        qoef = uniform(2, 3)
+        inverse = random() < 0.33
+        inverse = True
+        qoef = uniform(2.3, 4) if not inverse else uniform(1.4, 1.9)
         d = f"M{self.h / qoef},0 L{self.w - self.h / qoef},0 " \
             f"L{self.w - self.h / qoef},{self.h} L{self.h / qoef},{self.h} z"
         self.g.add(self.fc.path(d=d, stroke='none', fill=c))
-        self.fsc.center(scale_factor=uniform(0.4, 0.7))
-        self.symbol_chance *= 1.6
+        if inverse:
+            self.fsc.default_center_canton_small(scale_factor=uniform(0.4, 0.7), center_chance=0.2)
+        else:
+            self.fsc.center(scale_factor=uniform(0.4, 0.7))
+        self.symbol_chance *= 1.7
 
     # Chevron (left triangle), also chevronel (hollow chevron with stroke only)
     def chevron(self):

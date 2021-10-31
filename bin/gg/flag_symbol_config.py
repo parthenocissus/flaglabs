@@ -61,8 +61,8 @@ class FlagSymbolConfig:
     # __________________________
     # Shortcuts for layout types
 
-    def default_center_canton_small(self, scale_factor=uniform(0.3, 0.8)):
-        if random() <= 0.33:
+    def default_center_canton_small(self, scale_factor=uniform(0.3, 0.8), center_chance=0.33):
+        if random() <= center_chance:
             return self.center(scale_factor)
         else:
             return self.canton_small(scale_factor=uniform(0.2, 0.3))
