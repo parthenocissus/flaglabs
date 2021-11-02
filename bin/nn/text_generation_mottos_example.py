@@ -1,14 +1,23 @@
+"""
+Create and train a new model based on metaparameters.
+Later you can use this model for generating new text via text_generation_mottos_example_run_model.py
+"""
+
 from bin.nn.textgenrnn.textgenrnn import textgenrnn
 from datetime import datetime
 
-file_name = "mottos/dataset/cleaned_generalized_national_mottos.txt"
-model_name = 'colaboratory'
+mottos_path = "mottos/dataset/"
+file_name_generalized = f"{mottos_path}cleaned_generalized_national_mottos.txt"
+file_name = f"{mottos_path}mottos_full_dataset.txt"
+model_name = 'model_2_11_2021_a'
+
+output_path = "bin/nn/textgenrnn/output/"
 
 model_cfg = {
     'word_level': True,   # set to True if want to train a word-level model (requires more data and smaller max_length)
     'rnn_size': 128,   # number of LSTM cells of each layer (128/256 recommended)
     'rnn_layers': 4,   # number of LSTM layers (>=2 recommended)
-    'rnn_bidirectional': False,   # consider text both forwards and backward, can give a training boost
+    'rnn_bidirectional': True,   # consider text both forwards and backward, can give a training boost
     'max_length': 10,   # number of tokens to consider before predicting the next (20-40 for characters, 5-10 for words recommended)
     'max_words': 10000,   # maximum number of words to model; the rest will be ignored (word-level model only)
 }
@@ -46,7 +55,7 @@ train_function(
 
 # this temperature schedule cycles between 1 very unexpected token, 1 unexpected token, 2 expected tokens, repeat.
 # changing the temperature schedule can result in wildly different output!
-temperature = [1.0, 0.5, 0.2, 0.2]
+temperature = [1.0, 0.5, 0.7, 0.2]
 prefix = None  # if you want each generated text to start with a given seed text
 
 if train_cfg['line_delimited']:

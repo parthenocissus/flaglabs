@@ -21,7 +21,7 @@
     { "weight": 1, "name": "bicolor_diagonal_right" },
     { "weight": 3, "name": "bend_left" },
     { "weight": 2, "name": "bend_right" },
-    { "weight": 3000, "name": "pale" },
+    { "weight": 3, "name": "pale" },
     { "weight": 2, "name": "diamond", "layer2": ["border", "offset_stripes_vertical", "offset_stripes_horizontal"] },
     { "weight": 5, "name": "chevron", "layer2": ["pall", "fly_stripe"] },
     { "weight": 3, "name": "canton" },
