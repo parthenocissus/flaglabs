@@ -27,6 +27,11 @@
 - [ ] Write more functional code for conversion.
 - [ ] Add comments to the code for conversion of midi to csv.
 - [ ] Write Jupyter Notebook for the conversion with explanations about the midi file structure and the process of parsing and creating new csv dataset.
+- [ ] Clear the dataset + preparation for modeling (categorical variables encoding, etc).
+- [ ] Exploratory Data Analysis for the purpose of: (1) anthem vizualizations and (2) RNN model.
+- [ ] Check sklearn for models and try to fit some to the dataset.
+- [ ] Make some basic anthem visualizations - just for fun!
+- [ ] Make inverse conversion and compare the result with the original mid files! See if we are losing some information in this conversion. (systematically!)
 
 ___
 
