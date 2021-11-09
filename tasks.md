@@ -35,6 +35,7 @@
 - [ ] Remove duplicates in the extended audio dataset
 - [ ] Scrape lyrics for anthems and prepare them for the RNN generation of anthem text
 - [ ] Finish the Jeff Heaton course on Deep Learning Applications
+- [ ] Look into music characterization/parametrization related to ML and CNN/RNN. 
 
 ___
 
