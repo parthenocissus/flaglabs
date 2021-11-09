@@ -32,6 +32,9 @@
 - [ ] Check sklearn for models and try to fit some to the dataset.
 - [ ] Make some basic anthem visualizations - just for fun!
 - [ ] Make inverse conversion and compare the result with the original mid files! See if we are losing some information in this conversion. (systematically!)
+- [ ] Remove duplicates in the extended audio dataset
+- [ ] Scrape lyrics for anthems and prepare them for the RNN generation of anthem text
+- [ ] Finish the Jeff Heaton course on Deep Learning Applications
 
 ___
 
