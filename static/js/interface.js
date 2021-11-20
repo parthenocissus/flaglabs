@@ -17,6 +17,7 @@ $(document).ready(function () {
 
     for (let key in flagMappings) {
         $("#choose-params").append(selectHtml(key, flagMappings[key]["label"]));
+        console.log(flagMappings[key]["label"]);
     }
 
     chosen.chosen({max_selected_options: 5})
