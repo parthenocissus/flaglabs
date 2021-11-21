@@ -1,6 +1,6 @@
 import math
 import copy
-from random import choices, random, randint, uniform, randrange
+from random import choices, random, randint, uniform, randrange, choice
 
 from bin.gg.flag_symbol_config import FlagSymbolConfig
 
@@ -39,7 +39,7 @@ class FlagLayout:
         clip_path.add(self.fc.rect((0, 0), (self.w, self.h)))
         self.fc.add(self.g)
         getattr(self, self.layout['name'])()
-        self.symbol_chance = self.original_symbol_chance
+        # self.symbol_chance = self.original_symbol_chance
         getattr(self, self.layer2['name'])()
 
     # Getting the name of the function
@@ -77,7 +77,7 @@ class FlagLayout:
         c = self.choose_different_color()
         self.g.add(self.fc.rect((0, 0), (self.w, self.h), stroke='none', fill=c))
         self.fsc.default_center_center_left()
-        self.symbol_chance *= 1.95
+        self.flag.symbol_chance *= 1.95
 
     # Horizontal bicolor
     def bicolor_horizontal(self):
@@ -85,7 +85,7 @@ class FlagLayout:
             c = self.choose_different_color()
             self.g.add(self.fc.rect((0, i * self.h / 2), (self.w, self.h / 2), stroke='none', fill=c))
         self.fsc.default_center_center_left()
-        self.symbol_chance *= 1.4
+        self.flag.symbol_chance *= 1.4
 
     # Vertical bicolor
     def bicolor_vertical(self):
@@ -93,7 +93,7 @@ class FlagLayout:
             c = self.choose_different_color()
             self.g.add(self.fc.rect((i * self.w / 2, 0), (self.w / 2, self.h), stroke='none', fill=c))
         self.fsc.center(scale_factor=uniform(0.4, 0.7))
-        self.symbol_chance *= 1.4
+        self.flag.symbol_chance *= 1.4
 
     # Diagonal (left)
     def bicolor_diagonal_left(self):
@@ -152,7 +152,7 @@ class FlagLayout:
             c = self.choose_different_color()
             self.g.add(self.fc.rect((0, i * self.h / 3), (self.w, self.h / 3), stroke='none', fill=c))
         self.fsc.default_center_center_left()
-        self.symbol_chance *= 1.4
+        self.flag.symbol_chance *= 1.4
 
     # Vertical tricolor
     def tricolor_vertical(self):
@@ -160,7 +160,7 @@ class FlagLayout:
             c = self.choose_different_color()
             self.g.add(self.fc.rect((i * self.w / 3, 0), (self.w / 3, self.h), stroke='none', fill=c))
         self.fsc.center(scale_factor=uniform(0.4, 0.7))
-        self.symbol_chance *= 1.4
+        self.flag.symbol_chance *= 1.4
 
     # Horizontal stripes
     def stripes_horizontal(self):
@@ -171,7 +171,7 @@ class FlagLayout:
             self.g.add(self.fc.rect((0, i * self.h / n_stripes), (self.w, self.h / n_stripes),
                                     stroke='none', fill=c))
         self.fsc.default_center_center_left()
-        self.symbol_chance *= 1.2
+        self.flag.symbol_chance *= 1.2
 
     # Vertical stripes
     def stripes_vertical(self):
@@ -182,7 +182,7 @@ class FlagLayout:
             self.g.add(self.fc.rect((i * self.w / n_stripes, 0), (self.w / n_stripes, self.h),
                                     stroke='none', fill=c))
         self.fsc.center(scale_factor=uniform(0.4, 0.7))
-        self.symbol_chance *= 1.2
+        self.flag.symbol_chance *= 1.2
 
     # Checkered
     def checkered(self):
@@ -196,7 +196,7 @@ class FlagLayout:
                                         (self.w / n_hor, self.h / n_ver),
                                         stroke='none', fill=c))
         self.fsc.center(scale_factor=uniform(0.4, 0.7))
-        self.symbol_chance *= 1.2
+        self.flag.symbol_chance *= 1.2
 
     # Lozenges
     def lozenges(self):
@@ -213,7 +213,7 @@ class FlagLayout:
                 t = f"translate({-4 * self.w} {-4 * self.h}) skewX({skew_x}) skewY({skew_y})"
                 self.g.add(self.fc.rect((x1, x2), (r_w, r_h), stroke='none', fill=c, transform=t))
         self.fsc.center(scale_factor=uniform(0.4, 0.7))
-        self.symbol_chance *= 1.2
+        self.flag.symbol_chance *= 1.2
 
     # Sunburst (eg. Macedonian flag)
     def sunburst(self):
@@ -231,32 +231,33 @@ class FlagLayout:
             self.g.add(self.fc.path(d=d, stroke='none', fill=c, transform=t))
             x1, y1 = x2, y2
         self.fsc.center(scale_factor=uniform(0.4, 0.7))
-        self.symbol_chance *= 1.4
+        self.flag.symbol_chance *= 1.4
 
-    # Rays (eg. ___ flag)
-    def sunburst(self):
-        self.flag.set_alternating_colors_chance(factor=4.5)
-        n = randrange(6, 20, 2)
+    # Rays (eg. Seychelles flag)
+    def rays(self):
+        self.flag.set_alternating_colors_chance(factor=2)
+        n = randrange(14, 30, 2)
         theta = (2 * math.pi) / n
         offset = 0 if random() < 0.75 else uniform(0, theta)
-        r = self.w
+        r = 2 * self.w
         x1, y1 = r * math.sin(offset), r * math.cos(offset)
+        center_x, center_y = choice([0, self.w]), choice([0, self.h])
         for i in range(1, n + 1):
             c = self.choose_different_color()
             x2, y2 = r * math.sin(i * theta + offset), r * math.cos(i * theta + offset)
             d = f"M0,0 L{x1},{y1} L{x2},{y2} z"
-            t = f"translate({self.w / 2}, {self.h / 2})"
+            t = f"translate({center_x}, {center_y})"
             self.g.add(self.fc.path(d=d, stroke='none', fill=c, transform=t))
             x1, y1 = x2, y2
-        self.fsc.center(scale_factor=uniform(0.4, 0.7))
-        self.symbol_chance *= 1.4
+        self.fsc.default_canton_small_variations()
+        self.flag.symbol_chance *= 0.4
 
     # Diamond (eg. Brazilian flag)
     def diamond(self):
         self.unicolor()
         c = self.choose_different_color()
-        q_y = 5 if self.layer2['name'] is 'none' else 3
-        q_x = 4 if self.layer2['name'] is 'none' else 2.5
+        q_y = 5 if self.layer2['name'] == 'none' else 3
+        q_x = 4 if self.layer2['name'] == 'none' else 2.5
         margin_y = uniform(0, self.h / q_y)
         margin_x = uniform(0, self.h / q_x)
         x1, y1 = self.w / 2, margin_y
@@ -266,7 +267,7 @@ class FlagLayout:
         d = f"M{x1},{y1} L{x2},{y2} L{x3},{y3} L{x4},{y4} z"
         self.g.add(self.fc.path(d=d, stroke='none', fill=c))
         self.fsc.center(scale_factor=uniform(0.2, 0.4))
-        self.symbol_chance *= 1.6
+        self.flag.symbol_chance *= 1.6
 
     # Pale (eg. Canadian flag)
     def pale(self):
@@ -282,11 +283,11 @@ class FlagLayout:
             self.fsc.default_center_canton_small(scale_factor=uniform(0.4, 0.7), center_chance=0.2)
         else:
             self.fsc.center(scale_factor=uniform(0.4, 0.7))
-        self.symbol_chance *= 1.7
+        self.flag.symbol_chance *= 1.7
 
     # Chevron (left triangle), also chevronel (hollow chevron with stroke only)
     def chevron(self):
-        if self.layer2['name'] is 'none':
+        if self.layer2['name'] == 'none':
             self.unicolor()
         c = self.choose_different_color()
         chevron_w = self.h * math.sqrt(3) / 2
@@ -301,33 +302,33 @@ class FlagLayout:
             fill = 'none' if random() > 0.5 else c
         self.g.add(self.fc.path(d=d, stroke=stroke, fill=fill))
         self.fsc.default_left_or_right()
-        self.symbol_chance *= 1.4
+        self.flag.symbol_chance *= 1.4
 
     # Hoist Stripe
     def hoist_stripe(self):
-        if self.layer2['name'] is 'none':
+        if self.layer2['name'] == 'none':
             self.unicolor()
         c = self.choose_different_color()
         wid = self.h / uniform(2, 3)
         self.g.add(self.fc.rect((0, 0), (wid, self.h), stroke='none', fill=c))
         wf = (wid + (self.w - wid) / 2) / self.w
         self.fsc.center_right(scale_factor=uniform(0.4, 0.7), width_fraction=wf)
-        self.symbol_chance *= 1.6
+        self.flag.symbol_chance *= 1.6
 
     # Fly Stripe
     def fly_stripe(self):
-        if self.layer2['name'] is 'none':
+        if self.layer2['name'] == 'none':
             self.unicolor()
         c = self.choose_different_color()
         wid = self.w - (self.h / uniform(2, 3))
         self.g.add(self.fc.rect((wid, 0), (self.w, self.h), stroke='none', fill=c))
         wf = wid / self.w / 2
         self.fsc.center_right(scale_factor=uniform(0.4, 0.7), width_fraction=wf)
-        self.symbol_chance *= 1.7
+        self.flag.symbol_chance *= 1.7
 
     # Bottom Stripe
     def bottom_stripe(self):
-        if self.layer2['name'] is 'none':
+        if self.layer2['name'] == 'none':
             self.unicolor()
         c = self.choose_different_color()
         margin = self.h - (self.h / uniform(2.5, 4))
@@ -335,11 +336,11 @@ class FlagLayout:
         hf = (margin / self.h) / 2
         sf = 2 * hf * uniform(0.4, 0.6)
         self.fsc.center_down(scale_factor=sf, height_fraction=hf)
-        self.symbol_chance *= 1.7
+        self.flag.symbol_chance *= 1.7
 
     # Top Stripe
     def top_stripe(self):
-        if self.layer2['name'] is 'none':
+        if self.layer2['name'] == 'none':
             self.unicolor()
         c = self.choose_different_color()
         margin = self.h / uniform(2.5, 4)
@@ -349,11 +350,11 @@ class FlagLayout:
         cd = (margin / self.h) / 2
         self.fsc.default_canton_center_down(scale_factor=sf, height_fraction=hf,
                                             canton_dim=cd)
-        self.symbol_chance *= 1.7
+        self.flag.symbol_chance *= 1.7
 
     # Offset stripes, vertical
     def offset_stripes_vertical(self):
-        if self.layer2['name'] is 'none':
+        if self.layer2['name'] == 'none':
             self.unicolor()
         c = self.choose_different_color()
         margin = self.h / uniform(5, 10)
@@ -363,11 +364,11 @@ class FlagLayout:
             self.fc.line((self.w - margin, 0), (self.w - margin, self.h),
                          stroke=c, fill='none', stroke_width=str_w))
         self.fsc.center(scale_factor=uniform(0.3, 0.6))
-        self.symbol_chance *= 1.6
+        self.flag.symbol_chance *= 1.6
 
     # Offset stripes, horizontal
     def offset_stripes_horizontal(self):
-        if self.layer2['name'] is 'none':
+        if self.layer2['name'] == 'none':
             self.unicolor()
         c = self.choose_different_color()
         margin = self.h / uniform(5, 10)
@@ -376,14 +377,14 @@ class FlagLayout:
         self.g.add(self.fc.line((0, self.h - margin), (self.w, self.h - margin),
                                 stroke=c, fill='none', stroke_width=str_w))
         self.fsc.default_center_center_left()
-        self.symbol_chance *= 1.6
+        self.flag.symbol_chance *= 1.6
 
     # Canton (upper left recursive flag)
     def canton(self):
-        if self.layer2['name'] is 'none':
+        if self.layer2['name'] == 'none':
             self.unicolor()
         self.fsc.center_right(scale_factor=uniform(0.4, 0.55), width_fraction=0.75)
-        self.symbol_chance *= 1.2
+        self.flag.symbol_chance *= 1.2
         # Recursively create another flag for canton (upper left rectangle):
         if self.h > self.genflag_origin.h * 0.25:
             new_flag = self.genflag_origin.create_new_flag
@@ -397,7 +398,7 @@ class FlagLayout:
 
     # Border (also double border and border without the left hoist side)
     def border(self):
-        if self.layer2['name'] is 'none':
+        if self.layer2['name'] == 'none':
             self.unicolor()
         c = self.choose_different_color()
         wid = uniform(self.h / 16, self.h / 6)
@@ -422,7 +423,7 @@ class FlagLayout:
             self.fsc.default_center_center_left(scale_factor=uniform(0.3, 0.6))
         else:
             self.fsc.center(scale_factor=uniform(0.3, 0.6))
-        self.symbol_chance *= 1.5
+        self.flag.symbol_chance *= 1.5
 
     # Cross
     def cross(self):
@@ -441,7 +442,7 @@ class FlagLayout:
         self.g.add(self.fc.line((0, self.h / 2), (self.w, self.h / 2),
                                 stroke=c, fill='none', stroke_width=wid))
         self.fsc.center(scale_factor=uniform(0.1, 0.7))
-        self.symbol_chance *= 0.8
+        self.flag.symbol_chance *= 0.8
 
     # Nordic Cross
     def nordic_cross(self):
@@ -462,7 +463,7 @@ class FlagLayout:
         sf = uniform(0.1, 0.6)
         wf = (self.h / 2) / self.w
         self.fsc.center_left(scale_factor=sf, width_fraction=wf)
-        self.symbol_chance *= 0.6
+        self.flag.symbol_chance *= 0.6
 
     # Canton Cross
     def canton_cross(self):
@@ -481,7 +482,7 @@ class FlagLayout:
         self.g.add(self.fc.line((0, self.h / 3), (self.w, self.h / 3),
                                 stroke=c, fill='none', stroke_width=wid))
         self.fsc.canton_small(scale_factor=uniform(0.2, 0.33), dim=(1 / 3, 1 / 3))
-        self.symbol_chance *= 0.6
+        self.flag.symbol_chance *= 0.6
 
     # Saltire (X-cross)
     def saltire(self):
@@ -500,7 +501,7 @@ class FlagLayout:
         self.g.add(self.fc.line((0, self.h), (self.w, 0),
                                 stroke=c, fill='none', stroke_width=wid))
         self.fsc.center(scale_factor=uniform(0.1, 0.7))
-        self.symbol_chance *= 0.6
+        self.flag.symbol_chance *= 0.6
 
     # Cross and saltire (eg. British flag)
     def cross_saltire(self):
@@ -533,11 +534,11 @@ class FlagLayout:
         self.g.add(self.fc.line((0, self.h / 2), (self.w, self.h / 2),
                                 stroke=c, fill='none', stroke_width=wid_cross))
         self.fsc.center(scale_factor=uniform(0.1, 0.7))
-        self.symbol_chance *= 0.6
+        self.flag.symbol_chance *= 0.6
 
     # Pall (Y-shape flags, eg. South African flag)
     def pall(self):
-        if self.layer2['name'] is 'none':
+        if self.layer2['name'] == 'none':
             if random() > self.complexity:
                 self.unicolor()
             else:
@@ -565,7 +566,7 @@ class FlagLayout:
         self.g.add(self.fc.path(d=d_line, stroke_width=wid, stroke=c, fill='none'))
         scale_left = uniform(0.2, 0.3)
         self.fsc.center_left(scale_factor=scale_left, width_fraction=0.13)
-        self.symbol_chance *= 0.8
+        self.flag.symbol_chance *= 0.8
 
     # Neutral action
     def none(self):

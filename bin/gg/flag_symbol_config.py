@@ -58,6 +58,22 @@ class FlagSymbolConfig:
         self.scale(scale_factor)
         return self.sd
 
+    # Cantons in other directions:
+    def canton_small_upper_right(self, scale_factor=0.2, dim=(0.2, 0.2)):
+        self.sd['pos'] = (self.h * dim[0], self.h - self.h * dim[1])
+        self.scale(scale_factor)
+        return self.sd
+
+    def canton_small_lower_right(self, scale_factor=0.2, dim=(0.2, 0.2)):
+        self.sd['pos'] = (self.w - self.h * dim[0], self.h - self.h * dim[1])
+        self.scale(scale_factor)
+        return self.sd
+
+    def canton_small_lower_left(self, scale_factor=0.2, dim=(0.2, 0.2)):
+        self.sd['pos'] = (self.w - self.h * dim[0], self.h * dim[1])
+        self.scale(scale_factor)
+        return self.sd
+
     # __________________________
     # Shortcuts for layout types
 
@@ -89,3 +105,15 @@ class FlagSymbolConfig:
             return self.canton_small(dim=dim)
         else:
             return self.center_up(scale_factor=scale_factor, height_fraction=height_fraction)
+
+    def default_canton_small_variations(self, scale=uniform(0.3, 0.4), canton_dim=0.3):
+        dim = (canton_dim, canton_dim)
+        toss = random()
+        if toss < 0.25:
+            return self.canton_small(scale_factor=scale, dim=dim)
+        elif 0.25 <= toss < 0.5:
+            return self.canton_small_lower_right(scale_factor=scale, dim=dim)
+        elif 0.5 <= toss < 0.75:
+            return self.canton_small_upper_right(scale_factor=scale, dim=dim)
+        else:
+            return self.canton_small_lower_left(scale_factor=scale, dim=dim)

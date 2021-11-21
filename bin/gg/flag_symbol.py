@@ -24,17 +24,20 @@ class FlagSymbol:
         self.symbol = None
         self.build_symbol = None
 
-        # Set symbol (eg. coat of arms, a circle, a star, etc)
-        if random() < self.symbol_chance:
-            self.symbol = self.choose_symbol()
-        else:
-            self.build_symbol = self.empty_symbol
-
     # Draw symbol
     def draw(self):
+        self.set_symbol()
         self.change_alternating(1)
         symbol = self.build_symbol()
         self.fc.add(symbol)
+
+    # Set symbol
+    def set_symbol(self):
+        # Set symbol (eg. coat of arms, a circle, a star, etc)
+        if random() < self.flag.symbol_chance:
+            self.symbol = self.choose_symbol()
+        else:
+            self.build_symbol = self.empty_symbol
 
     # Choose a color
     def choose_different_color(self):

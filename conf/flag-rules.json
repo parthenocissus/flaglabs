@@ -42,7 +42,8 @@
     { "weight": 2, "name": "stripes_vertical", "layer2": ["chevron", "canton", "diamond", "saltire"] },
     { "weight": 3, "name": "checkered", "layer2": ["chevron", "canton", "diamond", "saltire"] },
     { "weight": 2, "name": "lozenges", "layer2": ["chevron", "canton", "diamond", "saltire"] },
-    { "weight": 2, "name": "sunburst", "layer2": ["canton"] }
+    { "weight": 2, "name": "sunburst", "layer2": ["canton"] },
+    { "weight": 2000, "name": "rays" }
   ],
 
   "colors": [
