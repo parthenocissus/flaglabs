@@ -236,7 +236,7 @@ class FlagLayout:
     # Rays (eg. Seychelles flag)
     def rays(self):
         self.flag.set_alternating_colors_chance(factor=2)
-        n = randrange(14, 30, 2)
+        n = randrange(10, 30, 2)
         theta = (2 * math.pi) / n
         offset = 0 if random() < 0.75 else uniform(0, theta)
         r = 2 * self.w

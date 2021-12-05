@@ -66,12 +66,34 @@ class InputDataUtil:
         else:
             return value
 
+    # Get all symbols by tags
+    def tags2symbols(self, tags):
+        symb = {}
+        # print(tags)
+        for t in tags:
+            # print(t)
+            # print(tags[t])
+            symbol_rules = [r for r in self.rules['symbols'] if t in r['tags']]
+            # print(symbol_rules)
+            for sr in symbol_rules:
+                value = tags[t]
+                if sr['name'] in symb:
+                    value = symb[sr['name']] if symb[sr['name']] > tags[t] else tags[t]
+                symb[sr['name']] = value
+        return symb
+
     # Create a pool of new filters
     # Getting ponders from input-ponders
     # for every record in raw data input
     def process_raw_input(self):
         for r in self.raw_input:
             ponders = self.input_ponders[r['key']]
+
+            # new tag-based system for calculating symbol probability distributions
+            if 'symbols' in ponders:
+                ponders['symbols'] = self.tags2symbols(ponders['symbols'])
+            # print(ponders['symbols'])
+
             ponder_keys = [k for k in ponders.keys() if k != "meta_data"]
             for pk in ponder_keys:
                 for name in ponders[pk].keys():
@@ -105,9 +127,7 @@ class InputDataUtil:
                 t = self.data[k]['type']
                 v = self.adjust_to_half_range(v, t)
                 self.rules[key][name] = v * p
-                # self.rules[key][name] = (v + p) / 2
             elif key == 'particular_colors':
-                # pass
                 rule = [r for r in self.particular_colors if r['name'] == name][0]
                 factor = self.exponential_map(v, p)
                 rule['weight'] *= factor
@@ -116,6 +136,7 @@ class InputDataUtil:
                 factor = self.exponential_map(v, p)
                 rule['weight'] *= factor
 
+        print(self.rules)
         return self.rules
 
 
@@ -127,25 +148,25 @@ if __name__ == '__main__':
     rules['symbols'] = symbols['symbols']
 
     input_ponders_path = 'conf/input-ponders.json'
-    input_ponders = json.load(open(input_ponders_path))
+    input_ponders = json.load(open(input_ponders_path, encoding="utf8"))
 
-    dummy_input = [
-        {"key": "warm", "value": 0.5, "type": "bipolar"},
-        {"key": "complex", "value": 0.8, "type": "bipolar"},
-        {"key": "anarchist", "value": 0, "type": "unipolar"},
-        {"key": "african", "value": 0, "type": "unipolar"},
-        {"key": "slavic", "value": 1, "type": "unipolar"},
-        {"key": "corporate", "value": 0, "type": "unipolar"}
-    ]
     # dummy_input = [
-    #     {"key": "complex", "value": 0.1, "type": "bipolar"}
+    #     {"key": "warm", "value": 0.5, "type": "bipolar"},
+    #     {"key": "complex", "value": 0.8, "type": "bipolar"},
+    #     {"key": "anarchist", "value": 0, "type": "unipolar"},
+    #     {"key": "african", "value": 0, "type": "unipolar"},
+    #     {"key": "slavic", "value": 1, "type": "unipolar"},
+    #     {"key": "corporate", "value": 0, "type": "unipolar"}
     # ]
     # dummy_input = [
-    #     {"key": "warm", "value": 0.4, "type": "bipolar"},
-    #     {"key": "slavic", "value": 1, "type": "unipolar"}
+    #     # {"key": "serbian", "value": 1, "type": "unipolar"},
+    #     # {"key": "yugoslav", "value": 1, "type": "unipolar"},
+    #     {"key": "anarchist", "value": 1, "type": "unipolar"}
     # ]
     dummy_input = [
-        {"key": "light", "value": 1, "type": "bipolar"}
+        # {"key": "serbian", "value": 1, "type": "unipolar"},
+        # {"key": "yugoslav", "value": 1, "type": "unipolar"},
+        {"key": "warm", "value": 1, "type": "bipolar"}
     ]
 
     iu = InputDataUtil(default_rules=rules, input_ponders=input_ponders, raw_input=dummy_input)

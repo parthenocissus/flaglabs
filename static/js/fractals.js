@@ -72,21 +72,26 @@ $(document).ready(function () {
                 let w = 150 * factor,
                     h = 100 * factor;
 
+                let noGhosts = () => {
+                    // comment for ghost patters:
+                    gs[index].g.remove();
+                }
+
                 rootFlag.attr("width", w)
                     .attr("height", h)
                     .attr("viewBox", "0 0 150 100")
                     .attr("preserveAspectRatio", "xMidYMid meet")
                     .on("click", () => {
-                        gs[index].g.remove();
-                        // rootFlag.remove();
+                        // gs[index].g.remove();
+                        noGhosts();
                         let newStart = {x: gs[index].x, y: gs[index].y};
                         let nextMetaLvl = metaLvl + 1;
                         getNewFlags(newStart, nextMetaLvl);
                     })
                     .on("contextmenu", function (d, i) {
                         d3.event.preventDefault();
-                        gs[index].g.remove();
-                        // rootFlag.remove();
+                        noGhosts();
+                        // gs[index].g.remove();
                         let newStart = {x: gs[index].x, y: gs[index].y};
                         getNewFlags(newStart, metaLvl, 1);
                     });

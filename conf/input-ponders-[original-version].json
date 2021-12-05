@@ -121,7 +121,7 @@
   },
 
   "anarchist": {
-    "meta_data": {"label": "Anarchist", "type": "unipolar"},
+    "meta_data": {"label": "Anarchist", "type": "bipolar"},
     "layout": {
       "bicolor_diagonal_left": 1,
       "bicolor_diagonal_right": 1,
@@ -133,7 +133,13 @@
       "black": 1
     },
     "symbols": {
-      "anarchism": 1
+      "anarchism": 1,
+      "anarchism_rough": 1,
+      "fist": 1,
+      "pentagram": 0.2,
+      "bitcoin": 0.2,
+      "rattlesnake": 0.2,
+      "porcupine": 0.1
     }
   },
 
@@ -154,7 +160,8 @@
       "yellow": 1
     },
     "symbols": {
-      "african": 1
+      "africa": 1,
+      "maasai_shield": 0.8
     }
   },
 
@@ -173,7 +180,13 @@
       "blue": 1
     },
     "symbols": {
-      "slavic": 1
+      "pentagram": 0.5,
+      "orthodox_cross": 1,
+      "russian_cross": 1,
+      "kolovrat": 0.7,
+      "hammer_sickle": 0.7,
+      "croatian_checkerboard": 0.7,
+      "serbian_cross": 0.7
     }
   },
 
@@ -196,7 +209,10 @@
       "sunburst": 0.5
     },
     "symbols": {
-      "queer": 1
+      "transgender": 1,
+      "transgender2": 1,
+      "gay": 1,
+      "lesbian": 1
     },
     "direct_rules": {
       "complexity": 0.7,
@@ -208,9 +224,12 @@
   "corporate": {
     "meta_data": {"label": "Corporate", "type": "unipolar"},
     "symbols": {
-      "corporate": 1,
-      "capitalism": 1,
-      "crypto": 0.5
+      "dollar": 1,
+      "apple_logo": 1,
+      "nike": 1,
+      "mcdonalds": 1,
+      "mercedes_benz": 1,
+      "bitcoin": 0.5
     }
   },
 
@@ -229,8 +248,16 @@
       "white": 0.2
     },
     "symbols": {
-      "socialism": 1,
-      "communism": 1
+      "anarchism": 0.1,
+      "anarchism_rough": 0.1,
+      "pentagram": 1,
+      "hammer_sickle": 1,
+      "fist": 1,
+      "socialism_star_hammer": 1,
+      "socialism_rose": 1,
+      "china_stars": 0.8,
+      "pentagram_skj": 1,
+      "yugoslavia_emblem": 0.7
     }
   },
 
@@ -252,7 +279,13 @@
       "yellow": 0.2
     },
     "symbols": {
-      "christian": 1
+      "pentagram": -1,
+      "orthodox_cross": 1,
+      "russian_cross": 1,
+      "hammer_sickle": -1,
+      "serbian_cross": 0.7,
+      "greek_cross": 1,
+      "swiss_cross": 1
     }
   },
 
@@ -274,7 +307,15 @@
       "red": 0.5
     },
     "symbols": {
-      "islam": 1
+      "islam": 1,
+      "quran": 1,
+      "rub_el_hizb": 1,
+      "crescent_star": 1,
+      "crescent_star_up": 1,
+      "egypt_eagle": 0.5,
+      "arab_league": 1,
+      "saudi": 1,
+      "saudi_emblem": 1
     }
   },
 
@@ -290,8 +331,13 @@
       "blue": 1
     },
     "symbols": {
-      "serbian": 1,
-      "yugoslav": 0.5
+      "pentagram": 0.2,
+      "orthodox_cross": 0.5,
+      "russian_cross": 0.3,
+      "hammer_sickle": 0.7,
+      "serbian_cross": 1,
+      "serbian_eagle_bw": 1,
+      "serbian_empire_eagle": 1
     }
   },
 
@@ -308,8 +354,8 @@
       "blue": 1
     },
     "symbols": {
-      "croatian": 1,
-      "yugoslav": 0.5
+      "swiss_cross": 0.5,
+      "croatian_checkerboard": 1
     }
   },
 
@@ -328,8 +374,11 @@
       "white": 1
     },
     "symbols": {
-      "south_american": 1,
-      "hispanic": 1
+      "pentagram": 0.5,
+      "random_star": 1,
+      "sol_de_mayo": 1,
+      "hispanic_star": 1,
+      "venezuela_stars": 0.8
     },
     "direct_rules": {
       "alternating_colors_chance": 0.6
@@ -360,7 +409,16 @@
       "black": 0.5
     },
     "symbols": {
-      "nordic": 1
+      "ring": 1,
+      "vevigsir": 1,
+      "swedish_crowns": 1,
+      "swedish_crowns2": 1,
+      "norway_army": 1,
+      "norway_lion": 1,
+      "norway_wyvern": 1,
+      "norway_wyvern2": 1,
+      "denmark_lions": 1,
+      "hannunvaakuna": 1
     }
   },
 
@@ -368,7 +426,14 @@
     "meta_data": {"label": "Antivax", "type": "unipolar"},
     "symbols": {
       "antivax": 1,
-      "covid": 1
+      "antivax2": 1,
+      "antivax3": 1,
+      "antivax4": 1,
+      "covid": 1,
+      "covid2": 1,
+      "covid3": 1,
+      "covid_hands": 1,
+      "saltire_cross": 1
     },
     "direct_rules": {
       "symbol_chance": 1
@@ -392,7 +457,16 @@
       "unicolor": 1
     },
     "symbols": {
-      "pirate": 1
+      "pirate": 1,
+      "pirate2": 1,
+      "pirate3": 1,
+      "pirate4": 1,
+      "pirate5": 1,
+      "pirate6": 1,
+      "pirate7": 1,
+      "pirate8": 1,
+      "pirate_party": 1,
+      "pirate_party_circle": 1
     },
     "direct_rules": {
       "symbol_chance": 1
@@ -413,8 +487,15 @@
       "tricolor_horizontal": 1
     },
     "symbols": {
-      "islam": 0.8,
-      "arab": 1
+      "islam": 1,
+      "quran": 0.5,
+      "rub_el_hizb": 0.5,
+      "crescent_star": 1,
+      "crescent_star_up": 1,
+      "egypt_eagle": 1,
+      "arab_league": 1,
+      "saudi": 1,
+      "saudi_emblem": 1
     }
   },
 
@@ -428,7 +509,10 @@
       "yellow": 0.5
     },
     "symbols": {
-      "eco": 1
+      "green_hand": 1,
+      "recycle": 1,
+      "eu_greens": 1,
+      "eu_greens_sunflower": 1
     }
   },
 
@@ -446,10 +530,11 @@
       "yellow": 0.2
     },
     "symbols": {
-      "yugoslav": 1,
-      "socialism": 0.5,
-      "communism": 0.5,
-      "balkan": 0.3
+      "pentagram": 1,
+      "hammer_sickle": 0.8,
+      "fist": 0.8,
+      "pentagram_skj": 1,
+      "yugoslavia_emblem": 1
     }
   },
 
@@ -466,8 +551,11 @@
       "white": 0.3
     },
     "symbols": {
-      "hindu": 1,
-      "buddhism": 1
+      "ashoka_chakra": 1,
+      "om": 1,
+      "hindu_swastika": 1,
+      "circle": 0.5,
+      "ring": 0.5
     }
   },
 
@@ -485,9 +573,16 @@
       "blue": 0.9
     },
     "symbols": {
-      "buddhism": 1,
-      "east_asian": 1,
-      "chinese": 1
+      "ashoka_chakra": 0.8,
+      "yin_yang": 1,
+      "yin_yang2": 1,
+      "mongolia_emblem": 1,
+      "hong_kong": 1,
+      "china_stars": 1,
+      "kuomintang": 1,
+      "circle": 1,
+      "ring": 1,
+      "random_star": 1
     }
   },
 
@@ -505,11 +600,22 @@
       "black": 1
     },
     "symbols": {
-      "libertarian": 1,
-      "liberal": 0.8,
-      "anarchism": 0.8,
-      "pirate": 0.7,
-      "crypto": 0.8
+      "anarchism": 0.3,
+      "anarchism_rough": 0.3,
+      "bitcoin": 1,
+      "rattlesnake": 1,
+      "porcupine": 1,
+      "dollar": 1,
+      "pirate": 0.3,
+      "pirate2": 0.3,
+      "pirate3": 0.3,
+      "pirate4": 0.3,
+      "pirate5": 0.3,
+      "pirate6": 0.3,
+      "pirate7": 0.3,
+      "pirate8": 0.3,
+      "pirate_party": 0.3,
+      "pirate_party_circle": 0.3
     },
      "direct_rules": {
       "symbol_chance": 0.75
@@ -538,7 +644,9 @@
     },
     "symbols": {
       "incel": 1,
-      "memetic": 0.5
+      "incel_meme": 1,
+      "male": 1,
+      "trollface": 1
     },
     "direct_rules": {
       "symbol_chance": 1,

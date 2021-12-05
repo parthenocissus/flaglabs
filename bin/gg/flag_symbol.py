@@ -77,7 +77,7 @@ class FlagSymbol:
                 f = path['fill']
             if 'stroke' in path:
                 s = path['stroke']
-            svg_path = self.fc.path(d=path['d'], fill=f, stroke=s, stroke_width=sw)
+            svg_path = self.fc.path(d=path['d'], fill=f, stroke=s, stroke_width=f'{sw}px')
             group.add(svg_path)
         return group
 
@@ -129,7 +129,7 @@ class FlagSymbol:
         c = self.choose_different_color()
         r = d['size'] * 0.5
         sw = self.h * uniform(0.05, 0.15)
-        return self.fc.circle(center=d['pos'], r=r, fill='none', stroke=c, stroke_width=sw)
+        return self.fc.circle(center=d['pos'], r=r, fill='none', stroke=c, stroke_width=f'{sw}px')
 
     # Random Star
     def random_star(self):
