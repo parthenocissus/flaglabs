@@ -516,6 +516,33 @@
     }
   },
 
+  "balkan": {
+    "meta_data": {"label": "Balkan", "type": "unipolar"},
+    "layout": {
+      "tricolor_horizontal": 1,
+      "unicolor": 1,
+      "sunburst": 0.5,
+      "stripes_horizontal": 0.5,
+      "bicolor_diagonal_left": 1,
+      "bicolor_diagonal_right": 1
+    },
+    "colors": {
+      "red": 1,
+      "white": 1,
+      "blue": 1,
+      "yellow": 1,
+      "black": 0.5
+    },
+    "symbols": {
+      "balkan": 1,
+      "yugoslav": 1,
+      "star": 1
+    },
+     "direct_rules": {
+      "symbol_chance": 0.8
+    }
+  },
+
   "incel": {
     "meta_data": {"label": "Incel", "type": "unipolar"},
     "colors": {
