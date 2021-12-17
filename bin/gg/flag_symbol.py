@@ -36,6 +36,8 @@ class FlagSymbol:
         # Set symbol (eg. coat of arms, a circle, a star, etc)
         if random() < self.flag.symbol_chance:
             self.symbol = self.choose_symbol()
+            # s = self.choose_symbol()
+            # self.symbol.append(s)
         else:
             self.build_symbol = self.empty_symbol
 
