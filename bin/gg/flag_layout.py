@@ -2,12 +2,12 @@ import math
 import copy
 from random import choices, random, randint, uniform, randrange, choice
 
-from bin.gg.flag_symbol_config import FlagSymbolConfig
+from bin.gg.symbol_engine import SymbolEngine
 
 
 class FlagLayout:
 
-    def __init__(self, origin, flag):
+    def __init__(self, origin, flag, sym_engine):
         self.genflag_origin = origin
         self.flag = flag
 
@@ -23,10 +23,12 @@ class FlagLayout:
         self.recursive_level = flag.recursive_level
         self.rules = flag.rules
         self.used_colors = flag.used_colors
-        self.sd = flag.symbol_data
+        # self.sd = sym_engine.symbol_data
         self.complexity = self.rules['direct_rules']['complexity']
         self.complex_factor = math.pow(self.complexity, 2)
-        self.fsc = FlagSymbolConfig(flag.genflag_origin, flag.symbol_data, self.w, flag.h)
+
+        # self.fsc = FlagSymbolConfig(flag.genflag_origin, flag.symbol_data, self.w, flag.h)
+        self.fsc = sym_engine.flag_symbol_config
 
         # Start generating flag elements with the first layer of the layout
         self.layout = self.select('layout')
@@ -103,7 +105,9 @@ class FlagLayout:
         c2 = self.choose_different_color()
         self.g.add(self.fc.path(d=d1, stroke='none', fill=c1))
         self.g.add(self.fc.path(d=d2, stroke='none', fill=c2))
-        self.fsc.default_center_canton_small()
+        # self.fsc.default_center_canton_small()
+        self.put_emblem(qoef=1, fn=self.fsc.default_diag_multiemblem, fn_arg=0,
+                        single_symbol_fn=self.fsc.default_center_canton_small)
 
     # Diagonal (right)
     def bicolor_diagonal_right(self):
@@ -113,7 +117,20 @@ class FlagLayout:
         c2 = self.choose_different_color()
         self.g.add(self.fc.path(d=d1, stroke='none', fill=c2))
         self.g.add(self.fc.path(d=d2, stroke='none', fill=c1))
-        self.fsc.center(scale_factor=uniform(0.4, 0.7))
+        # self.fsc.center(scale_factor=uniform(0.4, 0.7))
+        self.put_emblem(qoef=1, fn=self.fsc.default_diag_multiemblem, fn_arg=1,
+                        single_symbol_fn=self.fsc.center)
+
+    # Diagonal (Bosnian)
+    def bosnian(self):
+        d = f"M{self.w * 0.2},0 L{self.w * 0.867},{self.h} L{self.w * 0.867},0 z"
+        self.unicolor()
+        c = self.choose_different_color()
+        self.g.add(self.fc.path(d=d, stroke='none', fill=c))
+        self.fsc.bosnian_diagonal()
+        # self.fsc.center(scale_factor=uniform(0.4, 0.7))
+        # self.put_emblem(qoef=1, fn=self.fsc.default_diag_multiemblem, fn_arg=1,
+        #                 single_symbol_fn=self.fsc.center)
 
     # Bend (left)
     def bend_left(self):
@@ -151,8 +168,7 @@ class FlagLayout:
         for i in range(3):
             c = self.choose_different_color()
             self.g.add(self.fc.rect((0, i * self.h / 3), (self.w, self.h / 3), stroke='none', fill=c))
-        self.fsc.default_center_center_left()
-        self.flag.symbol_chance *= 1.4
+        self.put_emblem(qoef=1.4, fn=self.fsc.default_multiemblem)
 
     # Vertical tricolor
     def tricolor_vertical(self):
@@ -163,15 +179,30 @@ class FlagLayout:
         self.flag.symbol_chance *= 1.4
 
     # Horizontal stripes
-    def stripes_horizontal(self):
+    def stripes_horizontal(self, n_stripes=randint(4, 16)):
         self.flag.set_alternating_colors_chance(factor=4.5)
-        n_stripes = randint(4, 14)
+        # n_stripes = randint(4, 14)
         for i in range(n_stripes):
             c = self.choose_different_color()
             self.g.add(self.fc.rect((0, i * self.h / n_stripes), (self.w, self.h / n_stripes),
                                     stroke='none', fill=c))
-        self.fsc.default_center_center_left()
-        self.flag.symbol_chance *= 1.2
+        self.put_emblem(qoef=1.2, fn=self.fsc.default_multiemblem)
+
+    # American (Horizontal stripes with canton)
+    def american(self):
+        self.flag.set_alternating_colors_chance(factor=4.5)
+        n_stripes = 14
+        for i in range(n_stripes):
+            c = self.choose_different_color()
+            self.g.add(self.fc.rect((0, i * self.h / n_stripes), (self.w, self.h / n_stripes),
+                                    stroke='none', fill=c))
+        self.flag.choose_different_color = self.flag.choose_different_color_default
+        self.flag.alternating = False
+        c = self.choose_different_color()
+        self.g.add(self.fc.rect((0, 0), (self.w * 0.5, self.h * 0.5), stroke='none', fill=c))
+        self.fsc.american_multiemblem()
+        self.flag.symbol_chance = 1
+        # self.put_emblem(qoef=1.2, fn=self.fsc.default_multiemblem)
 
     # Vertical stripes
     def stripes_vertical(self):
@@ -365,6 +396,8 @@ class FlagLayout:
                          stroke=c, fill='none', stroke_width=str_w))
         self.fsc.center(scale_factor=uniform(0.3, 0.6))
         self.flag.symbol_chance *= 1.6
+        # self.put_emblem(qoef=1.6, fn=self.fsc.circular_multiemblem,
+        #                 single_symbol_fn=self.fsc.center)
 
     # Offset stripes, horizontal
     def offset_stripes_horizontal(self):
@@ -376,8 +409,7 @@ class FlagLayout:
         self.g.add(self.fc.line((0, margin), (self.w, margin), stroke=c, fill='none', stroke_width=str_w))
         self.g.add(self.fc.line((0, self.h - margin), (self.w, self.h - margin),
                                 stroke=c, fill='none', stroke_width=str_w))
-        self.fsc.default_center_center_left()
-        self.flag.symbol_chance *= 1.6
+        self.put_emblem(qoef=1.6, fn=self.fsc.default_multiemblem)
 
     # Canton (upper left recursive flag)
     def canton(self):
@@ -420,10 +452,12 @@ class FlagLayout:
         self.g.add(self.fc.rect((left, m), (right, self.h - 2 * m),
                                 stroke=c, fill='none', stroke_width=wid))
         if fly:
-            self.fsc.default_center_center_left(scale_factor=uniform(0.3, 0.6))
+            # self.fsc.default_center_center_left(scale_factor=uniform(0.3, 0.6))
+            self.put_emblem(qoef=1, single_symbol_fn=self.fsc.default_center_center_left)
         else:
-            self.fsc.center(scale_factor=uniform(0.3, 0.6))
-        self.flag.symbol_chance *= 1.5
+            # self.fsc.center(scale_factor=uniform(0.3, 0.6))
+            self.put_emblem(qoef=1, single_symbol_fn=self.fsc.center)
+
 
     # Cross
     def cross(self):
@@ -568,6 +602,69 @@ class FlagLayout:
         self.fsc.center_left(scale_factor=scale_left, width_fraction=0.13)
         self.flag.symbol_chance *= 0.8
 
+    # Unicolor with several emblems/symbols
+    def unicolor_multiemblem(self):
+        c = self.choose_different_color()
+        self.g.add(self.fc.rect((0, 0), (self.w, self.h), stroke='none', fill=c))
+        self.put_emblem(qoef=1.75, multichance=1, fn=self.fsc.variable_multiemblem)
+        # self.fsc.diagonal_multiemblem()
+        # self.flag.symbol_chance = 1
+
+    # Quadrisection
+    def quadrisection(self):
+        self.flag.symbol_chance = 0
+        pattern_chance = 0.4
+        pattern = False
+        pattern_choices = [self.lozenges, self.lozenges, self.lozenges, self.lozenges, self.lozenges,
+                           self.checkered, self.sunburst]
+        if random() > pattern_chance:
+            self.unicolor()
+        else:
+            pattern_fn = choices(pattern_choices)[0]
+            pattern_fn()
+            pattern = True
+            self.flag.choose_different_color = self.flag.choose_different_color_default
+            self.flag.alternating = False
+
+        first_third = True if random() > 0.5 else False
+        coords = [(0, 0), (0.5, 0.5), (0, 0.5), (0.5, 0)]
+
+        if first_third:
+            diag1, diag2 = 0, 1
+            coords = [coords[0], coords[1]]
+        else:
+            diag1, diag2 = 1, 0
+            coords = [coords[2], coords[3]]
+        if not pattern:
+            diag1, diag2 = 0.2, 0.2
+
+        c = self.choose_different_color()
+        for coord in coords:
+            x, y = coord
+            self.g.add(self.fc.rect((x * self.w, y * self.h), (0.5 * self.w, 0.5 * self.h), stroke='none', fill=c))
+        self.fsc.quadriemblem(diag1=diag1, diag2=diag2)
+
     # Neutral action
     def none(self):
         pass
+
+    # ________________
+    # Helper Functions
+
+    def put_emblem(self, qoef=1.4, multichance=0.33, fn=None, fn_arg=None,
+                   single_symbol_fn=None):
+
+        if fn is None:
+            fn = self.fsc.default_multiemblem
+        if single_symbol_fn is None:
+            single_symbol_fn = self.fsc.default_center_center_left
+
+        if random() > multichance:
+            single_symbol_fn()
+            self.flag.symbol_chance *= qoef
+        else:
+            if fn_arg is None:
+                fn()
+            else:
+                fn(fn_arg)
+            self.flag.symbol_chance = 1

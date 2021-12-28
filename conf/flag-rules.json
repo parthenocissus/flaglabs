@@ -7,15 +7,20 @@
   },
 
   "layout": [
+    { "weight": 2, "name": "american" },
+    { "weight": 2, "name": "bosnian" },
+    { "weight": 3, "name": "quadrisection" },
+    { "weight": 2, "name": "unicolor_multiemblem", "layer2": ["border", "offset_stripes_horizontal"] },
+
     { "weight": 3, "name": "unicolor", "layer2": ["chevron", "canton", "border", "hoist_stripe",
         "offset_stripes_vertical", "offset_stripes_horizontal", "diamond", "hoist_stripe",
         "fly_stripe", "bottom_stripe", "top_stripe", "border", "cross_saltire", "pall",
         "nordic_cross", "canton_cross", "saltire"]
     },
     { "weight": 5, "name": "tricolor_vertical" },
-    { "weight": 5, "name": "tricolor_horizontal", "layer2": ["chevron", "canton", "border", "hoist_stripe"] },
+    { "weight": 5, "name": "tricolor_horizontal", "layer2": ["chevron", "border", "hoist_stripe"] },
     { "weight": 3, "name": "bicolor_vertical" },
-    { "weight": 5, "name": "bicolor_horizontal", "layer2": ["chevron", "canton", "border", "hoist_stripe",
+    { "weight": 5, "name": "bicolor_horizontal", "layer2": ["chevron", "border", "hoist_stripe",
         "cross", "nordic_cross"] },
     { "weight": 4, "name": "bicolor_diagonal_left" },
     { "weight": 1, "name": "bicolor_diagonal_right" },
@@ -40,8 +45,8 @@
     { "weight": 3, "name": "canton_cross" },
     { "weight": 4, "name": "stripes_horizontal", "layer2": ["chevron", "canton", "diamond", "saltire"] },
     { "weight": 2, "name": "stripes_vertical", "layer2": ["chevron", "canton", "diamond", "saltire"] },
-    { "weight": 3, "name": "checkered", "layer2": ["chevron", "canton", "diamond", "saltire"] },
-    { "weight": 2, "name": "lozenges", "layer2": ["chevron", "canton", "diamond", "saltire"] },
+    { "weight": 3, "name": "checkered", "layer2": ["chevron", "diamond", "saltire"] },
+    { "weight": 2, "name": "lozenges", "layer2": ["chevron", "diamond", "saltire"] },
     { "weight": 2, "name": "sunburst", "layer2": ["canton"] },
     { "weight": 2, "name": "rays" }
   ],

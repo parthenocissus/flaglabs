@@ -1,3 +1,4 @@
+import copy
 import math
 from random import choices, random, randint, uniform, randrange
 from svgpathtools import svg2paths, svg2paths2, wsvg
@@ -6,9 +7,10 @@ from xml.etree import ElementTree as ET
 
 class FlagSymbol:
 
-    def __init__(self, origin, flag):
+    def __init__(self, origin, flag, sym_data):
         self.genflag_origin = origin
         self.flag = flag
+        self.symbol_data = sym_data
         self.fc = flag.fc
         self.w = flag.w
         self.h = flag.h
@@ -19,25 +21,63 @@ class FlagSymbol:
         self.rules = flag.rules
         self.used_colors = flag.used_colors
 
+        self.color_vector = []
+
         self.symbols = self.rules['symbols']
         self.symbol_chance = flag.symbol_chance
         self.symbol = None
         self.build_symbol = None
 
-    # Draw symbol
-    def draw(self):
         self.set_symbol()
         self.change_alternating(1)
-        symbol = self.build_symbol()
+        self.colors_defined = False
+
+    # Draw symbol
+    def draw(self):
+        if not self.colors_defined:
+            self.define_colors()
+        symbol = self.build_symbol(self.symbol_data)
         self.fc.add(symbol)
+
+    # Copy object
+    def copy(self, sym_data):
+        symbol_copy = FlagSymbol(self.genflag_origin, self.flag, sym_data)
+        # symbol_copy.use_color_vector = True
+        symbol_copy.build_symbol = self.build_symbol
+        return symbol_copy
+
+    # Define colors
+    def define_colors(self):
+        self.change_alternating(1)
+        if self.symbol is None:
+            return
+
+        f = self.choose_different_color()
+        if 'color' in self.symbol and self.symbol['color'] == 'full':
+            s = 'none'
+            sw = 0
+        else:
+            s = self.choose_different_color() if random() < self.complex_factor else 'none'
+            sw = self.h * 0.01 * randrange(2, 4)
+        rnd = random()
+
+        if 'paths' in self.symbol:
+            for path in self.symbol['paths']:
+                if 'fill' in path:
+                    f = path['fill'] if rnd > self.rndclr_chance else self.choose_different_color()
+                if 'stroke' in path:
+                    s = path['stroke'] if rnd > self.rndclr_chance else self.choose_different_color()
+                self.color_vector.append({"fill": f, "stroke": s, "stroke_width": sw})
+        else:
+            self.color_vector.append({"fill": f, "stroke": s, "stroke_width": sw})
+
+        self.colors_defined = True
 
     # Set symbol
     def set_symbol(self):
         # Set symbol (eg. coat of arms, a circle, a star, etc)
         if random() < self.flag.symbol_chance:
             self.symbol = self.choose_symbol()
-            # s = self.choose_symbol()
-            # self.symbol.append(s)
         else:
             self.build_symbol = self.empty_symbol
 
@@ -52,8 +92,9 @@ class FlagSymbol:
             self.flag.alternating = False
 
     # Build symbol from paths taken from a SVG file
-    def build_symbol_from_paths(self):
-        d = FlagSymbol.center_symbol(self.flag.symbol_data)
+    def build_symbol_from_paths(self, symbol_data):
+        symbol_data_copy = copy.deepcopy(symbol_data)
+        d = FlagSymbol.center_symbol(symbol_data_copy)
         return self.paths2symbol(d['pos'], d['scale'], d['rotate'], d['anchor_position'])
 
     # Recenter the symbol
@@ -65,25 +106,16 @@ class FlagSymbol:
         return symbol_data
 
     # Create a single symbol from paths and put it in a group (<g> element)
-    def paths2symbol(self, position=(0, 0), scale=1,
-                     rotation_angle=0, anchor_position=(50, 50)):
+    def paths2symbol(self, position=(0, 0), scale=1, rotation_angle=0, anchor_position=(50, 50)):
         x, y = position
         anchor_x, anchor_y = anchor_position
         t = f"translate({x}, {y}) scale({scale}) rotate({rotation_angle}, {anchor_x}, {anchor_y})"
-        f = self.choose_different_color()
-        if 'color' in self.symbol and self.symbol['color'] == 'full':
-            s = 'none'
-            sw = 0
-        else:
-            s = self.choose_different_color() if random() < self.complex_factor else 'none'
-            sw = self.h * 0.01 * randrange(2, 4)
         group = self.fc.g(transform=t)
-        rnd = random()
-        for path in self.symbol['paths']:
-            if 'fill' in path:
-                f = path['fill'] if rnd > self.rndclr_chance else self.choose_different_color()
-            if 'stroke' in path:
-                s = path['stroke'] if rnd > self.rndclr_chance else self.choose_different_color()
+        for i, path in enumerate(self.symbol['paths']):
+            cv = self.color_vector[i]
+            f = cv["fill"]
+            s = cv["stroke"]
+            sw = cv["stroke_width"]
             svg_path = self.fc.path(d=path['d'], fill=f, stroke=s, stroke_width=f'{sw}px')
             group.add(svg_path)
         return group
@@ -103,8 +135,7 @@ class FlagSymbol:
         return symbol
 
     # Empty symbol
-    def empty_symbol(self):
-        # return self.fc.circle(center=(-1, -1), r=0, fill='none', stroke='none')
+    def empty_symbol(self, d):
         return self.fc.g(id="empty")
 
     # Open a SVG file and get all path-related data
@@ -125,22 +156,22 @@ class FlagSymbol:
     # SYMBOL DRAWING METHODS
 
     # Circle
-    def circle(self):
-        d = self.flag.symbol_data
+    def circle(self, d):
+        # d = self.symbol_data
         c = self.choose_different_color()
         return self.fc.circle(center=d['pos'], r=d['size'] * 0.4, fill=c, stroke='none')
 
     # Ring
-    def ring(self):
-        d = self.flag.symbol_data
+    def ring(self, d):
+        # d = self.symbol_data
         c = self.choose_different_color()
         r = d['size'] * 0.5
         sw = self.h * uniform(0.05, 0.15)
         return self.fc.circle(center=d['pos'], r=r, fill='none', stroke=c, stroke_width=f'{sw}px')
 
     # Random Star
-    def random_star(self):
-        d = self.flag.symbol_data
+    def random_star(self, d):
+        # d = self.symbol_data
         c = self.choose_different_color()
         n = randint(5, 10)
         x, y = d['pos']

@@ -7,7 +7,7 @@ from random import choices, random, randint, uniform, randrange
 from colour import Color
 
 from bin.gg.flag_layout import FlagLayout
-from bin.gg.flag_symbol import FlagSymbol
+from bin.gg.symbol_engine import SymbolEngine
 from bin.gg.input_data_utils import InputDataUtil as IU
 
 
@@ -112,21 +112,24 @@ class Flag:
             self.ordered_palette = ["red", "orange", "yellow", "green", "blue", "purple", "brown"]
             self.ordered_palette_index = randrange(len(self.ordered_palette))
 
-        # Set symbol data, such as position and scale
-        scale_baseline = 1 / (2 ** recursive_level)
-        scale_factor = 0.5 * scale_baseline
-        self.symbol_data = {
-            "pos": (self.w / 2, self.h / 2),
-            "scale": scale_factor,
-            "size": self.origin_h * scale_factor,
-            "rotate": 0,
-            "anchor_position": (self.h / 2, self.h / 2),
-            "scale_baseline": scale_baseline
-        }
+        # # Set symbol data, such as position and scale
+        # scale_baseline = 1 / (2 ** recursive_level)
+        # scale_factor = 0.5 * scale_baseline
+        # self.symbol_data = {
+        #     "pos": (self.w / 2, self.h / 2),
+        #     "scale": scale_factor,
+        #     "size": self.origin_h * scale_factor,
+        #     "rotate": 0,
+        #     "anchor_position": (self.h / 2, self.h / 2),
+        #     "scale_baseline": scale_baseline
+        # }
+        # self.flag_symbol = FlagSymbol(self.genflag_origin, self)
 
-        # Set layouts and symbols
-        self.flag_layout = FlagLayout(self.genflag_origin, self)
-        self.flag_symbol = FlagSymbol(self.genflag_origin, self)
+        # Set symbol(s)
+        self.sym_engine = SymbolEngine(origin, self, recursive_level)
+
+        # Set layout
+        self.flag_layout = FlagLayout(origin, self, self.sym_engine)
 
         # Select colors and primary color groups
         self.primary_groups, self.colors = self.get_colors()
@@ -134,7 +137,8 @@ class Flag:
     # Draw layout
     def draw(self):
         self.flag_layout.draw()
-        self.flag_symbol.draw()
+        # self.flag_symbol.draw()
+        self.sym_engine.draw()
 
     # Get possible colors
     def get_colors(self):

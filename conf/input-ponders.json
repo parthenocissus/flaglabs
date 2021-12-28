@@ -521,6 +521,8 @@
     "layout": {
       "tricolor_horizontal": 1,
       "unicolor": 1,
+      "bosnian": 0.7,
+      "quadrisection": 0.8,
       "sunburst": 0.5,
       "stripes_horizontal": 0.5,
       "bicolor_diagonal_left": 1,
@@ -537,6 +539,182 @@
       "balkan": 1,
       "yugoslav": 1,
       "star": 1
+    },
+     "direct_rules": {
+      "symbol_chance": 0.8
+    }
+  },
+
+  "bosnian": {
+    "meta_data": {"label": "Bosnian", "type": "unipolar"},
+    "layout": {
+      "bosnian": 1
+    },
+    "colors": {
+      "blue": 1,
+      "yellow": 1,
+      "white": 1,
+      "green": 0.4,
+      "red": 0.4
+    },
+    "symbols": {
+      "bosnian": 1,
+      "balkan": 0.5,
+      "yugoslav": 0.5,
+      "star": 1
+    }
+  },
+
+  "american": {
+    "meta_data": {"label": "American", "type": "unipolar"},
+    "layout": {
+      "american": 1,
+      "stripes_horizontal": 0.5
+    },
+    "colors": {
+      "red": 1,
+      "white": 1,
+      "blue": 1
+    },
+    "symbols": {
+      "american": 1,
+      "star": 1,
+      "corporate": 1,
+      "capitalism": 1,
+      "south_american": 0.5,
+      "hispanic": 0.5
+    },
+     "direct_rules": {
+      "symbol_chance": 0.8
+    }
+  },
+
+  "bosnian": {
+    "meta_data": {"label": "Bosnian", "type": "unipolar"},
+    "layout": {
+      "bosnian": 1
+    },
+    "colors": {
+      "blue": 1,
+      "yellow": 1,
+      "white": 1,
+      "green": 0.4,
+      "red": 0.4
+    },
+    "symbols": {
+      "bosnian": 1,
+      "balkan": 0.5,
+      "yugoslav": 0.5,
+      "star": 1
+    }
+  },
+
+  "american": {
+    "meta_data": {"label": "American", "type": "unipolar"},
+    "layout": {
+      "american": 1,
+      "stripes_horizontal": 0.5
+    },
+    "colors": {
+      "red": 1,
+      "white": 1,
+      "blue": 1
+    },
+    "symbols": {
+      "american": 1,
+      "star": 1,
+      "corporate": 1,
+      "capitalism": 1,
+      "south_american": 0.5,
+      "hispanic": 0.5
+    },
+     "direct_rules": {
+      "symbol_chance": 0.8
+    }
+  },
+
+  "bosnian": {
+    "meta_data": {"label": "Bosnian", "type": "unipolar"},
+    "layout": {
+      "bosnian": 1
+    },
+    "colors": {
+      "blue": 1,
+      "yellow": 1,
+      "white": 1,
+      "green": 0.4,
+      "red": 0.4
+    },
+    "symbols": {
+      "bosnian": 1,
+      "balkan": 0.5,
+      "yugoslav": 0.5,
+      "star": 1
+    }
+  },
+
+  "american": {
+    "meta_data": {"label": "American", "type": "unipolar"},
+    "layout": {
+      "american": 1,
+      "stripes_horizontal": 0.5
+    },
+    "colors": {
+      "red": 1,
+      "white": 1,
+      "blue": 1
+    },
+    "symbols": {
+      "american": 1,
+      "star": 1,
+      "corporate": 1,
+      "capitalism": 1,
+      "south_american": 0.5,
+      "hispanic": 0.5
+    },
+     "direct_rules": {
+      "symbol_chance": 0.8
+    }
+  },
+
+  "bosnian": {
+    "meta_data": {"label": "Bosnian", "type": "unipolar"},
+    "layout": {
+      "bosnian": 1
+    },
+    "colors": {
+      "blue": 1,
+      "yellow": 1,
+      "white": 1,
+      "green": 0.4,
+      "red": 0.4
+    },
+    "symbols": {
+      "bosnian": 1,
+      "balkan": 0.5,
+      "yugoslav": 0.5,
+      "star": 1
+    }
+  },
+
+  "american": {
+    "meta_data": {"label": "American", "type": "unipolar"},
+    "layout": {
+      "american": 1,
+      "stripes_horizontal": 0.5
+    },
+    "colors": {
+      "red": 1,
+      "white": 1,
+      "blue": 1
+    },
+    "symbols": {
+      "american": 1,
+      "star": 1,
+      "corporate": 1,
+      "capitalism": 1,
+      "south_american": 0.5,
+      "hispanic": 0.5
     },
      "direct_rules": {
       "symbol_chance": 0.8
